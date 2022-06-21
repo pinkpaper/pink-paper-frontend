@@ -1,0 +1,17 @@
+
+
+RewriteEngine On
+
+#RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^(.+)$ routes.php [QSA,L]
+
+# cache settingh
+<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf|svg|ttf)$">
+Header set Cache-Control "max-age=31536000, public"
+</FilesMatch>
+
+# Redirect to 404 page
+#ErrorDocument 404 https://localhost/cms-medium/404.phpdium/404.phpdium/404.php

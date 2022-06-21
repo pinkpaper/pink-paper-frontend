@@ -1,0 +1,63 @@
+:root{
+    --loader-color: #667eea;
+    --loader-body-color: #1a202c;
+  
+  }
+  
+  [data-theme="dark"] {
+    
+    --loader-color:#667eea;
+    --loader-body-color:#f8f8f8;
+  }
+
+.loader-container {
+    z-index: 11111;
+    position: fixed;
+    min-width: 100vw;
+    min-height: 100vh;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--body-color);
+}
+
+.loader, .loader::before, .loader::after{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    animation: load 1.8s ease-in-out infinite;
+}
+.loader{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%) translateZ(0);
+    animation-delay: -0.16s;
+    color: var(--loader-color);
+}
+.loader::before,
+.loader::after{
+    content: '';
+    position: absolute;
+    top: 0;
+}
+.loader::before{
+    left: -23px;
+    animation-delay: -0.32s;
+}
+.loader::after{
+    left: 23px;
+}
+@keyframes load{
+    0%, 80%, 100%{
+        box-shadow: 0 20px 0 -10px;
+    }
+    40%{
+
+        box-shadow: 0 20px 0 0;
+    }
+}
