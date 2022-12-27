@@ -6,100 +6,129 @@ require_once("./router.php");
 // ##################################################
 // ##################################################
 
-// Static GET
-// In the URL -> http://localhost
-// The output -> Index
-//user panel
-get('./cms-medium/', 'home.php');
-get('./cms-medium/home', 'home.php');
-get('./cms-medium/register', 'signup-user.php');
-get('./cms-medium/login-user', 'login-user.php');
-get('./cms-medium/login-user-mm', 'login-user-mm.php');
-get('./cms-medium/logout', 'logout-user.php');
-get('./cms-medium/reset-code', 'reset-code.php');
- get('./cms-medium/user-otp', 'user-otp.php');
-// get('./cms-medium/logout', 'logout-user.php');
-get('./cms-medium/forgot-password', 'forgot-password.php');
-get('./cms-medium/create-story', 'create-story.php');
-get('./cms-medium/stories', 'stories.php');
-get('./cms-medium/user-stats', 'user-stats.php');
-get('./cms-medium/audience-stats', 'audience-stats.php');
-get('./cms-medium/reading-list', 'reading-list.php');
-get('./cms-medium/user-settings', 'user-settings.php');
-get('./cms-medium/about-us', 'about-us.php');
-get('./cms-medium/contact-us', 'contact-us.php');
-get('./cms-medium/edit-story/$edit_req', 'edit-story.php');
-get('./cms-medium/privacy-policy', 'privacy-policy.php');
-get('./cms-medium/cookies-policy', 'cookies-policy.php');
-get('./cms-medium/terms_of_use', 'terms_of_use.php');
+//
+// ──────────────────────────────────────────────────────────────────────── II ──────────
+//   :::::: L O C A L   R O U T E   D A T A : :  :   :    :     :        :          :
+// ──────────────────────────────────────────────────────────────────────────────────
+//
+
+
+get('./pinkpaper-testnet/', 'home.php');
+get('./pinkpaper-testnet/home', 'home.php');
+get('./pinkpaper-testnet/register', 'signup-user.php');
+get('./pinkpaper-testnet/login-user', 'login-user.php');
+get('./pinkpaper-testnet/login-user-mm', 'login-user-mm.php');
+get('./pinkpaper-testnet/logout', 'logout-user.php');
+get('./pinkpaper-testnet/reset-code', 'reset-code.php');
+ get('./pinkpaper-testnet/user-otp', 'user-otp.php');
+// get('./pinkpaper-testnet/logout', 'logout-user.php');
+get('./pinkpaper-testnet/forgot-password', 'forgot-password.php');
+get('./pinkpaper-testnet/create-story', 'create-story.php');
+get('./pinkpaper-testnet/stories', 'stories.php');
+get('./pinkpaper-testnet/user-stats', 'user-stats.php');
+get('./pinkpaper-testnet/audience-stats', 'audience-stats.php');
+get('./pinkpaper-testnet/reading-list', 'reading-list.php');
+get('./pinkpaper-testnet/user-settings', 'user-settings.php');
+get('./pinkpaper-testnet/about-us', 'about-us.php');
+get('./pinkpaper-testnet/contact-us', 'contact-us.php');
+get('./pinkpaper-testnet/edit-story/$edit_req', 'edit-story.php');
+get('./pinkpaper-testnet/withdraw-fund/$edit_req', 'withdraw-fund.php');
+get('./pinkpaper-testnet/privacy-policy', 'privacy-policy.php');
+get('./pinkpaper-testnet/cookies-policy', 'cookies-policy.php');
+get('./pinkpaper-testnet/terms_of_use', 'terms_of_use.php');
 //dashboard
-get('./cms-medium/dashboard/', 'dashboard/index.php');
-get('./cms-medium/dashboard/login', 'dashboard/login.php');
-get('./cms-medium/dashboard/logout', 'dashboard/logout.php');
-get('./cms-medium/dashboard/allpost', 'dashboard/allpost.php');
-get('./cms-medium/dashboard/trash-stories', 'dashboard/trash-stories.php');
-get('./cms-medium/dashboard/all-tags', 'dashboard/all-tags.php');
-get('./cms-medium/dashboard/add-tag', 'dashboard/add-tag.php');
-get('./cms-medium/dashboard/all-users', 'dashboard/all-users.php');
-get('./cms-medium/dashboard/add-user', 'dashboard/add-user.php');
-get('./cms-medium/dashboard/addpost', 'dashboard/addpost.php');
-get('./cms-medium/dashboard/followusers', 'dashboard/followusers.php');
-get('./cms-medium/dashboard/postlike', 'dashboard/postlike.php');
-get('./cms-medium/dashboard/savepost', 'dashboard/savepost.php');
-get('./cms-medium/dashboard/newsletter', 'dashboard/newsletter.php');
-get('./cms-medium/dashboard/comments', 'dashboard/comments.php');
-get('./cms-medium/dashboard/viewlogo', 'dashboard/viewlogo.php');
-get('./cms-medium/dashboard/nav', 'dashboard/nav.php');
-get('./cms-medium/dashboard/social', 'dashboard/social.php');
-get('./cms-medium/dashboard/editor', 'dashboard/editor.php');
-get('./cms-medium/dashboard/contactus', 'dashboard/contactus.php');
-get('./cms-medium/dashboard/aboutus', 'dashboard/aboutus.php');
-get('./cms-medium/dashboard/aboutus', 'dashboard/privacy-policy.php');
-get('./cms-medium/dashboard/aboutus', 'dashboard/cookies-policy.php');
-get('./cms-medium/dashboard/aboutus', 'dashboard/terms.php');
-get('./cms-medium/dashboard/metamask', 'dashboard/metamask.php');
-get('./cms-medium/dashboard/change-password', 'dashboard/change-password.php');
-
-get('./cms-medium/about/$about_req', 'about.php');
-get('./cms-medium/topic/$topic_req', 'topic.php');
-get('./cms-medium/search/$search_req', 'search.php');
-get('./cms-medium/$username_profile', 'profile.php');
-
-
-get('./cms-medium/$username_post/$post_slug', 'single-post.php');
-
-//get('./cms-medium/$username_post/$post_slug', 'extra.php');
+get('./pinkpaper-testnet/dashboard/', 'dashboard/index.php');
+get('./pinkpaper-testnet/dashboard/login', 'dashboard/login.php');
+get('./pinkpaper-testnet/dashboard/logout', 'dashboard/logout.php');
+get('./pinkpaper-testnet/dashboard/allpost', 'dashboard/allpost.php');
+get('./pinkpaper-testnet/dashboard/trash-stories', 'dashboard/trash-stories.php');
+get('./pinkpaper-testnet/dashboard/all-tags', 'dashboard/all-tags.php');
+get('./pinkpaper-testnet/dashboard/add-tag', 'dashboard/add-tag.php');
+get('./pinkpaper-testnet/dashboard/all-users', 'dashboard/all-users.php');
+get('./pinkpaper-testnet/dashboard/add-user', 'dashboard/add-user.php');
+get('./pinkpaper-testnet/dashboard/addpost', 'dashboard/addpost.php');
+get('./pinkpaper-testnet/dashboard/followusers', 'dashboard/followusers.php');
+get('./pinkpaper-testnet/dashboard/postlike', 'dashboard/postlike.php');
+get('./pinkpaper-testnet/dashboard/savepost', 'dashboard/savepost.php');
+get('./pinkpaper-testnet/dashboard/newsletter', 'dashboard/newsletter.php');
+get('./pinkpaper-testnet/dashboard/comments', 'dashboard/comments.php');
+get('./pinkpaper-testnet/dashboard/viewlogo', 'dashboard/viewlogo.php');
+get('./pinkpaper-testnet/dashboard/nav', 'dashboard/nav.php');
+get('./pinkpaper-testnet/dashboard/social', 'dashboard/social.php');
+get('./pinkpaper-testnet/dashboard/editor', 'dashboard/editor.php');
+get('./pinkpaper-testnet/dashboard/contactus', 'dashboard/contactus.php');
+get('./pinkpaper-testnet/dashboard/aboutus', 'dashboard/aboutus.php');
+get('./pinkpaper-testnet/dashboard/aboutus', 'dashboard/privacy-policy.php');
+get('./pinkpaper-testnet/dashboard/aboutus', 'dashboard/cookies-policy.php');
+get('./pinkpaper-testnet/dashboard/aboutus', 'dashboard/terms.php');
+get('./pinkpaper-testnet/dashboard/metamask', 'dashboard/metamask.php');
+get('./pinkpaper-testnet/dashboard/change-password', 'dashboard/change-password.php');
+get('./pinkpaper-testnet/about/$about_req', 'about.php');
+get('./pinkpaper-testnet/topic/$topic_req', 'topic.php');
+get('./pinkpaper-testnet/search/$search_req', 'search.php');
+get('./pinkpaper-testnet/$username_profile', 'profile.php');
+get('./pinkpaper-testnet/$username_post/$post_slug', 'single-post.php');
+any('./pinkpaper-testnet/404','404.php');
 
 
+//
+// ────────────────────────────────────────────────────────────────────── I ──────────
+//   :::::: L I V E   R O U T E   D A T A : :  :   :    :     :        :          :
+// ────────────────────────────────────────────────────────────────────────────────
+//
 
-
-// Dynamic GET. Example with 1 variable
-// The $id will be available in user.php
-//get('/user/$id', 'user.php');
-
-// Dynamic GET. Example with 2 variables
-// The $name will be available in user.php
-// The $last_name will be available in user.php
-//get('/user/$name/$last_name', 'user.php');
-
-// Dynamic GET. Example with 2 variables with static
-// In the URL -> http://localhost/product/shoes/color/blue
-// The $type will be available in product.php
-// The $color will be available in product.php
-//get('/product/$type/color/:color', 'product.php');
-
-// Dynamic GET. Example with 1 variable and 1 query string
-// In the URL -> http://localhost/item/car?price=10
-// The $name will be available in items.php which is inside the views folder
-//get('/item/$name', 'views/items.php');
-
-
-// ##################################################
-// ##################################################
-// ##################################################
-// any can be used for GETs or POSTs
-
-// For GET or POST
-// The 404.php which is inside the views folder will be called
-// The 404.php has access to $_GET and $_POST
-any('/404','404.php');
+// get('./', 'home.php');
+// get('./home', 'home.php');
+// get('./register', 'signup-user.php');
+// get('./login-user', 'login-user.php');
+// get('./login-user-mm', 'login-user-mm.php');
+// get('./logout', 'logout-user.php');
+// get('./reset-code', 'reset-code.php');
+//  get('./user-otp', 'user-otp.php');
+// // get('./logout', 'logout-user.php');
+// get('./forgot-password', 'forgot-password.php');
+// get('./create-story', 'create-story.php');
+// get('./stories', 'stories.php');
+// get('./user-stats', 'user-stats.php');
+// get('./audience-stats', 'audience-stats.php');
+// get('./reading-list', 'reading-list.php');
+// get('./user-settings', 'user-settings.php');
+// get('./about-us', 'about-us.php');
+// get('./contact-us', 'contact-us.php');
+// get('./edit-story/$edit_req', 'edit-story.php');
+// get('./privacy-policy', 'privacy-policy.php');
+// get('./cookies-policy', 'cookies-policy.php');
+// get('./terms_of_use', 'terms_of_use.php');
+// //dashboard
+// get('./dashboard/', 'dashboard/index.php');
+// get('./dashboard/login', 'dashboard/login.php');
+// get('./dashboard/logout', 'dashboard/logout.php');
+// get('./dashboard/allpost', 'dashboard/allpost.php');
+// get('./dashboard/trash-stories', 'dashboard/trash-stories.php');
+// get('./dashboard/all-tags', 'dashboard/all-tags.php');
+// get('./dashboard/add-tag', 'dashboard/add-tag.php');
+// get('./dashboard/all-users', 'dashboard/all-users.php');
+// get('./dashboard/add-user', 'dashboard/add-user.php');
+// get('./dashboard/addpost', 'dashboard/addpost.php');
+// get('./dashboard/followusers', 'dashboard/followusers.php');
+// get('./dashboard/postlike', 'dashboard/postlike.php');
+// get('./dashboard/savepost', 'dashboard/savepost.php');
+// get('./dashboard/newsletter', 'dashboard/newsletter.php');
+// get('./dashboard/comments', 'dashboard/comments.php');
+// get('./dashboard/viewlogo', 'dashboard/viewlogo.php');
+// get('./dashboard/nav', 'dashboard/nav.php');
+// get('./dashboard/social', 'dashboard/social.php');
+// get('./dashboard/editor', 'dashboard/editor.php');
+// get('./dashboard/contactus', 'dashboard/contactus.php');
+// get('./dashboard/aboutus', 'dashboard/aboutus.php');
+// get('./dashboard/aboutus', 'dashboard/privacy-policy.php');
+// get('./dashboard/aboutus', 'dashboard/cookies-policy.php');
+// get('./dashboard/aboutus', 'dashboard/terms.php');
+// get('./dashboard/metamask', 'dashboard/metamask.php');
+// get('./dashboard/change-password', 'dashboard/change-password.php');
+// get('./about/$about_req', 'about.php');
+// get('./topic/$topic_req', 'topic.php');
+// get('./search/$search_req', 'search.php');
+// get('./$username_profile', 'profile.php');
+// get('./$username_post/$post_slug', 'single-post.php');
+// any('/404','404.php');

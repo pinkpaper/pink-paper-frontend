@@ -1,34 +1,10 @@
 <?php require_once "php/controllerUserData.php"; ?>
-<?php
-/* if (isset($_SESSION['email'])) {
-  header("Location: ./");
-  exit;
-} */
-//$user = "<script>document.write(localStorage.getItem('userAddress'))</script>";
-//echo $user;
-/* if(isset($user)){
-    header('Location: ./create-story');
-    exit;
-} */
-/* $user_address = $_SESSION['userAddress'] ?? null;
-if($user_address != ''){
-  header('Location: ./create-story');
-} */
-?>
-<script>
-/* let name=localStorage.getItem('userAddress')?localStorage.getItem('userAddress'):''
-        console.log(name);
-        if(name!='')
-        {
-          alert('Please visit profile');
-          window.location.href="./create-story";
-        } */
-</script>
+<?php require_once "php/schedule_cron.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Login | Pink Papers </title>
+    <title>Login | Pink Paper </title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,6 +35,16 @@ if($user_address != ''){
         margin-top: -25px;
         position: relative;
         z-index: 2;
+    }
+
+    .st-line-style {
+        width: 4rem;
+        height: 0.1rem;
+        background: #adb5bd;
+    }
+
+    .button-image {
+        height: 2rem;
     }
     </style>
     <!-- Css for view password icon ends -->
@@ -104,45 +90,22 @@ if($user_address != ''){
                             <div
                                 class="register-right text-center px-4 py-4 d-flex flex-column justify-content-center h-100">
                                 <h4 class="fw-bold">Welcome Back!</h4>
-                                <p class="text-muted">Login with your Metamask!</p>
-
-                                <!-- <form action="login-user.php" method="POST" autocomplete="">
-                  <?php
-                  if (count($errors) > 0) {
-                  ?>
-                    <div class="alert alert-danger text-center my-3">
-                      <?php
-                      foreach ($errors as $showerror) {
-                        echo $showerror;
-                      }
-                      ?>
-                    </div>
-                  <?php
-                  }
-                  ?>
-                  <div class="form-group mb-3">
-                    <input class="form-control" type="email" name="email" placeholder="Email Address" required value="<?php echo $email ?>">
-                  </div>
-                  <div class="form-group mb-0">
-                    <input id="password-field" class="form-control" type="password" name="password" placeholder="Password" required>
-                    <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password" style="left:-10px;"></span>
-                  </div>
-                  <div class="mb-3 d-flex justify-content-end"><a href="forgot-password" class="login-link">Forgot
-                      password?</a></div>
-                  <div class="d-grid mb-4">
-                    <input class="btn button-primary" type="submit" name="login" value="Login">
-                  </div>
-                  <div class="text-center fw-bold">Not yet a member? <a href="register" class="login-link">Register</a></div>
-                </form> -->
-
+                                <div class="text-muted d-flex justify-content-center align-items-center my-3"><span
+                                        class="st-line-style"></span>&nbsp;Login with&nbsp;<span
+                                        class="st-line-style"></span></div>
                                 <div class="d-grid mb-4">
                                     <button id="buttonText" onclick="userLoginOut()" class="btn button-primary">
-                                        Login with MetaMask
+                                        <img src="./assets/images/metamask.png" alt="metamask"
+                                            class="img-responsive button-image">
+                                    </button>
+                                </div>
+                                <div class="d-grid mb-2">
+                                    <button id="neoConnection" onclick="neoLogin()" class="btn button-primary">
+                                        <img src="./assets/images/neo.png" alt="metamask"
+                                            class="img-responsive button-image">
                                     </button>
                                 </div>
                                 <p id='userWallet' class='text-truncate'></p>
-
-
                                 <div id="needMetamask" style="display:none;color: rgb(255, 115, 0);"
                                     class="user-login-msg">
                                     To login, first install a Web3 wallet like the <a href="https://metamask.io/"
@@ -157,13 +120,17 @@ if($user_address != ''){
                                     Sign the message with your wallet to authenticate
                                 </div>
                                 <div id="loggedIn" style="display:none;" class="user-login-msg">
-                                    Successful authentication for address:<br><span id="ethAddress"></span>
-                                    <!-- <br><br>
-                                    You can set a public name for this account:<br> -->
-                                    <!-- <input type="text" placeholder="Public name" id="updatePublicName"
-                                        onfocusout="setPublicName()" style="width:190px;"> -->
+                                    Successful authentication for address:<br><span id="ethAddress"
+                                        style="word-break: break-all;"></span>
                                 </div>
                                 <br>
+                                <small style="font-size:12px;">
+                                    <b>Note:</b>&nbsp;Before login must sure you have install <a
+                                        href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en"
+                                        target="_blank">MetaMask</a> and <a
+                                        href="https://chrome.google.com/webstore/detail/neoline/cphhlgmgameodnhkjdmkpanlelnlohao?hl=en"
+                                        target="_blank">Neo</a> extension in your browser.
+                                </small>
                             </div>
                         </div>
                     </div>
@@ -171,11 +138,6 @@ if($user_address != ''){
             </div>
         </div>
     </div>
-
-
-
-
-
 
     <!-- script -->
     <script type="text/javascript" src="assets/jquery/jquery-3.4.1.min.js"></script>
@@ -185,13 +147,7 @@ if($user_address != ''){
     <script type="text/javascript" src="assets/js/loader.js"></script>
     <script src="frontend/web3-login.js?v=009"></script>
     <script src="frontend/web3-modal.js?v=001"></script>
-    <script>
-    // const abc = window.ethereum.selectedAddress;
-    // console.log(abc);
-    // if(abc){
-    //     window.location.href = ("register");
-    // }
-    </script>
+    <script type="text/javascript" src="assets/js/neoLogin.js"></script>
 </body>
 
 </html>

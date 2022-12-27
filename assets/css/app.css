@@ -979,7 +979,7 @@ body {
 
 .navbar .dropdown-menu {
     position: absolute;
-    width: 100%;
+    width: 12rem;
     /* margin-top: 20px; */
     color: var(--text-color) !important;
     background-color: var(--primary-color) !important;
@@ -1556,3 +1556,7 @@ hr{
     background: rgba(255, 255, 255, 0.3);
   }
   
+
+  canvas{
+    width: 40px;
+  }

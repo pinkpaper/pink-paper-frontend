@@ -4,7 +4,7 @@ let userLoginData = {
   buttonText: "Log in",
   publicName: "",
   JWT: "",
-  config: { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
+  config: { headers: { "Content-Type": "application/json" } }
 }
 
 if (typeof(backendPath) == 'undefined') {
@@ -106,6 +106,9 @@ async function userLogin() {
     showMsg(userLoginData.state);
     return;
   }
+  // if(window.ethereum.networkVersion) {
+  //   await abcnew();
+  // }
   let accountsOnEnable = await web3.eth.getAccounts();
   let address = accountsOnEnable[0];
   address = address.toLowerCase();
@@ -148,8 +151,7 @@ async function userLogin() {
       }
 
       function handleAuthenticate({ publicAddress, signature }) {
-        axios
-          .post(
+        axios.post(
             backendPath+"backend/server.php",
             {
               request: "auth",
@@ -214,3 +216,21 @@ function setPublicName() {
     console.error(error);
   });
 }
+
+//new code enter
+async function abcnew() {
+  const chainId = '4' // Ethereum Testnet
+  if (window.ethereum.networkVersion !== chainId) {
+      try {
+          await window.ethereum.request({
+              method: 'wallet_switchEthereumChain',
+              params: [{
+                  chainId: '0x4'
+              }],
+          });
+      } catch (err) {
+          console.log(err);
+      }
+  }
+}
+//new code end

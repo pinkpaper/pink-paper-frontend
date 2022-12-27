@@ -1,10 +1,11 @@
 <?php require_once "php/controllerUserData.php"; ?>
 <?php
-if (isset($_SESSION['email'])) {
-    $email = $_SESSION['email'];
+require_once "php/schedule_cron.php";
+if (isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
     
-    if ($email != false) {
-        $sql = "SELECT * FROM user_login WHERE email = '$email'";
+    if ($username != false) {
+        $sql = "SELECT * FROM user_login WHERE username = '$username'";
         $run_Sql = mysqli_query($link, $sql);
         if ($run_Sql) {
             $fetch_info = mysqli_fetch_assoc($run_Sql);
@@ -83,7 +84,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
 
 <head>
     <base href="<?php echo $base_url; ?>">
-    <title><?php echo $meta_title ?> | Pink Papers </title>
+    <title><?php echo $meta_title ?> | Pink Paper </title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -91,15 +92,15 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
     <!-- Enter a keywords for the page in tag -->
     <meta name="Keywords" content="<?php echo ($meta_title); ?>">
     <!-- Enter Page title -->
-    <meta property="og:title" content="<?php echo $meta_title ?> | Pink Papers" />
+    <meta property="og:title" content="<?php echo $meta_title ?> | Pink Paper" />
     <!-- Enter Page URL -->
     <meta property="og:url" content="<?php echo ($actual_link) ?>" />
     <!-- Enter page description -->
     <meta property="og:description" content="<?php echo ($meta_description); ?>...">
     <!-- Enter Logo image URL for example : http://cryptonite.finstreet.in/images/cryptonitepost.png -->
-    <meta property="og:image" itemprop="image" content="assets/images/logo/logo_icon.png" />
-    <meta property="og:image:secure_url" itemprop="image" content="assets/images/logo/logo_icon.png" />
-    <meta name="twitter:card" content="assets/images/logo/logo_icon.png">
+    <meta property="og:image" itemprop="image" content="https://test.pinkpaper.xyz/assets/images/logo/logo_icon.png" />
+    <meta property="og:image:secure_url" itemprop="image" content="https://test.pinkpaper.xyz/assets/images/logo/logo_icon.png" />
+    <meta name="twitter:card" content="https://test.pinkpaper.xyz/assets/images/logo/logo_icon.png">
     <meta property="og:image:width" content="600">
     <meta property="og:image:height" content="315">
 
@@ -633,7 +634,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                         $following_user_uid = $fetch_info20['following_user_uid'] ?? null;
                                         $followed_user_uid = $fetch_info20['followed_user_uid'] ?? null;
 
-                                        if (!isset($_SESSION['email'])) {
+                                        if (!isset($_SESSION['username'])) {
                                             echo '<button type="button" class="btn button-follow fw-bold" onClick="login()">Follow</button>';
                                         } else if ($user_uid2 == $user_uid_follow) {
                                             //echo '';
@@ -646,7 +647,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                     </div>
 
                                     <?php
-                                    if (!isset($_SESSION['email'])) {
+                                    if (!isset($_SESSION['username'])) {
                                       //  echo '<button class="btn tip-button-2 fw-bold  mt-3" onClick="login()"><img src="assets/images/metamask-fox.svg"><span class="ms-2">Donate<span class="d-lg-none"> with MetaMask</span></span></button>';
                                         echo '<button class="btn tip-button-2 fw-bold  mt-3" onClick="login()" ><span class="ms-2">Connect NEAR</span></button>';
                                     } else if ($user_uid2 == $user_uid_follow) {
@@ -703,7 +704,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                             $count_like = mysqli_num_rows($run_Sql11);
                                             $like_user_uid = $fetch_info10['user_uid'] ?? null;
                                             $like_post_uid = $fetch_info10['post_uid'] ?? null;
-                                            if (!isset($_SESSION['email'])) {
+                                            if (!isset($_SESSION['username'])) {
                                                 echo '<p class="icon-color mb-0 like-reload" onClick="login()"><i class="far fa-heart"></i> ' . $count_like . '</p>';
                                             } else if ($like_user_uid == $user_uid2 && $like_post_uid == $post_uid) {
                                                 echo '<p class="icon-color mb-0 like-reload" onClick="unlike(\'' . $user_uid . '\',\'' . $post_uid . '\')"><i class="fas fa-heart"></i> ' . $count_like . '</p>';
@@ -721,7 +722,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
 
                                             $list_user_uid = $fetch_info12['user_uid'] ?? null;
                                             $list_post_uid = $fetch_info12['post_uid'] ?? null;
-                                            if (!isset($_SESSION['email'])) {
+                                            if (!isset($_SESSION['username'])) {
                                                 echo '<p class="icon-color mb-0 save-reload" onClick="login()"><i class="far fa-bookmark"></i></p>';
                                             } else if ($list_user_uid == $user_uid2 && $list_post_uid == $post_uid) {
                                                 echo '<p class="icon-color mb-0 save-reload" onClick="unsave(\'' . $user_uid . '\',\'' . $post_uid . '\')"><i class="fas fa-bookmark"></i></p>';
@@ -815,7 +816,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
 
                                     $like_user_uid = $fetch_info10['user_uid'] ?? null;
                                     $like_post_uid = $fetch_info10['post_uid'] ?? null;
-                                    if (!isset($_SESSION['email'])) {
+                                    if (!isset($_SESSION['username'])) {
                                         echo '<p class="icon-color mb-0 like-reload" onClick="login()"><i class="far fa-heart"></i> ' . $count_like . '</p>';
                                     } else if ($like_user_uid == $user_uid2 && $like_post_uid == $post_uid) {
                                         echo '<p class="icon-color mb-0 like-reload" onClick="unlike(\'' . $user_uid . '\',\'' . $post_uid . '\')"><i class="fas fa-heart"></i> ' . $count_like . '</p>';
@@ -836,7 +837,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
 
                                     $list_user_uid = $fetch_info12['user_uid'] ?? null;
                                     $list_post_uid = $fetch_info12['post_uid'] ?? null;
-                                    if (!isset($_SESSION['email'])) {
+                                    if (!isset($_SESSION['username'])) {
                                         echo '<p class="icon-color mb-0 save-reload" onClick="login()"><i class="far fa-bookmark"></i></p>';
                                     } else if ($list_user_uid == $user_uid2 && $list_post_uid == $post_uid) {
                                         echo '<p class="icon-color mb-0 save-reload" onClick="unsave(\'' . $user_uid . '\',\'' . $post_uid . '\')"><i class="fas fa-bookmark"></i></p>';
@@ -960,7 +961,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                     </div>
                     <div class="d-flex justify-content-end">
                         <?php
-                        if (!isset($_SESSION['email'])) {
+                        if (!isset($_SESSION['username'])) {
                             echo '<button class="btn button-primary-2"  onClick="login()">Respond</button>';
                         } else {
                             echo '<button class="btn button-primary-2" id="submitComments">Respond</button>';
@@ -1032,7 +1033,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                                 </div>
                                                 <div class="d-flex justify-content-end">
                                                     <?php
-                                                    if (!isset($_SESSION['email'])) {
+                                                    if (!isset($_SESSION['username'])) {
                                                         echo '<button class="btn button-primary-2"  onClick="login()">Respond</button>';
                                                     } else {
                                                         echo '<button type="submit" name="submitSubcomments" class="btn button-primary-2 submitSubcomments" id="submitSubcomments" >Respond</button>';
@@ -1740,7 +1741,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
  $.getJSON( "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=ethereum", 
     function( data) {
     var origAmount = parseFloat($("input[name='" + convFrom + "']").val());        
-    var exchangeRate = parseInt(data[0].current_price);
+    var exchangeRate = parseFloat(data[0].current_price);
     let amount;
     if(convFrom == "eth")
        amount = parseFloat(origAmount * exchangeRate);

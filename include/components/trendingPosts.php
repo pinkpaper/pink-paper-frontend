@@ -14,7 +14,7 @@
                         while ($row = mysqli_fetch_assoc($result)) {
                     ?>
                             <div class="swiper-slide">
-                                <div class="card border-0 shadow-sm mb-4">
+                                <div class="card border-0 shadow-sm mb-4" style="height:311.8px;">
                                     <div class="card-img p-2">
                                         <a href="<?php echo $row['username']; ?>/<?php echo $row['post_slug']; ?>">
                                             <?php
@@ -83,7 +83,7 @@
 
                                             $list_user_uid = $fetch_info12['user_uid'] ?? null;
                                             $list_post_uid = $fetch_info12['post_uid'] ?? null;
-                                            if (!isset($_SESSION['email'])) {
+                                            if (!isset($_SESSION['username'])) {
                                                 echo '<p class="icon-color mb-0 save-reload" onClick="login()"><i class="far fa-bookmark"></i></p>';
                                             } else if ($list_user_uid == $user_uid2 && $list_post_uid == $post_uid) {
                                                 echo '<p class="icon-color mb-0 save-reload" onClick="unsave(\'' . $user_uid . '\',\'' . $post_uid . '\')"><i class="fas fa-bookmark"></i></p>';

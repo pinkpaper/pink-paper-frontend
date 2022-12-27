@@ -1,0 +1,7 @@
+.style-position-1,.style-position-2,.style-position-3{
+display: flex !important;
+}
+
+.style-position-3{
+order: 1 !important;
+}

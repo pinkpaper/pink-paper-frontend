@@ -1,5 +1,6 @@
 <?php require_once "php/controllerUserData.php"; ?>
 <?php
+require_once "php/schedule_cron.php";
 if(!isset($_SESSION['userAddress'])){
     header("Location: ./login-user-mm");
     exit;
@@ -13,7 +14,7 @@ if(!isset($_SESSION['userAddress'])){
             if(!empty($fetch_info)){
                 $first_time_login = $fetch_info['first_time_login'];
                 if($first_time_login === 'true'){
-                    $_SESSION['email'] = $fetch_info['email'];
+                    $_SESSION['username'] = $fetch_info['username'];
                     header("Location: ./");
                 }
             }            
@@ -23,9 +24,10 @@ if(!isset($_SESSION['userAddress'])){
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <base href="<?php echo $base_url; ?>">
-    <title>Register New Account | Pink Papers </title>
+    <title>Register New Account | Pink Paper </title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,18 +49,19 @@ if(!isset($_SESSION['userAddress'])){
     <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/app.css" rel="stylesheet">
     <link href="assets/css/loader.css" rel="stylesheet">
-  <!-- Css for view password icon starts -->
-  <style type="text/css">
+    <!-- Css for view password icon starts -->
+    <style type="text/css">
     .field-icon {
-      float: right;
-      margin-left: -25px;
-      margin-top: -25px;
-      position: relative;
-      z-index: 2;
+        float: right;
+        margin-left: -25px;
+        margin-top: -25px;
+        position: relative;
+        z-index: 2;
     }
-  </style>
-  <!-- Css for view password icon ends -->
+    </style>
+    <!-- Css for view password icon ends -->
 </head>
+
 <body onload="loader()">
 
     <!-- loader start-->
@@ -71,7 +74,7 @@ if(!isset($_SESSION['userAddress'])){
         $result = mysqli_query($link, 'SELECT * FROM `logo`');
         $rowLogo = mysqli_fetch_assoc($result);
     ?>
-    
+
     <div class="container">
         <div class="row justify-content-center my-5">
             <div class="col-lg-8 col-md-12">
@@ -93,44 +96,47 @@ if(!isset($_SESSION['userAddress'])){
                                 <h4 class="fw-bold">Setup your account</h4>
                                 <p class="text-muted">It's quick and easy.</p>
 
-                                <form action="register" method="POST" autocomplete="">
+                                <form action="register" method="GET" autocomplete="">
                                     <?php
                                     if(count($errors) == 1){
                                         ?>
-                                        <div class="alert alert-danger text-center my-3">
-                                            <?php
+                                    <div class="alert alert-danger text-center my-3">
+                                        <?php
                                             foreach($errors as $showerror){
                                                 echo $showerror;
                                             }
                                             ?>
-                                        </div>
-                                        <?php
+                                    </div>
+                                    <?php
                                     }elseif(count($errors) > 1){
                                         ?>
-                                        <div class="alert alert-danger my-3">
-                                            <?php
+                                    <div class="alert alert-danger my-3">
+                                        <?php
                                             foreach($errors as $showerror){
                                                 ?>
-                                                <li><?php echo $showerror; ?></li>
-                                                <?php
+                                        <li><?php echo $showerror; ?></li>
+                                        <?php
                                             }
                                             ?>
-                                        </div>
-                                        <?php
+                                    </div>
+                                    <?php
                                     }
                                     ?>
                                     <div class="form-group mb-3">
-                                        <input class="form-control" type="text" name="name" placeholder="Full Name" required value="<?php echo $name ?>">
+                                        <input class="form-control" type="text" name="name" placeholder="Full Name"
+                                            required value="<?php echo $name ?>">
                                     </div>
                                     <div class="form-group mb-3">
-                                        <input class="form-control" type="email" name="email" placeholder="Email Address" required value="<?php echo $email ?>" >
+                                        <input class="form-control" type="text" name="username"
+                                            placeholder="Username" required value="<?php echo $username ?>">
                                     </div>
                                     <div class="form-group mb-3">
-                                        <input class="form-control" type="hidden" name="metamask_address" value="<?php echo $metamask_address ?>" required>
+                                        <input class="form-control" type="hidden" name="metamask_address"
+                                            value="<?php echo $metamask_address ?>" required>
                                     </div>
                                     <div class="d-grid mb-4">
                                         <input class="btn button-primary" type="submit" name="signup" value="Confirm">
-                                    </div>                                   
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -140,7 +146,7 @@ if(!isset($_SESSION['userAddress'])){
         </div>
     </div>
 
-    
+
 
 
 
@@ -152,20 +158,20 @@ if(!isset($_SESSION['userAddress'])){
     <script type="text/javascript" src="assets/js/app.js"></script>
     <script type="text/javascript" src="assets/js/loader.js"></script>
 
-      <!-- Javascript for view password starts-->
-  <script type="text/javascript">
+    <!-- Javascript for view password starts-->
+    <script type="text/javascript">
     $(".toggle-password").click(function() {
 
-      $(this).toggleClass("fa-eye fa-eye-slash");
-      var input = $($(this).attr("toggle"));
-      if (input.attr("type") == "password") {
-        input.attr("type", "text");
-      } else {
-        input.attr("type", "password");
-      }
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        var input = $($(this).attr("toggle"));
+        if (input.attr("type") == "password") {
+            input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
     });
-  </script>
-  <!-- Javascript for view password ends-->
+    </script>
+    <!-- Javascript for view password ends-->
 </body>
 
 </html>

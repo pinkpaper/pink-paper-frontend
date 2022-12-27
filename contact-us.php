@@ -1,11 +1,12 @@
 <?php require_once "php/controllerUserData.php"; ?>
 
 <?php
-if (isset($_SESSION['email'])) {
-    $email = $_SESSION['email'];
+require_once "php/schedule_cron.php";
+if (isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
     
-    if ($email != false) {
-        $sql = "SELECT * FROM user_login WHERE email = '$email'";
+    if ($username != false) {
+        $sql = "SELECT * FROM user_login WHERE username = '$username'";
         $run_Sql = mysqli_query($link, $sql);
         if ($run_Sql) {
             $fetch_info = mysqli_fetch_assoc($run_Sql);
@@ -38,22 +39,22 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
 <html lang="en">
 
 <head>
-    <title><?php echo $meta_title ?> | Pink Papers </title>
+    <title><?php echo $meta_title ?> | Pink Paper </title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Enter a keywords for the page in tag -->
     <meta name="Keywords" content="<?php echo ($meta_title); ?>">
     <!-- Enter Page title -->
-    <meta property="og:title" content="<?php echo $meta_title ?> | Pink Papers" />
+    <meta property="og:title" content="<?php echo $meta_title ?> | Pink Paper" />
     <!-- Enter Page URL -->
     <meta property="og:url" content="<?php echo ($actual_link) ?>" />
     <!-- Enter page description -->
     <meta property="og:description" content="<?php echo ($meta_description); ?>...">
     <!-- Enter Logo image URL for example : http://cryptonite.finstreet.in/images/cryptonitepost.png -->
-    <meta property="og:image" itemprop="image" content="assets/images/logo/logo_icon.png" />
-    <meta property="og:image:secure_url" itemprop="image" content="assets/images/logo/logo_icon.png" />
-    <meta name="twitter:card" content="assets/images/logo/logo_icon.png">
+    <meta property="og:image" itemprop="image" content="https://test.pinkpaper.xyz/assets/images/logo/logo_icon.png" />
+    <meta property="og:image:secure_url" itemprop="image" content="https://test.pinkpaper.xyz/assets/images/logo/logo_icon.png" />
+    <meta name="twitter:card" content="https://test.pinkpaper.xyz/assets/images/logo/logo_icon.png">
     <meta property="og:image:width" content="600">
     <meta property="og:image:height" content="315">
 
@@ -195,7 +196,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                             </h5>
                             <form> <input type="email"
                                     pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
-                                    class="form-control form-control-lg story-input" name="email" id="email"
+                                    class="form-control form-control-lg story-input" name="username" id="email"
                                     placeholder="Email" aria-required value="">
                             </form>
                         </div>
@@ -286,10 +287,10 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
             }
             if ($('#email').val() == "") {
                 sweetAlert("Warning", "Please enter all fields", "warning");
-                error = error + 'email';
+                error = error + 'username';
             } else {
 
-                formData.append('email', $('#email').val());
+                formData.append('username', $('#email').val());
             }
             if ($('#message').val() == "") {
                 sweetAlert("Warning", "Please enter all fields", "warning");

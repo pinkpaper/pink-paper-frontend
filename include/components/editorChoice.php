@@ -85,7 +85,7 @@ INNER JOIN `editor_choice` ON `stories`.`post_uid`=`editor_choice`.`post_uid`  W
 
                                             $list_user_uid = $fetch_info12['user_uid'] ?? null;
                                             $list_post_uid = $fetch_info12['post_uid'] ?? null;
-                                            if (!isset($_SESSION['email'])) {
+                                            if (!isset($_SESSION['username'])) {
                                                 echo '<p class="icon-color mb-0 save-reload" onClick="login()"><i class="far fa-bookmark"></i></p>';
                                             } else if ($list_user_uid == $user_uid2 && $list_post_uid == $post_uid) {
                                                 echo '<p class="icon-color mb-0 save-reload" onClick="unsave(\'' . $user_uid . '\',\'' . $post_uid . '\')"><i class="fas fa-bookmark"></i></p>';

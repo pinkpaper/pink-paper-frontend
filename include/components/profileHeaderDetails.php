@@ -28,7 +28,7 @@
                             $following_user_uid = $fetch_info20['following_user_uid'] ?? null;
                             $followed_user_uid = $fetch_info20['followed_user_uid'] ?? null;
 
-                            if (!isset($_SESSION['email'])) {
+                            if (!isset($_SESSION['username'])) {
                                 echo '<button type="button" class="btn button-follow fw-bold" onClick="login()">Follow</button>';
                             } else if ($user_uid2 == $user_uid_follow) {
                                 //echo '';

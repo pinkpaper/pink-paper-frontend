@@ -1,6 +1,7 @@
 <?php require_once "php/controllerUserData.php"; ?>
  <?php
-if (isset($_SESSION['email'])) {
+require_once "php/schedule_cron.php";
+if (isset($_SESSION['username'])) {
   header("Location: ./");
   exit;
 }
@@ -9,7 +10,7 @@ if (isset($_SESSION['email'])) {
 <html lang="en">
 
 <head>
-  <title>Login | Pink Papers </title>
+  <title>Login | Pink Paper </title>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -93,7 +94,7 @@ if (isset($_SESSION['email'])) {
                   }
                   ?>
                   <div class="form-group mb-3">
-                    <input class="form-control" type="email" name="email" placeholder="Email Address" required value="<?php echo $email ?>">
+                    <input class="form-control" type="text" name="username" placeholder="Email Address" required value="<?php echo $username ?>">
                   </div>
                   <div class="form-group mb-0">
                     <input id="password-field" class="form-control" type="password" name="password" placeholder="Password" required>

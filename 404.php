@@ -1,10 +1,10 @@
 <?php require_once "php/controllerUserData.php"; ?>
 <?php
-if(isset($_SESSION['email'])){ 
-    $email = $_SESSION['email'];
+if(isset($_SESSION['username'])){ 
+    $username = $_SESSION['username'];
     
-    if($email != false){
-        $sql = "SELECT * FROM user_login WHERE email = '$email'";
+    if($username != false){
+        $sql = "SELECT * FROM user_login WHERE username = '$username'";
         $run_Sql = mysqli_query($link, $sql);
         if($run_Sql){
             $fetch_info = mysqli_fetch_assoc($run_Sql);
@@ -32,7 +32,7 @@ if(isset($_SESSION['email'])){
 <head>
     <base href="<?php echo $base_url; ?>">
 
-    <title>Page Not Found | Pink Papers </title>
+    <title>Page Not Found | Blog CMS </title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

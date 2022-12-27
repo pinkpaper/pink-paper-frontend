@@ -1,36 +1,11 @@
 <?php require_once "php/controllerUserData.php"; ?>
 <?php
-/* if (isset($_SESSION['email'])) {
-    $email = $_SESSION['email'];
-    
-    if ($email != false) {
-        $sql = "SELECT * FROM user_login WHERE email = '$email'";
-        $run_Sql = mysqli_query($link, $sql);
-        if ($run_Sql) {
-            $fetch_info = mysqli_fetch_assoc($run_Sql);
-            $status = $fetch_info['email_status'];
-            $name = $fetch_info['name'];
-            $username = $fetch_info['username'];
-            $code = $fetch_info['code'];
-            $profile = $fetch_info['profile'];
-            $user_uid = $fetch_info['user_uid'];
-            if ($status == "verified") {
-                if ($code != 0) {
-                    header('Location: reset-code');
-                }
-            } else {
-                header('Location: user-otp');
-            }
-        }
-    } else {
-        header('Location: login-user-mm');
-    }
-} */
+require_once "php/schedule_cron.php";
 if(isset($_SESSION['userAddress'])){
     $userAddres = $_SESSION['userAddress'];
 }
 
-if (isset($_SESSION['userAddress'])) {
+if (isset($_SESSION['userAddress']) && isset($_SESSION['header_show'])) {
     $userAddress = $_SESSION['userAddress'];
     if ($userAddress != '') {
         $sql = "SELECT * FROM user_login  WHERE metamask_address = '$userAddress'";
@@ -65,7 +40,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
 
 <head>
     <base href="<?php echo $base_url; ?>">
-    <title><?php echo $meta_title ?> | Pink Papers </title>
+    <title><?php echo $meta_title ?> | Pink Paper </title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -73,15 +48,16 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
     <!-- Enter a keywords for the page in tag -->
     <meta name="Keywords" content="<?php echo ($meta_title); ?>">
     <!-- Enter Page title -->
-    <meta property="og:title" content="<?php echo $meta_title ?> | Pink Papers" />
+    <meta property="og:title" content="<?php echo $meta_title ?> | Pink Paper" />
     <!-- Enter Page URL -->
     <meta property="og:url" content="<?php echo ($actual_link) ?>" />
     <!-- Enter page description -->
     <meta property="og:description" content="<?php echo ($meta_description); ?>...">
     <!-- Enter Logo image URL for example : http://cryptonite.finstreet.in/images/cryptonitepost.png -->
-    <meta property="og:image" itemprop="image" content="assets/images/logo/logo_icon.png" />
-    <meta property="og:image:secure_url" itemprop="image" content="assets/images/logo/logo_icon.png" />
-    <meta name="twitter:card" content="assets/images/logo/logo_icon.png">
+    <meta property="og:image" itemprop="image" content="https://test.pinkpaper.xyz/assets/images/logo/logo_icon.png" />
+    <meta property="og:image:secure_url" itemprop="image"
+        content="https://test.pinkpaper.xyz/assets/images/logo/logo_icon.png" />
+    <meta name="twitter:card" content="https://test.pinkpaper.xyz/assets/images/logo/logo_icon.png">
     <meta property="og:image:width" content="600">
     <meta property="og:image:height" content="315">
 
@@ -217,7 +193,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
     <!-- header end-->
 
     <?php
-    if (isset($_SESSION['email'])) {
+    if (isset($_SESSION['username'])) {
         echo '<div class="container" style="padding-top:50px;"></div>';
     } else {
     ?>
@@ -271,7 +247,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                 role="tab" aria-controls="latest-post" aria-selected="false">Latest Post</a>
                         </li>
                         <?php
-                        if (isset($_SESSION['email'])) { ?>
+                        if (isset($_SESSION['username'])) { ?>
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="following-post-tab" data-bs-toggle="tab" href="#following-post"
                                 role="tab" aria-controls="following-post" aria-selected="false">Following Post</a>
@@ -310,7 +286,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                     while ($row = mysqli_fetch_assoc($result)) {
                                 ?>
 
-                                <div class="card border-0 shadow-sm mb-3 card-reading-time">
+                                <div class="card border-0 shadow-sm mb-3 card-reading-time overflow-auto">
                                     <div class="d-flex">
                                         <div class="card-img p-2">
                                             <a href="<?php echo $row['username']; ?>/<?php echo $row['post_slug']; ?>">
@@ -323,7 +299,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                                         ?>
                                             </a>
                                         </div>
-                                        <div class="card-body px-2">
+                                        <div class="card-body px-2 w-75">
                                             <a href="<?php echo $row['username']; ?>/<?php echo $row['post_slug']; ?>"
                                                 class="title-link articles-dot mb-0">
                                                 <h5 class="fw-bold"><?php echo $row['post_title']; ?></h5>
@@ -384,7 +360,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
 
                                             $list_user_uid = $fetch_info12['user_uid'] ?? null;
                                             $list_post_uid = $fetch_info12['post_uid'] ?? null;
-                                            if (!isset($_SESSION['email'])) {
+                                            if (!isset($_SESSION['username'])) {
                                                 echo '<p class="icon-color mb-0 save-reload" onClick="login()"><i class="far fa-bookmark"></i></p>';
                                             } else if ($list_user_uid == $user_uid2 && $list_post_uid == $post_uid) {
                                                 echo '<p class="icon-color mb-0 save-reload" onClick="unsave(\'' . $user_uid . '\',\'' . $post_uid . '\')"><i class="fas fa-bookmark"></i></p>';
@@ -431,7 +407,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
 
                         </div>
                         <?php
-                        if (isset($_SESSION['email'])) { ?>
+                        if (isset($_SESSION['username'])) { ?>
                         <div class="tab-pane fade" id="following-post" role="tabpanel"
                             aria-labelledby="following-post-tab">
                             <div class="post-following-post">
@@ -458,7 +434,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                         while ($row = mysqli_fetch_assoc($result)) {
                                             $row = mysqli_fetch_assoc($result);
                                     ?>
-                                <div class="card border-0 shadow-sm mb-3 card-reading-time">
+                                <div class="card border-0 shadow-sm mb-3 card-reading-time overflow-auto">
                                     <div class="d-flex">
                                         <div class="card-img p-2">
                                             <a href="<?php echo $row['username']; ?>/<?php echo $row['post_slug']; ?>">
@@ -471,7 +447,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                                             ?>
                                             </a>
                                         </div>
-                                        <div class="card-body px-2">
+                                        <div class="card-body px-2 w-75">
                                             <a href="<?php echo $row['username']; ?>/<?php echo $row['post_slug']; ?>"
                                                 class="title-link articles-dot mb-0">
                                                 <h5 class="fw-bold"><?php echo $row['post_title']; ?></h5>
@@ -491,7 +467,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                                 <div class="author d-flex justify-content-start">
                                                     <?php
                                                                 if ($row['profile'] == '') {
-                                                                    echo '<div class="profile"><a href="' . $row['username'] . '"><canvas class="avatar-image2 img-fluid rounded-circle" title="' . $row['name'] . '" width="40" height="40"></canvas></a></div>';
+                                                                    echo '<div class="profile"><a href="' . $row['username'] . '"><canvas class="avatar-image2 img-fluid rounded-circle" title="' . $row['name'] . '" style="width:34px;height: 34px;"></canvas></a></div>';
                                                                 } else {
                                                                     echo '<div class="profile"><a href="' . $row['username'] . '"><img src="uploads/profile/' . $row['profile'] . '" alt="" class="img-fluid rounded-circle"></a></div>';
                                                                 }
@@ -531,7 +507,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
 
                                             $list_user_uid = $fetch_info12['user_uid'] ?? null;
                                             $list_post_uid = $fetch_info12['post_uid'] ?? null;
-                                            if (!isset($_SESSION['email'])) {
+                                            if (!isset($_SESSION['username'])) {
                                                 echo '<p class="icon-color mb-0 save-reload" onClick="login()"><i class="far fa-bookmark"></i></p>';
                                             } else if ($list_user_uid == $user_uid2 && $list_post_uid == $post_uid) {
                                                 echo '<p class="icon-color mb-0 save-reload" onClick="unsave(\'' . $user_uid . '\',\'' . $post_uid . '\')"><i class="fas fa-bookmark"></i></p>';
@@ -586,7 +562,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                         }
                         ?>
                         <?php
-                        if (isset($_SESSION['email'])) { ?>
+                        if (isset($_SESSION['username'])) { ?>
                         <div class="tab-pane fade" id="recommended-post" role="tabpanel"
                             aria-labelledby="recommended-post-tab">
                             <div class="post-recommended-post">
@@ -619,7 +595,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                             while ($row = mysqli_fetch_assoc($result)) {
                                     ?>
 
-                                <div class="card border-0 shadow-sm mb-3 card-reading-time">
+                                <div class="card border-0 shadow-sm mb-3 card-reading-time overflow-auto">
                                     <div class="d-flex">
                                         <div class="card-img p-2">
                                             <a href="<?php echo $row['username']; ?>/<?php echo $row['post_slug']; ?>">
@@ -632,7 +608,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                                                 ?>
                                             </a>
                                         </div>
-                                        <div class="card-body px-2">
+                                        <div class="card-body px-2 w-75">
                                             <a href="<?php echo $row['username']; ?>/<?php echo $row['post_slug']; ?>"
                                                 class="title-link articles-dot mb-0">
                                                 <h5 class="fw-bold"><?php echo $row['post_title']; ?></h5>
@@ -654,7 +630,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                                                     if ($row['profile'] == '') {
                                                                         echo '<div class="profile">
                                                     <a href="' . $row['username'] . '">
-                                                    <canvas class="avatar-image img-fluid rounded-circle" title="' . $row['name'] . '" width="40" height="40"></canvas>
+                                                    <canvas class="avatar-image img-fluid rounded-circle" title="' . $row['name'] . '" style="width:34px;height: 34px;"></canvas>
 
                                                         </a>
                                                         </div>';
@@ -701,7 +677,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
 
                                             $list_user_uid = $fetch_info12['user_uid'] ?? null;
                                             $list_post_uid = $fetch_info12['post_uid'] ?? null;
-                                            if (!isset($_SESSION['email'])) {
+                                            if (!isset($_SESSION['username'])) {
                                                 echo '<p class="icon-color mb-0 save-reload" onClick="login()"><i class="far fa-bookmark"></i></p>';
                                             } else if ($list_user_uid == $user_uid2 && $list_post_uid == $post_uid) {
                                                 echo '<p class="icon-color mb-0 save-reload" onClick="unsave(\'' . $user_uid . '\',\'' . $post_uid . '\')"><i class="fas fa-bookmark"></i></p>';
@@ -1137,7 +1113,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                         <div class="make-me-sticky">
                             <!-- topics -->
                             <?php
-                                if (isset($_SESSION['email'])) {
+                                if (isset($_SESSION['username'])) {
                                 ?>
                             <div class="topic-div mb-5">
                                 <div class="heading mb-4">
@@ -1437,7 +1413,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                     } else {
                         $("#loadBtnFollowingPost").val('Load More');
                     }
-                    $(".avatar-image").letterpic({
+                    $(".avatar-image2").letterpic({
                         colors: [
                             "#1abc9c", "#2ecc71", "#3498db", "#9b59b6",
                             "#34495e", "#16a085", "#27ae60", "#2980b9",
@@ -1534,15 +1510,6 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
 
     }
     </script>
-    <script>
-    const abc = window.ethereum.selectedAddress;
-    console.log(abc);
-    // if(!abc){
-    //     window.location.replace("login-user-mm");
-    // }
-    </script>
-
-
 </body>
 
 </html>

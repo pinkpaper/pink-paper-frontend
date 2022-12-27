@@ -1,15 +1,12 @@
 <?php require_once "php/controllerUserData.php"; ?>
 <?php
-// if(isset($_SESSION['email'])){
-//     header("Location: index");
-//     exit;
-// }
+require_once "php/schedule_cron.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Forget Passsword | Pink Papers </title>
+    <title>Forget Passsword | Blog CMS </title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -83,7 +80,7 @@
                                         }
                                     ?>
                                     <div class="form-group mb-3">
-                                        <input class="form-control" type="email" name="email" placeholder="Enter email address" required value="<?php echo $email ?>">
+                                        <input class="form-control" type="text" name="username" placeholder="Enter email address" required value="<?php echo $username ?>">
                                     </div>
                                     <div class="d-grid mb-4">
                                         <input class="btn button-primary" type="submit" name="check-email" value="Continue">

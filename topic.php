@@ -1,9 +1,10 @@
 <?php require_once "php/controllerUserData.php"; ?>
 <?php
-if (isset($_SESSION['email'])) {
-    $email = $_SESSION['email'];    
-    if ($email != false) {
-        $sql = "SELECT * FROM user_login WHERE email = '$email'";
+require_once "php/schedule_cron.php";
+if (isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];    
+    if ($username != false) {
+        $sql = "SELECT * FROM user_login WHERE username = '$username'";
         $run_Sql = mysqli_query($link, $sql);
         if ($run_Sql) {
             $fetch_info = mysqli_fetch_assoc($run_Sql);
@@ -48,7 +49,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
 <head>
     <base href="<?php echo $base_url; ?>">
 
-    <title><?php echo $meta_title ?> | Pink Papers </title>
+    <title><?php echo $meta_title ?> | Pink Paper </title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -56,15 +57,16 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
     <!-- Enter a keywords for the page in tag -->
     <meta name="Keywords" content="<?php echo ($meta_title); ?>">
     <!-- Enter Page title -->
-    <meta property="og:title" content="<?php echo $meta_title ?> | Pink Papers" />
+    <meta property="og:title" content="<?php echo $meta_title ?> | Pink Paper" />
     <!-- Enter Page URL -->
     <meta property="og:url" content="<?php echo ($actual_link) ?>" />
     <!-- Enter page description -->
     <meta property="og:description" content="<?php echo ($meta_description); ?>...">
     <!-- Enter Logo image URL for example : http://cryptonite.finstreet.in/images/cryptonitepost.png -->
-    <meta property="og:image" itemprop="image" content="assets/images/logo/logo_icon.png" />
-    <meta property="og:image:secure_url" itemprop="image" content="assets/images/logo/logo_icon.png" />
-    <meta name="twitter:card" content="assets/images/logo/logo_icon.png">
+    <meta property="og:image" itemprop="image" content="https://test.pinkpaper.xyz/assets/images/logo/logo_icon.png" />
+    <meta property="og:image:secure_url" itemprop="image"
+        content="https://test.pinkpaper.xyz/assets/images/logo/logo_icon.png" />
+    <meta name="twitter:card" content="https://test.pinkpaper.xyz/assets/images/logo/logo_icon.png">
     <meta property="og:image:width" content="600">
     <meta property="og:image:height" content="315">
 
@@ -78,7 +80,8 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
 
     <!-- icons pack -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css" />
     <script src="assets/feather/feather.min.js"></script>
 
 
@@ -119,7 +122,9 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                 <div class="col-lg-8 col-md-12">
                     <div class="heading mb-4">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h1 class="fw-bold text-capitalize" style="color: var(--text-color);"><i class="fas fa-hashtag fst-italic" style="color: var(--gray-color);"></i> <?php echo  utf8_decode(urldecode($topic_req)); ?></h1>
+                            <h1 class="fw-bold text-capitalize" style="color: var(--text-color);"><i
+                                    class="fas fa-hashtag fst-italic" style="color: var(--gray-color);"></i>
+                                <?php echo  utf8_decode(urldecode($topic_req)); ?></h1>
                             <?php
                             $user_uid2 = $user_uid ?? null; 
 
@@ -129,21 +134,21 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                             $topic_follow = $fetch_info7['topic_follow'] ?? null;
                             $user_uid3 = $fetch_info7['user_uid'] ?? null;
 
-                            if (!isset($_SESSION['email'])) {
+                            if (!isset($_SESSION['username'])) {
                             echo '<form id="follow" action="login-user.php">
-                                <button style="float:left;" class="follow_btn btn button-follow fw-bold" type="submit">Follow</button>
+                                <button style="float:left;" class="follow_btn btn button-follow fw-bold" type="button">Follow</button>
                             </form>';
                             }else if($topic_follow == $topic_req && $user_uid3 == $user_uid2){
                                 echo '<form id="follow" >
                                 <input type="hidden" value="'.$user_uid2.'" name="user_uid">
                                 <input type="hidden" value="'.$topic_req.'" name="topic_follow">
-                                <button style="float:left;" onClick="unfollowtopic(\'' . $user_uid . '\',\'' . $topic_req . '\')" class="follow_btn btn button-follow fw-bold" type="submit" name="unfollow_topic">Following</button>
+                                <button style="float:left;" onClick="unfollowtopic(\'' . $user_uid . '\',\'' . $topic_req . '\')" class="follow_btn btn button-follow fw-bold" type="button" name="unfollow_topic">Following</button>
                             </form>';
                             }else{
                                 echo '<form id="follow">
                                 <input type="hidden" value="'.$user_uid2.'" name="user_uid">
                                 <input type="hidden" value="'.$topic_req.'" name="topic_follow">
-                                <button style="float:left;" onClick="followtopic(\'' . $user_uid . '\',\'' . $topic_req . '\')" class="follow_btn btn button-follow fw-bold" type="submit" name="follow_topic">Follow</button>
+                                <button style="float:left;" onClick="followtopic(\'' . $user_uid . '\',\'' . $topic_req . '\')" class="follow_btn btn button-follow fw-bold" type="button" name="follow_topic">Follow</button>
                             </form>';
                             }
                             ?>
@@ -169,35 +174,37 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                             while ($row = mysqli_fetch_assoc($result)) {
                         ?>
 
-                                <div class="card border-0 shadow-sm mb-3 card-reading-time">
-                                    <div class="d-flex">
-                                        <div class="card-img p-2">
-                                            <a href="<?php echo $row['username']; ?>/<?php echo $row['post_slug']; ?>">
-                                                <?php
+                        <div class="card border-0 shadow-sm mb-3 card-reading-time">
+                            <div class="d-flex">
+                                <div class="card-img p-2">
+                                    <a href="<?php echo $row['username']; ?>/<?php echo $row['post_slug']; ?>">
+                                        <?php
                                                 if ($row['featured_image'] == '') {
                                                     echo '<img src="assets/images/blogcms.com.png" alt="image" class="shadow">';
                                                 } else {
                                                     echo '<img src="uploads/featuredImages/' . $row['featured_image'] . '" alt="image" class="shadow">';
                                                 }
                                                 ?>
-                                            </a>
-                                        </div>
-                                        <div class="card-body px-2">
-                                            <a href="<?php echo $row['username']; ?>/<?php echo $row['post_slug']; ?>" class="title-link articles-dot mb-0">
-                                                <h5 class="fw-bold"><?php echo $row['post_title']; ?></h5>
-                                            </a>
-                                            <p class="text-muted articles-dot small mb-2"><?php echo strip_tags($row['post_content']); ?></p>
+                                    </a>
+                                </div>
+                                <div class="card-body px-2">
+                                    <a href="<?php echo $row['username']; ?>/<?php echo $row['post_slug']; ?>"
+                                        class="title-link articles-dot mb-0">
+                                        <h5 class="fw-bold"><?php echo $row['post_title']; ?></h5>
+                                    </a>
+                                    <p class="text-muted articles-dot small mb-2">
+                                        <?php echo strip_tags($row['post_content']); ?></p>
 
-                                            <div class="d-flex flex-wrap gap-2 mb-3">
-                                                <?php
+                                    <div class="d-flex flex-wrap gap-2 mb-3">
+                                        <?php
                                                 $tag_name = explode(",", $row['post_tags']);
                                                 foreach ($tag_name as $key => $val) {
                                                     echo '<a href="topic/' . $val . '" class="topic fw-bold py-0 px-3">' . $val . '</a>';
                                                 }
                                                 ?>
-                                            </div>
-                                            <div class="author d-flex justify-content-start">
-                                                <?php
+                                    </div>
+                                    <div class="author d-flex justify-content-start">
+                                        <?php
                                                 if ($row['profile'] == '') {
                                                     echo '<div class="profile">
                                                     <a href="' . $row['username'] . '">
@@ -215,12 +222,16 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                                 ?>
 
 
-                                                <div class="author-name ms-2">
-                                                    <a href="<?php echo $row['username']; ?>" class="author-link">
-                                                        <h6 class="fw-bold mb-0" style="font-size:14px;"><?php echo $row['name']; ?></h6>
-                                                    </a>
-                                                    <span class="text-muted" style="font-size:12px;"><?php echo date('M j, Y', strtotime($row['created_at'])); ?></span> <span class="text-muted">&bull;</span> <span class="text-muted" style="font-size:12px;">
-                                                        <?php
+                                        <div class="author-name ms-2">
+                                            <a href="<?php echo $row['username']; ?>" class="author-link">
+                                                <h6 class="fw-bold mb-0" style="font-size:14px;">
+                                                    <?php echo $row['name']; ?></h6>
+                                            </a>
+                                            <span class="text-muted"
+                                                style="font-size:12px;"><?php echo date('M j, Y', strtotime($row['created_at'])); ?></span>
+                                            <span class="text-muted">&bull;</span> <span class="text-muted"
+                                                style="font-size:12px;">
+                                                <?php
                                                         $mycontent = $row['post_content'];
                                                         $word = str_word_count(strip_tags($mycontent));
                                                         $m = floor($word / 200);
@@ -232,25 +243,28 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                                             echo $s . ' sec' . ($s == 1 ? '' : 's') . ' read';
                                                         }
                                                         ?>
-                                                    </span>
-                                                </div>
-                                            </div>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
 
-                            <?php }
+                        <?php }
                         } else { ?>
 
-                            <div class="my-5">
-                                <div class="row justify-content-center">
-                                    <div class="col-12 text-center">
-                                        <img src="assets/images/no_data.svg" alt="" class="p-3" style="width: 200px;">
-                                        <h6 class="fw-bold text-center" style="color:var(--gray-color)">You have no data</h6>
-                                        <h6 class="text-center" style="color:var(--gray-color)"><a href="create-story" class="text-link-3 fw-bold ">Write</a> a story or <a href="./"class="text-link-3 fw-bold ">read</a> on Blog CMS.</h6>
-                                    </div>
+                        <div class="my-5">
+                            <div class="row justify-content-center">
+                                <div class="col-12 text-center">
+                                    <img src="assets/images/no_data.svg" alt="" class="p-3" style="width: 200px;">
+                                    <h6 class="fw-bold text-center" style="color:var(--gray-color)">You have no data
+                                    </h6>
+                                    <h6 class="text-center" style="color:var(--gray-color)"><a href="create-story"
+                                            class="text-link-3 fw-bold ">Write</a> a story or <a href="./"
+                                            class="text-link-3 fw-bold ">read</a> on Blog CMS.</h6>
                                 </div>
                             </div>
+                        </div>
                         <?php } ?>
 
                     </div>
@@ -258,7 +272,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                         <?php
                         if ($limitLatestPost < $postCountLatestPost) {
                         ?>
-                            <input type="button" class="loadBtn" id="loadBtnLatestPost" value="Load More">
+                        <input type="button" class="loadBtn" id="loadBtnLatestPost" value="Load More">
                         <?php } ?>
                         <input type="hidden" id="rowLatestPost" value="0">
                         <input type="hidden" id="postCountLatestPost" value="<?php echo $postCountLatestPost; ?>">
@@ -291,16 +305,19 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                         <h4 class="fw-bold mb-0" style="color: var(--text-color);">
                                             <?php echo custom_number_format($count_stories); ?>
                                         </h4>
-                                        <h6 class="mb-0" style="color: var(--gray-color);">Stor<?php echo ($count_stories == 1 ? 'y' : 'ies'); ?></h6>
+                                        <h6 class="mb-0" style="color: var(--gray-color);">
+                                            Stor<?php echo ($count_stories == 1 ? 'y' : 'ies'); ?></h6>
                                     </div>
                                     <div class="col-6 text-center">
-                                    <?php
+                                        <?php
                                         $query3 = "SELECT DISTINCT(user_uid) FROM `stories` WHERE `post_tags` LIKE '%$topic_req%'";
                                         $result3 = mysqli_query($link, $query3);
                                         $count_writers = mysqli_num_rows($result3);
                                     ?>
-                                    <h4 class="fw-bold mb-0" style="color: var(--text-color);"><?php echo custom_number_format($count_writers); ?></h4>
-                                    <h6 class="mb-0" style="color: var(--gray-color);">Writer<?php echo ($count_writers == 1 ? '' : 's'); ?></h6>
+                                        <h4 class="fw-bold mb-0" style="color: var(--text-color);">
+                                            <?php echo custom_number_format($count_writers); ?></h4>
+                                        <h6 class="mb-0" style="color: var(--gray-color);">
+                                            Writer<?php echo ($count_writers == 1 ? '' : 's'); ?></h6>
                                     </div>
                                 </div>
                             </div>
@@ -315,15 +332,16 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                     $result = mysqli_query($link, $query);
                                     if (mysqli_num_rows($result) > 0) {
                                         while ($row = mysqli_fetch_assoc($result)) {
-                                    ?>                                    
-                                        <a href="topic/<?php echo $row['tag_name']; ?>" class="btn topic-single ms-2 mb-2 px-3"><?php echo $row['tag_name']; ?></a>
+                                    ?>
+                                    <a href="topic/<?php echo $row['tag_name']; ?>"
+                                        class="btn topic-single ms-2 mb-2 px-3"><?php echo $row['tag_name']; ?></a>
                                     <?php } }else{?>
-                                        <h6>No data Found</h6>
+                                    <h6>No data Found</h6>
                                     <?php }?>
                                 </div>
                             </div>
 
-                            
+
                         </div>
                     </div>
                 </div>
@@ -350,198 +368,200 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
 
 
     <script>
-        feather.replace()
+    feather.replace()
     </script>
     <script>
-        var animated_text_color = document.getElementById('animated-text-color');
+    var animated_text_color = document.getElementById('animated-text-color');
 
-        var typewriter = new Typewriter(animated_text_color, {
-            loop: true
-        });
+    var typewriter = new Typewriter(animated_text_color, {
+        loop: true
+    });
 
-        typewriter.typeString('Post')
-            .pauseFor(2500)
-            .deleteAll()
-            .typeString('Article')
-            .pauseFor(2500)
-            .deleteChars(7)
-            .typeString('Story')
-            .start();
+    typewriter.typeString('Post')
+        .pauseFor(2500)
+        .deleteAll()
+        .typeString('Article')
+        .pauseFor(2500)
+        .deleteChars(7)
+        .typeString('Story')
+        .start();
     </script>
 
     <script>
-        var swiper = new Swiper(".mySwiper", {
-            slidesPerView: 1,
-            spaceBetween: 15,
-            pagination: {
-                el: ".swiper-pagination-1",
-                clickable: true,
+    var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        spaceBetween: 15,
+        pagination: {
+            el: ".swiper-pagination-1",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next-1",
+            prevEl: ".swiper-button-prev-1",
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 1,
+                spaceBetween: 15,
             },
-            navigation: {
-                nextEl: ".swiper-button-next-1",
-                prevEl: ".swiper-button-prev-1",
+            768: {
+                slidesPerView: 2,
+                spaceBetween: 25,
             },
-            breakpoints: {
-                640: {
-                    slidesPerView: 1,
-                    spaceBetween: 15,
-                },
-                768: {
-                    slidesPerView: 2,
-                    spaceBetween: 25,
-                },
-                1024: {
-                    slidesPerView: 4,
-                    spaceBetween: 25,
-                },
+            1024: {
+                slidesPerView: 4,
+                spaceBetween: 25,
             },
-        });
+        },
+    });
 
-        var swiper = new Swiper(".mySwiper2", {
-            slidesPerView: 1,
-            spaceBetween: 15,
-            pagination: {
-                el: ".swiper-pagination-2",
-                clickable: true,
+    var swiper = new Swiper(".mySwiper2", {
+        slidesPerView: 1,
+        spaceBetween: 15,
+        pagination: {
+            el: ".swiper-pagination-2",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next-2",
+            prevEl: ".swiper-button-prev-2",
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 1,
+                spaceBetween: 15,
             },
-            navigation: {
-                nextEl: ".swiper-button-next-2",
-                prevEl: ".swiper-button-prev-2",
+            768: {
+                slidesPerView: 2,
+                spaceBetween: 25,
             },
-            breakpoints: {
-                640: {
-                    slidesPerView: 1,
-                    spaceBetween: 15,
-                },
-                768: {
-                    slidesPerView: 2,
-                    spaceBetween: 25,
-                },
-                1024: {
-                    slidesPerView: 3,
-                    spaceBetween: 25,
-                },
+            1024: {
+                slidesPerView: 3,
+                spaceBetween: 25,
             },
-        });
+        },
+    });
     </script>
     <script>
-        $(document).ready(function() {
-           
-            $(".avatar-image").letterpic({
-                colors: [
-                    "#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50",
-                    "#f1c40f", "#e67e22", "#e74c3c", "#ecf0f1", "#95a5a6", "#f39c12", "#d35400", "#c0392b", "#bdc3c7", "#7f8c8d"
-                ],
-                font: 'Inter'
-            });
+    $(document).ready(function() {
 
-            $(document).on('click', '#loadBtnLatestPost', function() {
-                var row = Number($('#rowLatestPost').val());
-                var count = Number($('#postCountLatestPost').val());
-                var topic_req = $('#topic_req').val();
-                var limit = 2;
-                row = row + limit;
-                $('#rowLatestPost').val(row);
-                $("#loadBtnLatestPost").val('Loading...');
-
-                $.ajax({
-                    type: 'POST',
-                    url: 'php/loadMoreTopicPost.php',
-                    data: {row: row, topic_req: topic_req},
-                    success: function(data) {
-                        var rowCount = row + limit;
-                        $('.post-latest-post').append(data);
-                        if (rowCount >= count) {
-                            $('#loadBtnLatestPost').css("display", "none");
-                        } else {
-                            $("#loadBtnLatestPost").val('Load More');
-                        }
-                        $(".avatar-image").letterpic({
-                            colors: [
-                                "#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50",
-                                "#f1c40f", "#e67e22", "#e74c3c", "#ecf0f1", "#95a5a6", "#f39c12", "#d35400", "#c0392b", "#bdc3c7", "#7f8c8d"
-                            ],
-                            font: 'Inter'
-                        });
-                    }
-                });
-            });
-            
+        $(".avatar-image").letterpic({
+            colors: [
+                "#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60",
+                "#2980b9", "#8e44ad", "#2c3e50",
+                "#f1c40f", "#e67e22", "#e74c3c", "#ecf0f1", "#95a5a6", "#f39c12", "#d35400",
+                "#c0392b", "#bdc3c7", "#7f8c8d"
+            ],
+            font: 'Inter'
         });
-    </script>
-<script>
-         function followtopic(user_uid, topic_req) {
+
+        $(document).on('click', '#loadBtnLatestPost', function() {
+            var row = Number($('#rowLatestPost').val());
+            var count = Number($('#postCountLatestPost').val());
+            var topic_req = $('#topic_req').val();
+            var limit = 2;
+            row = row + limit;
+            $('#rowLatestPost').val(row);
+            $("#loadBtnLatestPost").val('Loading...');
+
             $.ajax({
-                url: "php/followtopic.php",
-                method: "POST",
-                dataType: "json",
+                type: 'POST',
+                url: 'php/loadMoreTopicPost.php',
                 data: {
-                    user_uid: user_uid,
-                    topic_req : topic_req
+                    row: row,
+                    topic_req: topic_req
                 },
                 success: function(data) {
-                    console.log(data);
-                    if (data.status == 201) {
-                        if(data.link!=""){
-                        window.location.replace("all-tags");
-                        }else{
-                            window.location.replace("./);
-                        }
-                        window.location.reload();
-                        $("#divProfileReload").load(location.href + " #divProfileReload");
-                        $("#follow_reloaduser").load(location.href + " #follow_reloaduser");
-
-                    } else if (data.status == 301) {
-                        console.log(data.error);
-                        swal("error");
-                        $('#contact-success').css('display', 'none');
-                        $('#contact-form').css('display', 'block');
-                        swal('success'); 
+                    var rowCount = row + limit;
+                    $('.post-latest-post').append(data);
+                    if (rowCount >= count) {
+                        $('#loadBtnLatestPost').css("display", "none");
                     } else {
-                            swal("problem with query");
+                        $("#loadBtnLatestPost").val('Load More');
                     }
+                    $(".avatar-image").letterpic({
+                        colors: [
+                            "#1abc9c", "#2ecc71", "#3498db", "#9b59b6",
+                            "#34495e", "#16a085", "#27ae60", "#2980b9",
+                            "#8e44ad", "#2c3e50",
+                            "#f1c40f", "#e67e22", "#e74c3c", "#ecf0f1",
+                            "#95a5a6", "#f39c12", "#d35400", "#c0392b",
+                            "#bdc3c7", "#7f8c8d"
+                        ],
+                        font: 'Inter'
+                    });
                 }
             });
+        });
 
-
-        }
-
-        function unfollowtopic(user_uid, topic_req) {
-            $.ajax({
-                url: "php/unfollowtopic.php",
-                method: "POST",
-                dataType: "json",
-                data: {
-                    user_uid: user_uid,
-                    topic_req : topic_req
-                },
-                success: function(data) {
-                    console.log(data);
-                    if (data.status == 201) {
-                        if(data.link!=""){
+    });
+    </script>
+    <script>
+    function followtopic(user_uid, topic_req) {
+        $.ajax({
+            url: "php/followtopic.php",
+            method: "POST",
+            dataType: "json",
+            data: {
+                user_uid: user_uid,
+                topic_req: topic_req
+            },
+            success: function(data) {
+                console.log(data);
+                if (data.status == 201) {
+                    if (data.link != "") {
                         window.location.replace("all-tags");
-                        }else{
-                            window.location.replace("./);
-                        }
-                        window.location.reload();
-                        $("#follow_reloaduser").load(location.href + " #follow_reloaduser");
-
-                    } else if (data.status == 301) {
-                        console.log(data.error);
-                        swal("error");
-                        $('#contact-success').css('display', 'none');
-                        $('#contact-form').css('display', 'block');
-                        swal('success'); 
                     } else {
-                            swal("problem with query");
+                        window.location.replace("./");
                     }
+                    window.location.reload();
+                    $("#divProfileReload").load(location.href + " #divProfileReload");
+                    $("#follow_reloaduser").load(location.href + " #follow_reloaduser");
+                } else if (data.status == 301) {
+                    console.log(data.error);
+                    swal("error");
+                    $('#contact-success').css('display', 'none');
+                    $('#contact-form').css('display', 'block');
+                    swal('success');
+                } else {
+                    swal("problem with query");
                 }
-            });
+            }
+        });
+    }
 
-           
-        }
+    function unfollowtopic(user_uid, topic_req) {
+        $.ajax({
+            url: "php/unfollowtopic.php",
+            method: "POST",
+            dataType: "json",
+            data: {
+                user_uid: user_uid,
+                topic_req: topic_req
+            },
+            success: function(data) {
+                console.log(data);
+                if (data.status == 201) {
+                    if (data.link != "") {
+                        window.location.replace("all-tags");
+                    } else {
+                        window.location.replace("./");
+                    }
+                    window.location.reload();
+                    $("#follow_reloaduser").load(location.href + " #follow_reloaduser");
 
-       
+                } else if (data.status == 301) {
+                    console.log(data.error);
+                    swal("error");
+                    $('#contact-success').css('display', 'none');
+                    $('#contact-form').css('display', 'block');
+                    swal('success');
+                } else {
+                    swal("problem with query");
+                }
+            }
+        });
+    }
     </script>
 
 </body>

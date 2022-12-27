@@ -1,10 +1,11 @@
 <?php require_once "php/controllerUserData.php"; ?>
 <?php
-if (isset($_SESSION['email'])) {
-    $email = $_SESSION['email'];
+require_once "php/schedule_cron.php";
+if (isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
     
-    if ($email != false) {
-        $sql = "SELECT * FROM user_login WHERE email = '$email'";
+    if ($username != false) {
+        $sql = "SELECT * FROM user_login WHERE username = '$username'";
         $run_Sql = mysqli_query($link, $sql);
         if ($run_Sql) {
             $fetch_info = mysqli_fetch_assoc($run_Sql);
@@ -49,7 +50,7 @@ $meta_description = implode(' ', array_slice(explode(' ', $category_description)
 <html lang="en">
 
 <head>
-    <title><?php echo $meta_title ?> | Pink Papers </title>
+    <title><?php echo $meta_title ?> | Pink Paper </title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -57,15 +58,16 @@ $meta_description = implode(' ', array_slice(explode(' ', $category_description)
     <!-- Enter a keywords for the page in tag -->
     <meta name="Keywords" content="<?php echo ($meta_title); ?>">
     <!-- Enter Page title -->
-    <meta property="og:title" content="<?php echo $meta_title ?> | Pink Papers" />
+    <meta property="og:title" content="<?php echo $meta_title ?> | Pink Paper" />
     <!-- Enter Page URL -->
     <meta property="og:url" content="<?php echo ($actual_link) ?>" />
     <!-- Enter page description -->
     <meta property="og:description" content="<?php echo ($meta_description); ?>...">
     <!-- Enter Logo image URL for example : http://cryptonite.finstreet.in/images/cryptonitepost.png -->
-    <meta property="og:image" itemprop="image" content="assets/images/logo/logo_icon.png" />
-    <meta property="og:image:secure_url" itemprop="image" content="assets/images/logo/logo_icon.png" />
-    <meta name="twitter:card" content="assets/images/logo/logo_icon.png">
+    <meta property="og:image" itemprop="image" content="https://test.pinkpaper.xyz/assets/images/logo/logo_icon.png" />
+    <meta property="og:image:secure_url" itemprop="image"
+        content="https://test.pinkpaper.xyz/assets/images/logo/logo_icon.png" />
+    <meta name="twitter:card" content="https://test.pinkpaper.xyz/assets/images/logo/logo_icon.png">
     <meta property="og:image:width" content="600">
     <meta property="og:image:height" content="315">
 
@@ -79,7 +81,8 @@ $meta_description = implode(' ', array_slice(explode(' ', $category_description)
 
     <!-- icons pack -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css" />
     <script src="assets/feather/feather.min.js"></script>
 
 
@@ -115,7 +118,8 @@ $meta_description = implode(' ', array_slice(explode(' ', $category_description)
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8 col-md-12">
-                    <h2 class="fw-bold text-capitalize mb-3 text-align" style="color:var(--text-color);"><?php echo $follower_count . ' Follower' . ($follower_count == 1 ? '' : 's') ?></h2>
+                    <h2 class="fw-bold text-capitalize mb-3 text-align" style="color:var(--text-color);">
+                        <?php echo $follower_count . ' Follower' . ($follower_count == 1 ? '' : 's') ?></h2>
 
                     <div class="all-follower">
                         <?php
@@ -143,28 +147,30 @@ $user_uid2 = $fetch_info2['user_uid'];
                             while ($row = mysqli_fetch_assoc($result)) {
                         ?>
 
-                                <div class="follower-card shadow d-flex justify-content-between align-items-center px-3 py-2 mb-3 gap-2">
-                                    <div class="d-flex justify-content-start align-items-center gap-2">
-                                        <?php
+                        <div
+                            class="follower-card shadow d-flex justify-content-between align-items-center px-3 py-2 mb-3 gap-2">
+                            <div class="d-flex justify-content-start align-items-center gap-2">
+                                <?php
                                         if ($row['profile'] == '') {
                                             echo '<div class="text-center"><a href="profile?username='.$row['username'].'"><canvas class="avatar-image text-center p-1 shadow-sm" title="'.$row['name'].'"></canvas></a></div>';
                                         } else {
-                                            echo '<div class="text-center"><a href="profile?username='.$row['username'].'"><img src="' . $row['profile'] . '" alt="" class="text-center p-1 shadow-sm"></a></div>';
+                                            echo '<div class="text-center"><a href="profile?username='.$row['username'].'"><img src="uploads/profile/' . $row['profile'] . '" alt="" class="text-center p-1 shadow-sm"></a></div>';
                                         }
                                         ?>
-                                        <div>
-                                            <a href="<?php echo $row['username']; ?>">
-                                                <h5 class="fw-bold text-capitalize mb-1" style="color:var(--text-color);"><?php echo $row['name']; ?></h5>
-                                            </a>
-                                            <p class="text-muted mb-0"><?php echo $row['bio']; ?></p>
-                                        </div>
-                                    </div>
-                                    <div id="follow_reloaduser">
-                                  
-                            <?php
+                                <div>
+                                    <a href="<?php echo $row['username']; ?>">
+                                        <h5 class="fw-bold text-capitalize mb-1" style="color:var(--text-color);">
+                                            <?php echo $row['name']; ?></h5>
+                                    </a>
+                                    <p class="text-muted mb-0"><?php echo $row['bio']; ?></p>
+                                </div>
+                            </div>
+                            <div id="follow_reloaduser">
+
+                                <?php
                               $user_uid_follow=$row['user_uid'];
                             ?>
-                            <?php
+                                <?php
                             $user_uid2 = $user_uid ?? null;
                             $sql20 = "SELECT * FROM follow WHERE following_user_uid = '$user_uid2' 
                             AND followed_user_uid = '$user_uid_follow'";
@@ -174,7 +180,7 @@ $user_uid2 = $fetch_info2['user_uid'];
                             $following_user_uid = $fetch_info20['following_user_uid'] ?? null;
                             $followed_user_uid = $fetch_info20['followed_user_uid'] ?? null;
 
-                            if (!isset($_SESSION['email'])) {
+                            if (!isset($_SESSION['username'])) {
                                 echo '<button type="button" class="btn button-follow fw-bold" onClick="login()">Follow</button>';
                             } else if ($user_uid2 == $user_uid_follow) {
                                 //echo '';
@@ -184,22 +190,23 @@ $user_uid2 = $fetch_info2['user_uid'];
                                 echo '<button type="button" class="btn button-follow fw-bold" onClick="follow1(\'' . $user_uid . '\',\'' . $user_uid_follow . '\')">Follow</button>';
                             }
                             ?>
-                                     <!--   <a href="follow" class="btn button-follow fw-bold" role="button">Follow</a>-->
-                                    </div>
-                                </div>
+                                <!--   <a href="follow" class="btn button-follow fw-bold" role="button">Follow</a>-->
+                            </div>
+                        </div>
 
-                            <?php }
+                        <?php }
                         } else { ?>
 
-                            <div class="my-5">
-                                <div class="row justify-content-center">
-                                    <div class="col-12 text-center">
-                                        <img src="assets/images/no_data.svg" alt="" class="p-3" style="width: 200px;">
-                                        <h6 class="fw-bold text-center" style="color:var(--gray-color)">You have no data</h6>
-                                        <!-- <h6 class="text-center" style="color:var(--gray-color)"><a href="create-story" class="text-link-3 fw-bold ">Write</a> a story or <a href="./"class="text-link-3 fw-bold ">read</a> on Blog CMS.</h6> -->
-                                    </div>
+                        <div class="my-5">
+                            <div class="row justify-content-center">
+                                <div class="col-12 text-center">
+                                    <img src="assets/images/no_data.svg" alt="" class="p-3" style="width: 200px;">
+                                    <h6 class="fw-bold text-center" style="color:var(--gray-color)">You have no data
+                                    </h6>
+                                    <!-- <h6 class="text-center" style="color:var(--gray-color)"><a href="create-story" class="text-link-3 fw-bold ">Write</a> a story or <a href="./"class="text-link-3 fw-bold ">read</a> on Blog CMS.</h6> -->
                                 </div>
                             </div>
+                        </div>
                         <?php } ?>
 
                     </div>
@@ -207,7 +214,7 @@ $user_uid2 = $fetch_info2['user_uid'];
                         <?php
                         if ($limitFollower < $postCountFollower) {
                         ?>
-                            <input type="button" class="loadBtn" id="loadBtnFollower" value="Load More">
+                        <input type="button" class="loadBtn" id="loadBtnFollower" value="Load More">
                         <?php } ?>
                         <input type="hidden" id="rowFollower" value="0">
                         <input type="hidden" id="postCountFollower" value="<?php echo $postCountFollower; ?>">
@@ -236,120 +243,124 @@ $user_uid2 = $fetch_info2['user_uid'];
     <script type="text/javascript" src="assets/js/loader.js"></script>
 
     <script type="text/javascript">
-        $(document).ready(function() {
-            $(".avatar-image").letterpic({
-                colors: [
-                    "#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50",
-                    "#f1c40f", "#e67e22", "#e74c3c", "#ecf0f1", "#95a5a6", "#f39c12", "#d35400", "#c0392b", "#bdc3c7", "#7f8c8d"
-                ],
-                font: 'Inter'
-            });
-            $(document).on('click', '#loadBtnFollower', function() {
-                var row = Number($('#rowFollower').val());
-                var count = Number($('#postCountFollower').val());
-                var limit = 2;
-                row = row + limit;
-                $('#rowFollower').val(row);
-                $("#loadBtnFollower").val('Loading...');
-
-                $.ajax({
-                    type: 'POST',
-                    url: 'php/loadMoreFollowerData.php',
-                    data: 'row=' + row,
-                    success: function(data) {
-                        var rowCount = row + limit;
-                        $('.all-follower').append(data);
-                        if (rowCount >= count) {
-                            $('#loadBtnFollower').css("display", "none");
-                        } else {
-                            $("#loadBtnFollower").val('Load More');
-                        }
-                        $(".avatar-image").letterpic({
-                            colors: [
-                                "#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50",
-                                "#f1c40f", "#e67e22", "#e74c3c", "#ecf0f1", "#95a5a6", "#f39c12", "#d35400", "#c0392b", "#bdc3c7", "#7f8c8d"
-                            ],
-                            font: 'Inter'
-                        });
-                    }
-                });
-            });
-
+    $(document).ready(function() {
+        $(".avatar-image").letterpic({
+            colors: [
+                "#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60",
+                "#2980b9", "#8e44ad", "#2c3e50",
+                "#f1c40f", "#e67e22", "#e74c3c", "#ecf0f1", "#95a5a6", "#f39c12", "#d35400",
+                "#c0392b", "#bdc3c7", "#7f8c8d"
+            ],
+            font: 'Inter'
         });
+        $(document).on('click', '#loadBtnFollower', function() {
+            var row = Number($('#rowFollower').val());
+            var count = Number($('#postCountFollower').val());
+            var limit = 2;
+            row = row + limit;
+            $('#rowFollower').val(row);
+            $("#loadBtnFollower").val('Loading...');
+
+            $.ajax({
+                type: 'POST',
+                url: 'php/loadMoreFollowerData.php',
+                data: 'row=' + row,
+                success: function(data) {
+                    var rowCount = row + limit;
+                    $('.all-follower').append(data);
+                    if (rowCount >= count) {
+                        $('#loadBtnFollower').css("display", "none");
+                    } else {
+                        $("#loadBtnFollower").val('Load More');
+                    }
+                    $(".avatar-image").letterpic({
+                        colors: [
+                            "#1abc9c", "#2ecc71", "#3498db", "#9b59b6",
+                            "#34495e", "#16a085", "#27ae60", "#2980b9",
+                            "#8e44ad", "#2c3e50",
+                            "#f1c40f", "#e67e22", "#e74c3c", "#ecf0f1",
+                            "#95a5a6", "#f39c12", "#d35400", "#c0392b",
+                            "#bdc3c7", "#7f8c8d"
+                        ],
+                        font: 'Inter'
+                    });
+                }
+            });
+        });
+
+    });
     </script>
     <script>
-         function follow1(following_user_uid, followed_user_uid) {
-            $.ajax({
-                url: "php/followUser.php",
-                method: "POST",
-                dataType: "json",
-                data: {
-                    following_user_uid: following_user_uid,
-                    followed_user_uid: followed_user_uid
-                },
-                success: function(data) {
-                    console.log(data);
-                    if (data.status == 201) {
-                        // if(data.link!=""){
-                        // window.location.replace("all-tags");
-                        // }else{
-                        //     window.location.replace("./);
-                        // }
-                        window.location.reload();
-                        //$("#divProfileReload").load(location.href + " #divProfileReload");
-                        //$("#follow_reloaduser").load(location.href + " #follow_reloaduser");
+    function follow1(following_user_uid, followed_user_uid) {
+        $.ajax({
+            url: "php/followUser.php",
+            method: "POST",
+            dataType: "json",
+            data: {
+                following_user_uid: following_user_uid,
+                followed_user_uid: followed_user_uid
+            },
+            success: function(data) {
+                console.log(data);
+                if (data.status == 201) {
+                    // if(data.link!=""){
+                    // window.location.replace("all-tags");
+                    // }else{
+                    //     window.location.replace("./);
+                    // }
+                    window.location.reload();
+                    //$("#divProfileReload").load(location.href + " #divProfileReload");
+                    //$("#follow_reloaduser").load(location.href + " #follow_reloaduser");
 
-                    } else if (data.status == 301) {
-                        console.log(data.error);
-                        //swal("error");
-                        // $('#contact-success').css('display', 'none');
-                        // $('#contact-form').css('display', 'block');
-                        // swal('success'); 
-                    } else {
-                        //     swal("problem with query");
-                    }
+                } else if (data.status == 301) {
+                    console.log(data.error);
+                    //swal("error");
+                    // $('#contact-success').css('display', 'none');
+                    // $('#contact-form').css('display', 'block');
+                    // swal('success'); 
+                } else {
+                    //     swal("problem with query");
                 }
-            });
+            }
+        });
 
 
-        }
+    }
 
-        function unfollow1(following_user_uid, followed_user_uid) {
-            $.ajax({
-                url: "php/unfollowUser.php",
-                method: "POST",
-                dataType: "json",
-                data: {
-                    following_user_uid: following_user_uid,
-                    followed_user_uid: followed_user_uid
-                },
-                success: function(data) {
-                    console.log(data);
-                    if (data.status == 201) {
-                        // if(data.link!=""){
-                        // window.location.replace("all-tags");
-                        // }else{
-                        //     window.location.replace("./);
-                        // }
-                        window.location.reload();
-                        //$("#follow_reloaduser").load(location.href + " #follow_reloaduser");
+    function unfollow1(following_user_uid, followed_user_uid) {
+        $.ajax({
+            url: "php/unfollowUser.php",
+            method: "POST",
+            dataType: "json",
+            data: {
+                following_user_uid: following_user_uid,
+                followed_user_uid: followed_user_uid
+            },
+            success: function(data) {
+                console.log(data);
+                if (data.status == 201) {
+                    // if(data.link!=""){
+                    // window.location.replace("all-tags");
+                    // }else{
+                    //     window.location.replace("./);
+                    // }
+                    window.location.reload();
+                    //$("#follow_reloaduser").load(location.href + " #follow_reloaduser");
 
-                    } else if (data.status == 301) {
-                        console.log(data.error);
-                        //swal("error");
-                        // $('#contact-success').css('display', 'none');
-                        // $('#contact-form').css('display', 'block');
-                        // swal('success'); 
-                    } else {
-                        //     swal("problem with query");
-                    }
+                } else if (data.status == 301) {
+                    console.log(data.error);
+                    //swal("error");
+                    // $('#contact-success').css('display', 'none');
+                    // $('#contact-form').css('display', 'block');
+                    // swal('success'); 
+                } else {
+                    //     swal("problem with query");
                 }
-            });
+            }
+        });
 
 
-        }
-
-
+    }
     </script>
 
 </body>

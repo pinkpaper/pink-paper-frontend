@@ -1,8 +1,9 @@
 <?php require_once "php/controllerUserData.php"; ?>
 <?php
-$email = $_SESSION['email'];
-if ($email != false) {
-    $sql = "SELECT * FROM user_login WHERE email = '$email'";
+require_once "php/schedule_cron.php";
+$username = $_SESSION['username'];
+if ($username != false) {
+    $sql = "SELECT * FROM user_login WHERE username = '$username'";
     $run_Sql = mysqli_query($link, $sql);
     if ($run_Sql) {
         $fetch_info = mysqli_fetch_assoc($run_Sql);
@@ -54,9 +55,10 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
     <!-- Enter page description -->
     <meta property="og:description" content="<?php echo ($meta_description); ?>...">
     <!-- Enter Logo image URL for example : http://cryptonite.finstreet.in/images/cryptonitepost.png -->
-    <meta property="og:image" itemprop="image" content="assets/images/logo/logo_icon.png" />
-    <meta property="og:image:secure_url" itemprop="image" content="assets/images/logo/logo_icon.png" />
-    <meta name="twitter:card" content="assets/images/logo/logo_icon.png">
+    <meta property="og:image" itemprop="image" content="https://test.pinkpaper.xyz/assets/images/logo/logo_icon.png" />
+    <meta property="og:image:secure_url" itemprop="image"
+        content="https://test.pinkpaper.xyz/assets/images/logo/logo_icon.png" />
+    <meta name="twitter:card" content="https://test.pinkpaper.xyz/assets/images/logo/logo_icon.png">
     <meta property="og:image:width" content="600">
     <meta property="og:image:height" content="315">
 
@@ -234,9 +236,9 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                     <a class="nav-link active" aria-current="page" href="#about-you"
                                         style="justify-content:left">About You</a>
                                 </li>
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a class="nav-link " href="#email-section">Email</a>
-                                </li>                                
+                                </li>                                 -->
                                 <li class="nav-item">
                                     <a class="nav-link " href="#meta-section" tabindex="-1"
                                         aria-disabled="true">Metamask Details</a>
@@ -279,7 +281,8 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
 
                                         </div>
 
-                                        <div class="inputs d-flex justify-content-between align-items-center mt-4 gap-2">
+                                        <div
+                                            class="inputs d-flex justify-content-between align-items-center mt-4 gap-2">
                                             <button class="btn button-outline-primary " id='cancel'
                                                 style="visibility: hidden;" type='reset'>Cancel</button>
                                             <button class='btn button-outline-primary' data-role="update"
@@ -302,7 +305,8 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                         <div class="d-flex justify-content-between">
 
                                         </div>
-                                        <div class="inputs d-flex justify-content-between align-items-center mt-4 gap-2">
+                                        <div
+                                            class="inputs d-flex justify-content-between align-items-center mt-4 gap-2">
                                             <button class="btn button-outline-primary" id='cancel2'
                                                 style="visibility: hidden;"
                                                 onclick="window.location.replace('user-settings.php')"
@@ -333,14 +337,14 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                                 while ($row = mysqli_fetch_assoc($result)) {
                                                     if ($row['profile'] == '') {
                                                         echo '<div class="profile">
-                                                    <a href="profile?username=' . $row['username'] . '">
+                                                    <a href="' . $row['username'] . '">
                                                     <canvas class="avatar-image img-fluid rounded-circle" title="' . $row['name'] . '" width="40" height="40"></canvas>
 
                                                     </a>
                                                 </div>';
                                                     } else {
                                                         echo '<div class="profile" style="width:6rem;height:6rem;">
-                                                    <a href="profile?username=' . $row['username'] . '">
+                                                    <a href="' . $row['username'] . '">
                                                         <img src="uploads/profile/' . $row['profile'] . '" alt="" class="img-fluid rounded-circle">
                                                     </a>
                                                 </div>';
@@ -366,192 +370,8 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                         <button id="edit6" class="btn button-outline-primary">Edit</a>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="d-flex justify-content-between align-items-center mb-4">
-                                        <h5 class="fw-bold text-capitalize mb-0 text-align"
-                                            style="color:var(--text-color);">Username
-                                            <p></p>
-                                            <div class="form-group mb-3">
-                                               <input style="float: right;" class="form-control" readonly
-                                                        id="Username" type="text" name="Username" placeholder="Username"
-                                                        required value="<?php echo $username ?>">
-                                            </div>
-                                        </h5>
-                                        <div class="d-flex justify-content-between">
-
-                                        </div>
-                                        <div class="inputs d-flex justify-content-between align-items-center mt-4 gap-2">
-                                        <button class="btn button-outline-primary" id='cancel3'
-                                                    style="visibility: hidden;" type='reset'
-                                                    onclick="window.location.replace('user-settings.php')">Cancel</button>
-                                                <button class='btn button-outline-primary' id='save3'
-                                                    style="visibility: hidden;" type='submit'>Save</button>
-                                                <button class='btn button-outline-primary' id="edit3"
-                                                    style="float:right">Edit</button>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                
                             </div>
-                        </section>
-                    </div>
-
-                    <!-- About You ends -->
-                    <!-- EMAIL starts -->
-                    <section id="email-section">
-                        <div class="email-section">
-                            <div class="row">
-                                <div class="d-flex justify-content-between align-items-center mb-4">
-                                    <div class="email-settings">
-                                        <h2 class="fw-bold text-capitalize mb-0 text-align=left"
-                                            style="color:var(--text-color);">Email Settings
-                                        </h2>
-                                        <hr style="color: gray; width:29vw;padding-left: 15vw;">
-                                        </hr>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="d-flex justify-content-between align-items-center mb-4">
-                                    <h5 class="fw-bold text-capitalize mb-0 text-align"
-                                        style="color:var(--text-color);">Your Email
-                                        <p></p>
-                                        <div class="form-group mb-3">
-                                            <input class="form-control" type="text" readonly id="email" name="email"
-                                                placeholder="EMAIL" required value="<?php echo $email ?>">
-                                        </div>
-
-                                    </h5>
-                                    <div class="d-flex justify-content-between">
-
-                                    </div>
-                                    <div class="inputs d-flex justify-content-between align-items-center mt-4 gap-2">
-                                        <button class="btn button-outline-primary" id='cancel5'
-                                            style="visibility: hidden;" type='reset'
-                                            onclick="window.location.replace('user-settings.php')">Cancel</button>
-                                        <button class='btn button-outline-primary' id='save5'
-                                            style="visibility: hidden;" type='submit'>Save</button>
-
-                                        <button class='btn button-outline-primary' id="edit5">Edit</button>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="d-flex justify-content-between align-items-center mb-4">
-
-                                    <h5 class="fw-bold text-capitalize mb-0 text-align=left"
-                                        style="color:var(--text-color);">Recommended Reading
-                                    </h5>
-                                    <div class="d-flex justify-content-between">
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="d-flex justify-content-between align-items-center mb-4">
-
-                                    <h5 class="fw-bold text-capitalize mb-0 text-align=left"
-                                        style="color:var(--text-color);">Newsletters
-                                        <p class="fw-bold text-capitalize mb-0 text-align=left"
-                                            style="font-size: small;color:grey">Recieve newsletters from publication</p>
-                                    </h5>
-
-                                    <div class="d-flex justify-content-between">
-
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <div class="d-flex on-btn">
-                                            <p class="mb-0" style="margin-top: 3px;">On/Off</p>
-                                            <div class="theme-switch form-check form-switch ms-2">
-                                                <input class="form-check-input" type="checkbox" style="pointer-events:none" id="switch" checked/>
-                                            </div>
-                                        </div>
-                                        <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
-                    </section>
-                    <!-- Email Ends -->
-
-                    <!-- Security Starts -->
-                    <!-- <section id="security-section">
-                        <div class="security-section">
-                            <div class="row">
-                                <div class="d-flex justify-content-between align-items-center mb-4">
-                                    <div class="security-settings">
-                                        <h2 class="fw-bold text-capitalize mb-0 text-align"
-                                            style="color:var(--text-color);">Security
-                                        </h2>
-                                        <hr style="color: gray; width:29vw;padding-left: 15vw;">
-                                        </hr>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="d-flex justify-content-between align-items-center mb-4">
-                                    <h5 class="fw-bold text-capitalize mb-0 text-align=left"
-                                        style="color:var(--text-color);">Sign
-                                        out of all other sessions
-                                        <p class="fw-bold text-capitalize mb-0 text-align=left"
-                                            style="font-size: small;color:grey">This will sign you out of sessions in
-                                            other browsers or on other computers</p>
-
-                                    </h5>
-                                    <div class="d-flex justify-content-between">
-
-                                    </div>
-                                    <div>
-                                        <a href="about-you" class="btn button-outline-primary">Sign out other
-                                            sessions</a>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="d-flex justify-content-between align-items-center mb-4">
-
-                                    <h5 class="fw-bold text-capitalize mb-0 text-align=left"
-                                        style="color:var(--text-color);">Deactivate account
-                                        <p class="fw-bold text-capitalize mb-0 text-align=left"
-                                            style="font-size: small;color:grey">Deactivating your account will remove it
-                                            from
-                                            <br>Medium within a few minutes. Deactivation will also immediately cancel
-                                            any subscription for
-                                            <br> Medium Membership, and no money will be reimbursed. You can sign back
-                                            in anytime to reactivate your account and restore its content.
-                                        </p>
-                                        <a href="" style="color: gray;font-size: small;">Deactivate Account</a>
-                                    </h5>
-                                    <div class="d-flex justify-content-between">
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="d-flex justify-content-between align-items-center mb-4">
-                                    <h5 class="fw-bold text-capitalize mb-0 text-align=left"
-                                        style="color:var(--text-color);">Delete account
-                                        <p class="fw-bold text-capitalize mb-0 text-align=left"
-                                            style="font-size: small;color:grey">Permanently delete your account and all
-                                            of your content.</p>
-                                        <a href="" style="color: gray;font-size: small;">Delete Account</a>
-                                    </h5>
-                                    <div class="d-flex justify-content-between">
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section> -->
-                    <!-- Security Ends -->
-
+                        </section>                                     
                     <!-- Metamask Details starts -->
                     <section id="meta-section">
                         <div class="meta-section"> <?php
@@ -564,7 +384,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                 <div class="d-flex justify-content-between align-items-center mb-4 col-sm-12">
                                     <div class="security-settings">
                                         <h2 class="fw-bold text-capitalize mb-0 text-align"
-                                            style="color:var(--text-color);">Metamask Details
+                                            style="color:var(--text-color);">Account Details
                                         </h2>
                                         <hr style="color: gray; width:29vw;padding-left: 15vw;">
                                         </hr>
@@ -572,6 +392,11 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                 </div>
                             </div>
                             <div class="row d-flex justify-content-center align-items-end">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <small class="mb-4 d-block">You can recieve
+                                        donation on these accounts from users.
+                                    </small>
+                                </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <div class="form-group">
                                         <label for="email" class="fw-bold text-capitalize mb-0 text-align=left">Meta
@@ -585,30 +410,56 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                             while ($row = mysqli_fetch_array($result)) {
                                                     ?>
                                         <input class="form-control" required readonly id="maddress" name="maddress"
-                                            type="text" placeholder="<?php echo $row['metamask_address'] ?>" required
-                                            value="<?php echo $row['metamask_address'] ?>">
+                                            type="text" value="<?php echo $row['eth_metamask_address'] ?>">
                                         <input type="hidden" id="user_uid" value="<?php echo $user_uid ?>">
                                         <?php
-                            }
-                        }?>
+                                            }
+                                        }?>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <div class="inputs-1 d-flex  justify-content-end">
-
-                                        <button class="btn button-outline-primary " id='cancel8'
-                                            style="visibility: hidden; margin-right:3px;" type='reset'>Cancel</button>
+                                        <button class="btn button-outline-primary" id='cancel8'
+                                            style="visibility: hidden;" type='reset'
+                                            onclick="window.location.replace('user-settings.php')">Cancel</button>
                                         <button class='btn button-outline-primary' data-role="update" id='save8'
                                             style="visibility: hidden;" type='button'>Save</button>
                                         <button class='btn button-outline-primary' id="edit8">Edit</button>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row d-flex justify-content-center align-items-end">
-                                <div class="col-lg-6 col-md-12 col-sm-12">
+                                <div class="col-lg-6 col-md-12 col-sm-12 mt-4">
                                     <div class="form-group">
-                                        <label for="meta" class="fw-bold text-capitalize mb-0 text-align=left">Metamask
+                                        <label for="email" class="fw-bold text-capitalize mb-0 text-align=left">Neo
+                                            Address</label>
+                                        <?php
+                                        $query = "SELECT * from `metamask_details` WHERE`metamask_details`.`user_uid`='$user_uid' ";
+                                        $result = mysqli_query($link, $query);
+                                        if (mysqli_num_rows($result) > 0) {
+                                            while ($row = mysqli_fetch_array($result)) {
+                                                    ?>
+                                        <input class="form-control" required readonly id="naddress" name="maddress"
+                                            type="text" value="<?php echo $row['neo_address'] ?>">
+                                        <input type="hidden" id="user_uid" value="<?php echo $user_uid ?>">
+                                        <?php
+                                            }
+                                        }?>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-sm-12">
+                                    <div class="inputs-1 d-flex  justify-content-end">
+                                        <button class="btn button-outline-primary" id='cancel88'
+                                            style="visibility: hidden;" type='reset'
+                                            onclick="window.location.replace('user-settings.php')">Cancel</button>
+                                        <button class='btn button-outline-primary' data-role="update" id='save88'
+                                            style="visibility: hidden;" type='button'>Save</button>
+                                        <button class='btn button-outline-primary' id="edit88">Edit</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row d-flex justify-content-center align-items-end">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="meta" class="fw-bold text-capitalize mb-0 text-align=left">Account
                                             Status</label>
                                         <?php
                                             $query = "SELECT * from `metamask_details` WHERE`metamask_details`.`user_uid`='$user_uid' ";
@@ -617,10 +468,10 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                                 while ($row = mysqli_fetch_array($result)) {
                                                     $status_now = $row['meta_status'];
                                                     if($row['meta_status']=="active"){
-                                                        $meta_stat="<button type=\"button\" class=\"follow_btn btn button-follow fw-bold\" style=\"margin-top:5px;\">Active</button> <input type=\"hidden\" name=\"meta_status_check\" id=\"meta_status_check\" value=\"$status_now\" />";
+                                                        $meta_stat="<button type=\"button\" class=\"follow_btn btn button-follow fw-bold\" style=\"margin-top:5px;\">Active Account</button> <input type=\"hidden\" name=\"meta_status_check\" id=\"meta_status_check\" value=\"$status_now\" />";
                                                     }
                                                     else{
-                                                        $meta_stat="<button type=\"button\" class=\"follow_btn btn button-follow fw-bold\" style=\"margin-top:5px;\">Inactive</button> <input type=\"hidden\" name=\"meta_status_check\" id=\"meta_status_check\" value=\"$status_now\" />";        
+                                                        $meta_stat="<button type=\"button\" class=\"follow_btn btn button-follow fw-bold\" style=\"margin-top:5px;\">Inactive Account</button> <input type=\"hidden\" name=\"meta_status_check\" id=\"meta_status_check\" value=\"$status_now\" />";        
                                                     }
                                             ?>
                                         <br>
@@ -628,60 +479,9 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                     </div>
                                     <?php }
                                             } else { ?>
-                                    <?php } ?>                                   
-                                </div>
-                                <div class="col-lg-6 col-md-12 col-sm-12 ">
-                                    <div class="d-flex on-btn justify-content-end">
-                                        <p class="mb-0">Inactive/Active</p>
-                                        <div class="theme-switch form-check form-switch ms-2" for="checkbox">                                            
-                                            <input class="form-check-input" type="checkbox" id="switch2" />
-                                        </div>
-                                    </div>
+                                    <?php } ?>
                                 </div>
                             </div>
-                            <?php 
-                                            }
-                                            else{
-                                                ?>
-
-
-                            <div class="row">
-                                <div class="d-flex justify-content-between align-items-center mb-4 col-sm-12">
-                                    <div class="security-settings">
-                                        <h2 class="fw-bold text-capitalize mb-0 text-align"
-                                            style="color:var(--text-color);">Add New Metamask
-                                        </h2>
-                                        <hr style="color: gray; width:29vw;padding-left: 15vw;">
-                                        </hr>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row d-flex justify-content-center align-items-end">
-                                <div class="col-lg-6 col-md-12 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="email" class="fw-bold text-capitalize mb-0 text-align=left">Add Your
-                                            Meta Address</label>
-
-                                        <input class="form-control" required readonly id="newmaddress"
-                                            name="newmaddress" type="text" placeholder="Add Meta Address" required
-                                            value="">
-                                        <input type="hidden" id="user_uid" value="<?php echo $user_uid ?>">
-
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-12 col-sm-12">
-                                    <div class="inputs-1 d-flex  justify-content-end">
-
-                                        <button class="btn button-outline-primary " id='cancel9'
-                                            style="visibility: hidden; margin-right:3px;" type='reset'>Cancel</button>
-                                        <button class='btn button-outline-primary' data-role="update" id='save9'
-                                            style="visibility: hidden;" type='button'>Save</button>
-                                        <button class='btn button-outline-primary' id="edit9">Edit</button>
-                                    </div>
-                                </div>
-                            </div>
-
-
                             <?php }?>
                         </div>
 
@@ -731,8 +531,8 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                         <p></p>
                                         <div class="form-group mb-3">
                                             <input class="form-control" type="text" readonly id="social-instagram"
-                                                name="instagram_url" placeholder="Enter Instagram full account url" required
-                                                value="<?php echo $instagram_url ?>">
+                                                name="instagram_url" placeholder="Enter Instagram full account url"
+                                                required value="<?php echo $instagram_url ?>">
                                         </div>
                                     </h5>
                                     <div class="d-flex justify-content-between"></div>
@@ -754,8 +554,8 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                         <p></p>
                                         <div class="form-group mb-3">
                                             <input class="form-control" type="text" readonly id="social-linkedin"
-                                                name="linkedin_url" placeholder="Enter Linkedin full account url" required
-                                                value="<?php echo $linkedin_url ?>">
+                                                name="linkedin_url" placeholder="Enter Linkedin full account url"
+                                                required value="<?php echo $linkedin_url ?>">
                                         </div>
                                     </h5>
                                     <div class="d-flex justify-content-between"></div>
@@ -777,8 +577,8 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                         <p></p>
                                         <div class="form-group mb-3">
                                             <input class="form-control" type="text" readonly id="social-facebook"
-                                                name="facebook_url" placeholder="Enter Facebook full account url" required
-                                                value="<?php echo $facebook_url ?>">
+                                                name="facebook_url" placeholder="Enter Facebook full account url"
+                                                required value="<?php echo $facebook_url ?>">
                                         </div>
                                     </h5>
                                     <div class="d-flex justify-content-between"></div>
@@ -1076,6 +876,38 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
         });
     });
 
+    $(document).ready(function() {
+        $('#edit88').click(function() {
+            $('#naddress').focus($('#naddress').css({
+                'border': '1px solid #7259B5',
+
+            }));
+            $('#naddress').prop("readonly", false)
+        });
+        $("#edit88").click(function() {
+            $(this).hide();
+            var t = $('#naddress').html();
+            $('#naddress').val(t);
+            $('#naddress').show();
+        });
+
+        $("#edit88").blur(function() {
+
+            $(this).hide();
+            var t = $('#naddress').val();
+            $('#naddress').html(t);
+            $('#naddress').show();
+
+        });
+        $('#edit88').click(function() {
+            var edit = document.getElementById("edit88");
+            var save = document.getElementById("save88");
+            var cancel = document.getElementById("cancel88");
+            save.style.visibility = "visible";
+            cancel.style.visibility = "visible";
+        });
+    });
+
 
     $(document).ready(function() {
         $('#edit-twitter').click(function() {
@@ -1249,7 +1081,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
             }
         });
     });
-    
+
     $(document).on('click', '#switch2', function() {
 
         event.preventDefault();
@@ -1600,6 +1432,66 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
             }
         });
 
+        $('#save88').on('click', function(event) {
+
+            event.preventDefault();
+            var error = "";
+            var formData = new FormData();
+
+            if ($('#naddress').val() == "") {
+                alert("Please enter all fields");
+                error = error + 'naddress';
+            } else {
+
+                formData.append('naddress', $('#naddress').val());
+            }
+            formData.append('user_uid', $('#user_uid').val());
+            if (error == "") {
+
+                console.log(formData);
+                $.ajax({
+                    url: "php/updatemetaaddress.php",
+                    type: "POST",
+                    dataType: "json",
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: formData,
+
+                    success: function(data) {
+                        console.log(data);
+                        if (data.status == 201) {
+
+                            toastr["success"]("Address Updated");
+                            var edit = document.getElementById("edit8");
+                            edit.style.visibility = "visible";
+                            var save = document.getElementById("save8");
+                            save.style.visibility = "hidden";
+                            var cancel = document.getElementById("cancel8");
+                            cancel.style.visibility = "hidden";
+                            $('#naddress').prop("readonly", true);
+                            $('#naddress').focus($('#naddress').css({
+                                'border': 'none',
+
+                            }));
+                            window.location.replace('user-settings.php');
+                        } else if (data.status == 501) {
+
+                            toastr["success"]("No changes made");
+
+                        } else if (data.status == 801) {
+                            console.log(data.error);
+                            toastr.error("Error");
+                            alert("Status is inactive");
+
+                        }
+                    }
+                });
+            } else {
+
+            }
+        });
+
     });
     </script>
     <script>
@@ -1745,9 +1637,9 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
             var formData = new FormData();
             if ($('#email').val() == "") {
                 sweetAlert("Warning", "Please enter all fields", "warning");
-                error = error + 'email';
+                error = error + 'username';
             } else {
-                formData.append('email', $('#email').val());
+                formData.append('username', $('#email').val());
             }
             formData.append('user_uid', $('#user_uid').val());
             if (error == "") {
@@ -1791,14 +1683,14 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
 
     <script>
     //social media setting start
-if($('#meta_status_check').val()){
-    var status_value = $('#meta_status_check').val();
-    if(status_value === 'active'){
-        $('#switch2').prop('checked', true);
-    }else{
-        $('#switch2').prop('checked', false);
+    if ($('#meta_status_check').val()) {
+        var status_value = $('#meta_status_check').val();
+        if (status_value === 'active') {
+            $('#switch2').prop('checked', true);
+        } else {
+            $('#switch2').prop('checked', false);
+        }
     }
-}
     $(document).ready(function() {
         /* --------------------------------- twitter -------------------------------- */
         $('#save-twitter').on('click', function(event) {

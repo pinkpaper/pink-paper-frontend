@@ -4,7 +4,7 @@
         if ($profile2 == '') {
             echo '<div class="text-center"><canvas class="avatar-image rounded-circle text-center p-1 shadow-sm mb-2" title="' . $name2 . '"></canvas></div>';
         } else {
-            echo '<div class="text-center"><img src="' . $profile2 . '" alt="" class="text-center p-1 shadow-sm mb-2"></div>';
+            echo '<div class="text-center"><img src="uploads/profile/' . $profile2 . '" alt="" class="text-center p-1 shadow-sm mb-2" style="height:5rem;width:5rem;object-fit:contain;"></div>';
         }
         ?>
         <h4 class="fw-bold text-capitalize mb-0" style="color:var(--text-color);"><?php echo $name2; ?></h4>
@@ -22,7 +22,7 @@
         $user_uid_follow=$user_uid2;
         ?>
         <div class="d-grid" id="follow_relo">
-        <?php
+            <?php
         $user_uid2 = $user_uid ?? null;
         $sql20 = "SELECT * FROM follow WHERE following_user_uid = '$user_uid2' 
         AND followed_user_uid = '$user_uid_follow'";
@@ -33,7 +33,7 @@
         $followed_user_uid = $fetch_info20['followed_user_uid'] ?? null;
 
         
-        if (!isset($_SESSION['email'])) {
+        if (!isset($_SESSION['username'])) {
             echo '<button type="button" class="btn button-follow fw-bold" onClick="login()">Follow</button>';
         } else if ($user_uid2 == $user_uid_follow) {
             //echo '';
@@ -43,10 +43,12 @@
             echo '<button type="button" class="btn button-follow fw-bold" onClick="follow(\'' . $user_uid . '\',\'' . $user_uid_follow . '\')">Follow</button>';
         }
         ?>
-    </div>
+        </div>
 
 
-        <div class="d-flex justify-content-center align-items-center gap-3"><a href="followers.php?username=<?php echo $username2; ?>" class="text-link-2"><?php echo $follower_count . ' Follower' . ($follower_count == 1 ? '' : 's') ?></a>
+        <div class="d-flex justify-content-center align-items-center gap-3"><a
+                href="followers.php?username=<?php echo $username2; ?>"
+                class="text-link-2"><?php echo $follower_count . ' Follower' . ($follower_count == 1 ? '' : 's') ?></a>
             <a href="about/<?php echo $username2; ?>" class="text-link-2">About</a>
         </div>
     </div>

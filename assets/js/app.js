@@ -1,11 +1,16 @@
 $(function () {
-  $(window).on('scroll', function () {
-      if ( $(window).scrollTop() > 10 ) {
-          $('#navbar-2').addClass('active');
-      } else {
-          $('#navbar-2').removeClass('active');
-      }
-  });
+    if ($(window).scrollTop() > 10) {
+        $('#navbar-2').addClass('active');
+    } else {
+        $('#navbar-2').removeClass('active');
+    }
+    $(window).on('scroll', function () {
+        if ($(window).scrollTop() > 10) {
+            $('#navbar-2').addClass('active');
+        } else {
+            $('#navbar-2').removeClass('active');
+        }
+    });
 });
 
 $(function () {
@@ -14,51 +19,51 @@ $(function () {
 
 $(function () {
     $('[data-bs-toggle="popover"]').popover({
-        placement : 'right',
+        placement: 'right',
         trigger: 'hover'
     });
 });
 
 
-$(window).scroll(function() {
-  if ($(this).scrollTop() > 50) {
-      $('#back-to-top').fadeIn();
-  } else {
-      $('#back-to-top').fadeOut();
-  }
+$(window).scroll(function () {
+    if ($(this).scrollTop() > 50) {
+        $('#back-to-top').fadeIn();
+    } else {
+        $('#back-to-top').fadeOut();
+    }
 });
 // scroll body to 0px on click
-$('#back-to-top').click(function() {
-  $('body,html').animate({
-      scrollTop: 0
-  }, 400);
-  return false;
+$('#back-to-top').click(function () {
+    $('body,html').animate({
+        scrollTop: 0
+    }, 400);
+    return false;
 });
 
 //
 function openNav() {
-  document.getElementById("mySidenav").style.width = "300px";
-  //document.body.style.backgroundColor = "rgba(0,0,0,0.3)";
+    document.getElementById("mySidenav").style.width = "300px";
+    //document.body.style.backgroundColor = "rgba(0,0,0,0.3)";
 }
 
 function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
-  //document.body.style.backgroundColor = "white";
+    document.getElementById("mySidenav").style.width = "0";
+    //document.body.style.backgroundColor = "white";
 
 }
 
 function openSearchNav() {
-  document.getElementById("searchHeader").style.width = "100%";
+    document.getElementById("searchHeader").style.width = "100%";
 }
 
 function closeSearchNav() {
-  document.getElementById("searchHeader").style.width = "0";
+    document.getElementById("searchHeader").style.width = "0";
 }
 
-$(document).keyup(function(e) {
-  if (e.keyCode == 27) { // escape key maps to keycode `27`
-      document.getElementById("searchHeader").style.width = "0";
- }
+$(document).keyup(function (e) {
+    if (e.keyCode == 27) { // escape key maps to keycode `27`
+        document.getElementById("searchHeader").style.width = "0";
+    }
 });
 
 
@@ -70,7 +75,7 @@ const currentTheme = localStorage.getItem('theme');
 
 if (currentTheme) {
     document.documentElement.setAttribute('data-theme', currentTheme);
-  
+
     if (currentTheme === 'dark') {
         toggleSwitch.checked = true;
     }
@@ -80,10 +85,10 @@ function switchTheme(e) {
     if (e.target.checked) {
         document.documentElement.setAttribute('data-theme', 'dark');
         localStorage.setItem('theme', 'dark');
+    } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
     }
-    else {        document.documentElement.setAttribute('data-theme', 'light');
-          localStorage.setItem('theme', 'light');
-    }    
 }
 
 toggleSwitch.addEventListener('change', switchTheme, false);
@@ -100,12 +105,12 @@ $(".header-avatar-image").letterpic({
 
 
 /*
-     * LetterAvatar
-     * 
-     * Artur Heinze
-     * Create Letter avatar based on Initials
-     * based on https://gist.github.com/leecrossley/6027780
-     */
+ * LetterAvatar
+ * 
+ * Artur Heinze
+ * Create Letter avatar based on Initials
+ * based on https://gist.github.com/leecrossley/6027780
+ */
 /* (function(w, d){
 
 
@@ -191,11 +196,11 @@ $(".header-avatar-image").letterpic({
 
 })(window, document); */
 
-$(document).ready(function(){
+$(document).ready(function () {
     var maxLength = 200;
-    $(".show-read-more").each(function(){
+    $(".show-read-more").each(function () {
         var myStr = $(this).text();
-        if($.trim(myStr).length > maxLength){
+        if ($.trim(myStr).length > maxLength) {
             var newStr = myStr.substring(0, maxLength);
             var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
             $(this).empty().html(newStr);
@@ -203,17 +208,17 @@ $(document).ready(function(){
             $(this).append('<span class="more-text">' + removedStr + '</span>');
         }
     });
-    $(".read-more").click(function(){
+    $(".read-more").click(function () {
         $(this).siblings(".more-text").contents().unwrap();
         $(this).remove();
     });
 });
 
-$(document).ready(function(){
+$(document).ready(function () {
     var maxLength = 50;
-    $(".show-read-more-2").each(function(){
+    $(".show-read-more-2").each(function () {
         var myStr = $(this).text();
-        if($.trim(myStr).length > maxLength){
+        if ($.trim(myStr).length > maxLength) {
             var newStr = myStr.substring(0, maxLength);
             var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
             $(this).empty().html(newStr);
@@ -221,7 +226,7 @@ $(document).ready(function(){
             $(this).append('<span class="more-text-2">' + removedStr + '</span>');
         }
     });
-    $(".read-more-2").click(function(){
+    $(".read-more-2").click(function () {
         $(this).siblings(".more-text-2").contents().unwrap();
         $(this).remove();
     });
@@ -230,7 +235,11 @@ $(document).ready(function(){
 //count
 $('.count').each(function () {
     var $this = $(this);
-    $({ Counter: 0 }).animate({ Counter: $this.text() }, {
+    $({
+        Counter: 0
+    }).animate({
+        Counter: $this.text()
+    }, {
         duration: 3000,
         easing: 'swing',
         step: function () {
@@ -243,5 +252,22 @@ function login() {
     location.href = 'login-user-mm';
 }
 
+/* ------------------------ switch network code start ----------------------- */
 
+// async function abcnew() {
+//     const chainId = '4' // Ethereum Testnet
 
+//     if (window.ethereum.networkVersion !== chainId) {
+//         try {
+//             await window.ethereum.request({
+//                 method: 'wallet_switchEthereumChain',
+//                 params: [{
+//                     chainId: '0x4'
+//                 }],
+//             });
+//         } catch (err) {
+//             console.log(err);
+//         }
+//     }
+// }
+/* ------------------------ switch network code end ----------------------- */
