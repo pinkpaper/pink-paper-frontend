@@ -13,7 +13,6 @@ if ($username != false) {
         $username = $fetch_info['username'];
         $profile = $fetch_info['profile'];
         $user_uid = $fetch_info['user_uid'];
-        $user_address = $fetch_info['metamask_address'];
         $code = $fetch_info['code'];
         if ($status == "verified") {
             if ($code != 0) {
@@ -58,10 +57,11 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
     <!-- Enter page description -->
     <meta property="og:description" content="<?php echo ($meta_description); ?>...">
     <!-- Enter Logo image URL for example : http://cryptonite.finstreet.in/images/cryptonitepost.png -->
-    <meta property="og:image" itemprop="image" content="https://test.pinkpaper.xyz/assets/images/logo/logo_icon.png" />
+    <meta property="og:image" itemprop="image"
+        content="https://content.pinkpaper.xyz/assets/images/logo/logo_icon.png" />
     <meta property="og:image:secure_url" itemprop="image"
-        content="https://test.pinkpaper.xyz/assets/images/logo/logo_icon.png" />
-    <meta name="twitter:card" content="https://test.pinkpaper.xyz/assets/images/logo/logo_icon.png">
+        content="https://content.pinkpaper.xyz/assets/images/logo/logo_icon.png" />
+    <meta name="twitter:card" content="https://content.pinkpaper.xyz/assets/images/logo/logo_icon.png">
     <meta property="og:image:width" content="600">
     <meta property="og:image:height" content="315">
 
@@ -102,7 +102,6 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
     <link rel='stylesheet' href='https://cdn.quilljs.com/1.2.3/quill.bubble.css'>
     <link rel="stylesheet" href="assets/css/flatpickr.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.1/assets/owl.carousel.css">
-    <link rel="stylesheet" href="assets/css/newLoader.css">
     <style>
     input[type=radio] {
         width: 20px;
@@ -185,41 +184,38 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
         border: 3px solid #764ba2;
     }
     </style>
+    <!-- Google Tag Manager -->
+    <script>
+    (function(w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+            'gtm.start': new Date().getTime(),
+            event: 'gtm.js'
+        });
+        var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s),
+            dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src =
+            'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-TNWHRNG');
+    </script>
+    <!-- End Google Tag Manager -->
 </head>
 
 <body onload="loader()">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TNWHRNG" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <!-- loader start-->
     <div class="loader-container">
         <div class="loader"></div>
     </div>
     <!-- loader end-->
-    <!-- new loader start -->
-    <div class="new-loader-wrapper" style="display:none">
-        <div>
-            <div class="loadingio-spinner-blocks-6z64s4i6x4q">
-                <div class="ldio-orclk6era8b">
-                    <div style='left:38px;top:38px;animation-delay:0s'></div>
-                    <div style='left:80px;top:38px;animation-delay:0.125s'></div>
-                    <div style='left:122px;top:38px;animation-delay:0.25s'></div>
-                    <div style='left:38px;top:80px;animation-delay:0.875s'></div>
-                    <div style='left:122px;top:80px;animation-delay:0.375s'></div>
-                    <div style='left:38px;top:122px;animation-delay:0.75s'></div>
-                    <div style='left:80px;top:122px;animation-delay:0.625s'></div>
-                    <div style='left:122px;top:122px;animation-delay:0.5s'></div>
-                </div>
-            </div>
-        </div>
-        <div class="text-center">
-            <h1>Please Wait ...</h1>
-            <p>Don't refresh the page.<br>Data will be lost if you leave the page,you will autometically redirect on
-                story list tab after this process.</p>
-        </div>
-    </div>
-    <!-- new loader end -->
     <input type="hidden" id="selected_theme" name="selected_theme" value="0">
-    <input type="hidden" id="user_username" name="user_username" value="<?= $username?>">
-    <input type="hidden" id="user_address" name="user_address" value="<?= $user_address?>">
-    <input type="hidden" id="user_amount_in" name="user_amount_in" value="ETH">
     <button id="back-to-top" class="btn btn-lg back-to-top text-white"><i class="fas fa-chevron-up"></i></button>
 
     <!-- header start-->
@@ -312,171 +308,6 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                         </div>
                                     </div>
                                 </div>
-                                <!-- funding code start -->
-                                <div class="col-12" style="display:none;" id="crowdfunding_section">
-                                    <div class="story-right-card shadow px-3 py-3 mb-3"
-                                        style="color:var(--text-color);">
-                                        <div>
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <h5>Crowdfunding</h5>
-                                                <div class="d-flex justify-content-end align-items-center">
-                                                    <div class="form-check form-switch">
-                                                        <input class="form-check-input" type="checkbox"
-                                                            id="crowd_funding_switch">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- funding body start -->
-                                            <div id="crowd_funding_body">
-                                                <div class="d-flex justify-content-center align-items-center my-2 p-3" style="background:#f4fbff;">
-                                                    <!-- eth and matic start -->
-                                                    <label class="mx-2 network_class_eth"
-                                                        style="color:var(--text-color);font-size:16px;font-weight:bold;"><img
-                                                            style="width:1.2rem;height:1.2rem;"
-                                                            src="assets/images/download.png" alt="matic"
-                                                            class="img-responsive mx-1">ETH</label>
-                                                    <div class="form-check form-switch">
-                                                        <input class="form-check-input" type="checkbox"
-                                                            id="crowd_funding_network" style="width:2.4em;height:1.2em">
-                                                    </div>
-                                                    <label
-                                                        class="mx-1 network_class_matic d-flex justify-content-center align-items-center"
-                                                        style="color:var(--text-color);font-size:16px;"><img
-                                                            style="width:1.2rem;height:1.2rem;"
-                                                            src="assets/images/polygon-matic-logo.png" alt="matic"
-                                                            class="img-responsive mx-1">MATIC</label>
-                                                    <!-- eth and matic end -->
-                                                </div>
-
-                                                <!-- eth_crowd_funding_network start-->
-                                                <div id="eth_crowdfunding_section">
-                                                    <div class="d-flex justify-content-center align-items-center my-3">
-                                                        <form class="form">
-                                                            <p>Collect up to <span id="eth_show_value">0</span> ETH
-                                                                ($<span id="dollar_amount">0.00</span>)
-                                                                with these settings.</p>
-                                                            <div class="d-flex form-row align-items-center row mb-2">
-                                                                <div class="col-md-12">
-                                                                    <label class="sr-only" for="min_donation">Min
-                                                                        Donation</label>
-                                                                    <div class="input-group mb-2">
-                                                                        <input type="number" class="form-control"
-                                                                            id="min_donation" placeholder="Min Donation"
-                                                                            min="0">
-                                                                        <div class="input-group-prepend">
-                                                                            <div class="input-group-text">ETH</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-12">
-                                                                    <label class="sr-only" for="target_amount">Target
-                                                                        Value</label>
-                                                                    <div class="input-group mb-2">
-                                                                        <input type="number"
-                                                                            class="form-control currencyField"
-                                                                            id="target_amount"
-                                                                            placeholder="Target Amount" min="0"
-                                                                            name="convFrom">
-                                                                        <div class="input-group-prepend">
-                                                                            <div class="input-group-text">ETH</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-auto mt-2 w-100">
-                                                                    <div class="form-check mb-2 py-1 w-100 d-flex justify-content-between"
-                                                                        style="background:#efefef;color: mediumpurple;">
-                                                                        <input class="form-check-input mx-lg-2"
-                                                                            type="checkbox" id="settingConfiramtion">
-                                                                        <label class="form-check-label w-100"
-                                                                            for="settingConfiramtion">
-                                                                            I confirm these settings are correct and
-                                                                            would
-                                                                            be not change in future.
-                                                                        </label>
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <small style="font-size:0.75rem;"><b>*Min
-                                                                    Donation:&nbsp;</b>You
-                                                                can
-                                                                set minimum amount which user can pay.</small><br>
-                                                            <small style="font-size:0.75rem;"><b>**Target
-                                                                    Amount:&nbsp;</b>You
-                                                                can set total funding required.</small>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                                <!-- eth_crowd_funding_network end-->
-
-                                                <!-- matic_crowd_funding_network start-->
-                                                <div id="matic_crowdfunding_section" style="display:none;">
-                                                    <div class="d-flex justify-content-center align-items-center my-3">
-                                                        <form class="form">
-                                                            <p>Collect up to <span id="matic_show_value">0</span> MATIC
-                                                                ($<span id="dollar_amount_matic">0.00</span>)
-                                                                with these settings.</p>
-                                                            <div class="d-flex form-row align-items-center row mb-2">
-                                                                <div class="col-md-12">
-                                                                    <label class="sr-only" for="min_donation_matic">Min
-                                                                        Donation</label>
-                                                                    <div class="input-group mb-2">
-                                                                        <input type="number" class="form-control"
-                                                                            id="min_donation_matic"
-                                                                            placeholder="Min Donation" min="0">
-                                                                        <div class="input-group-prepend">
-                                                                            <div class="input-group-text">MATIC</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-12">
-                                                                    <label class="sr-only"
-                                                                        for="target_amount_matic">Target
-                                                                        Value</label>
-                                                                    <div class="input-group mb-2">
-                                                                        <input type="number"
-                                                                            class="form-control currencyFieldMatic"
-                                                                            id="target_amount_matic"
-                                                                            placeholder="Target Amount" min="0"
-                                                                            name="convFromMatic">
-                                                                        <div class="input-group-prepend">
-                                                                            <div class="input-group-text">MATIC</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-auto mt-2 w-100">
-                                                                    <div class="form-check mb-2 py-1 w-100 d-flex justify-content-between"
-                                                                        style="background:#efefef;color: mediumpurple;">
-                                                                        <input class="form-check-input mx-lg-2"
-                                                                            type="checkbox"
-                                                                            id="settingConfiramtion_matic">
-                                                                        <label class="form-check-label w-100"
-                                                                            for="settingConfiramtion_matic">
-                                                                            I confirm these settings are correct and
-                                                                            would
-                                                                            be not change in future.
-                                                                        </label>
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <small style="font-size:0.75rem;"><b>*Min
-                                                                    Donation:&nbsp;</b>You
-                                                                can
-                                                                set minimum amount which user can pay.</small><br>
-                                                            <small style="font-size:0.75rem;"><b>**Target
-                                                                    Amount:&nbsp;</b>You
-                                                                can set total funding required.</small>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                                <!-- matic_crowd_funding_network end-->
-                                            </div>
-                                            <!-- funding body end -->
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- funding code end -->
                                 <div class="col-12 ">
                                     <div class="story-right-card shadow px-3 py-3 mb-3">
                                         <div class="d-flex justify-content-between align-items-center">
@@ -568,7 +399,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                     </div>
                                 </div>
                                 <!-- theme slider -->
-                                <div class="col-12 themeSliderShow">
+                                <div class="col-12 ">
                                     <div class="story-right-card shadow px-3 py-3 mb-3">
                                         <div>
                                             <div class="d-flex align-items-center justify-content-between">
@@ -629,10 +460,6 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
             </div>
         </div>
     </section>
-
-
-
-
     <!-- footer start-->
     <?php include('include/footer.php'); ?>
     <!-- footer end-->
@@ -705,15 +532,6 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
     <script src="assets/js/moment.min.js"></script>
     <script src="assets/js/moment-duration-format.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.1/owl.carousel.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.1-rc.0/web3.min.js"></script>
-    <script src="https://aloycwl.github.io/js/cdn/ipfs-api.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/near-api-js@0.41.0/dist/near-api-js.min.js"></script>
-    <!-- eth -->
-    <script src="contract/factoryContract.js"></script>
-    <script src="contract/contract.js"></script>
-    <!-- matic -->
-    <script src="contract/matic/maticFactoryContract.js"></script>
-    <script src="contract/matic/maticContract.js"></script>
     <script>
     $('.sidebar-setting-link-1').click(function() {
         $('.sidebar-setting-link-1 i').toggleClass('fa-chevron-right fa-chevron-down');
@@ -722,12 +540,6 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
     $('.sidebar-setting-link-2').click(function() {
         $('.sidebar-setting-link-2 i').toggleClass('fa-chevron-right fa-chevron-down');
     });
-
-    var crowd_on_off = false;
-    var crowdfunding_price_confiramtion = false;
-    var project_uri_ipfs_link = '';
-    var crowd_funding_switch = false;
-    var crowd_funding_network = false;
 
     $(document).ready(function() {
         var name = $('#name').val();
@@ -773,6 +585,9 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
             }
         });
     });
+
+
+
 
     toastr.options = {
         "closeButton": true,
@@ -947,43 +762,6 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
     });
     </script>
     <script>
-    async function fun_project_qri(crowd_project_uri) {
-        console.log(JSON.stringify(crowd_project_uri));
-        const projectId = '2DInI7VLAGEHD8O9MjGjm2HDlo5';
-        const projectSecret = 'f69504cfab98937d3b6bd405d175420a';
-        const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
-
-        ipfs = IpfsApi({
-            host: 'ipfs.infura.io',
-            port: 5001,
-            protocol: 'https',
-            headers: {
-                authorization: auth,
-            },
-        });
-        console.log(ipfs, 'ipfs');
-        pro = await new Promise(async (d) => {
-            reader = new FileReader();
-            reader.onloadend = () => {
-                ipfs.add(ipfs.Buffer.from(reader.result)).then((files) => {
-                    d(files);
-                });
-            };
-            await fetch(window.location.href).then(response => response.text()).then(
-                formatedResponse => {
-                    reader.readAsArrayBuffer(new File([JSON.stringify(crowd_project_uri)],
-                        'application/json'));
-                })
-
-        });
-        if (pro) {
-            var ipfs_link = (`https://ipfs.io/ipfs/${pro[0].hash}`);
-            return ipfs_link;
-        } else {
-            return;
-        }
-
-    }
     $(document).ready(function() {
         var _autosave;
         $('#add_story').on('click', function(e) {
@@ -1007,16 +785,6 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
             var meta_description = $('#meta_description').val();
             var selected_theme = $('#selected_theme').val();
             const current_radio_value = $('input[name=radio]:checked').val();
-
-            const crowd_min_amount = parseFloat($('#min_donation').val());
-            const crowd_target_amount = parseFloat($('#target_amount').val());
-            const crowd_min_amount_matic = parseFloat($('#min_donation_matic').val());
-            const crowd_target_amount_matic = parseFloat($('#target_amount_matic').val());
-            const crowd_amount_in = $('#user_amount_in').val();
-            const crowd_current_datetime = moment().format('MMMM Do YYYY, h:mm:ss a');
-            const username = $('#user_username').val();
-            const authoraddress = $('#user_address').val();
-            const current_timestamp = Date.now();
             var error = "";
             e.preventDefault();
 
@@ -1066,252 +834,39 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
             } else {
                 formData.append('featured_image', $("#featured-image")[0].files[0]);
             }
-            if ($("#crowd_funding_switch").is(':checked')) {
-                crowd_on_off = true;
-                if ($('#user_amount_in').val() === 'ETH') {
-                    confirmation_function();
-                } else if ($('#user_amount_in').val() === 'MATIC') {
-                    confirmation_function_matic();
-                } else {
-                    console.log('something went wrong');
-                }
-
-                const is_confirm_crowd = $("#settingConfiramtion").is(':checked');
-                const is_confirm_crowd_matic = $("#settingConfiramtion_matic").is(':checked');
-                if (crowdfunding_price_confiramtion && crowd_on_off && (is_confirm_crowd ||
-                        is_confirm_crowd_matic)) {
-
-                    formData.append('is_crowdfunding', true);
-                } else {
-                    crowdfunding_price_confiramtion = false;
-                }
-            } else {
-                crowd_on_off = false;
-                formData.append('is_crowdfunding', false);
-            }
 
             formData.append('user_uid', user_uid);
             formData.append('unlisted', unlisted_btn);
             formData.append('pin_story', pin_story);
             formData.append('story_editor', story_editor);
             formData.append('post_id', post_id);
+
             formData.append('meta_title', meta_title);
             formData.append('meta_description', meta_description);
             formData.append('selected_theme', selected_theme);
-
-
-            const crowd_project_uri = [{
-                content: {
-                    title: story_title,
-                    tag: tag_list,
-                    story: story_editor,
-                    timestamp: current_timestamp
-                },
-                author: {
-                    address: authoraddress,
-                    uid: user_uid,
-                    username: username,
-                },
-                crowdfunding_details: {
-                    min_pay_amount: crowd_min_amount,
-                    target_amount: crowd_target_amount,
-                    amount_in: crowd_amount_in
-                },
-                created_at: crowd_current_datetime,
-                updated_at: crowd_current_datetime
-            }];
-            // ETH Contract
-            async function createProjectFunding(crowd_min_amount, crowd_target_amount, project_uri_link,
-                crowd_amount_in) {
-                if (window.ethereum) {
-                    console.log("This is DAppp Environment");
-                    var accounts = await ethereum.request({
-                        method: 'eth_requestAccounts'
-                    });
-                    var currentaddress = accounts[0];
-                    console.log("Current address: " + currentaddress);
-                    web3 = new Web3(window.ethereum);
-                    myFactoryContract = new web3.eth.Contract(factoryContract, contractAddress);
-                    var min_donation_wei = web3.utils.toWei(crowd_min_amount.toString(), 'ether');
-                    var target_amount_wei = web3.utils.toWei(crowd_target_amount.toString(),
-                        'ether');
-
-                    // create a project 
-                    myFactoryContract.methods.createProject(min_donation_wei, target_amount_wei,
-                        project_uri_link).send({
-                        from: currentaddress
-                    }).then((res) => {
-                        const returnTxData = (res.events.ProjectCreated.returnValues);
-                        const returnTxProjectId = returnTxData._project;
-                        const returnTxCreator = returnTxData._creator;
-                        console.log(returnTxProjectId, returnTxCreator);
-                        formData.append('project_uri_link', project_uri_link);
-                        formData.append('project_address', returnTxProjectId);
-                        formData.append('project_creator', returnTxCreator);
-                        formData.append('minimum_pay', crowd_min_amount);
-                        formData.append('target_amount', crowd_target_amount);
-                        formData.append('amount_in', crowd_amount_in);
-                        $(".new-loader-wrapper").addClass("d-none");
-                        $.ajax({
-                            url: 'php/publish_stories.php',
-                            type: "POST",
-                            cache: false,
-                            contentType: false,
-                            processData: false,
-                            data: formData,
-                            success: function() {
-                                toastr["success"]("Story Published");
-                                window.location.replace("stories");
-                                AutoSave();
-                            }
-                        });
-                    }).catch((err) => {
-                        $(".new-loader-wrapper").addClass("d-none");
-                        console.log(err);
-                    });
-                } else {
-                    console.log("Please connect with metamask");
-                }
-            }
-
-
-            const crowd_project_uri_matic = [{
-                content: {
-                    title: story_title,
-                    tag: tag_list,
-                    story: story_editor,
-                    timestamp: current_timestamp
-                },
-                author: {
-                    address: authoraddress,
-                    uid: user_uid,
-                    username: username,
-                },
-                crowdfunding_details: {
-                    min_pay_amount: crowd_min_amount_matic,
-                    target_amount: crowd_target_amount_matic,
-                    amount_in: crowd_amount_in
-                },
-                created_at: crowd_current_datetime,
-                updated_at: crowd_current_datetime
-            }];
-            // MATIC Contract
-            async function createProjectFundingMatic(crowd_min_amount, crowd_target_amount,
-                project_uri_link, crowd_amount_in) {
-                console.log(crowd_min_amount, crowd_target_amount, project_uri_link,
-                    crowd_amount_in)
-                if (window.ethereum) {
-                    console.log("This is DAppp Environment");
-                    var accounts = await ethereum.request({
-                        method: 'eth_requestAccounts'
-                    });
-                    var currentaddress = accounts[0];
-                    console.log("Current address: " + currentaddress);
-                    web3 = new Web3(window.ethereum);
-                    myFactoryContract = new web3.eth.Contract(maticFactoryContract, maticContract);
-                    var min_donation_wei = web3.utils.toWei(crowd_min_amount.toString(), 'ether');
-                    var target_amount_wei = web3.utils.toWei(crowd_target_amount.toString(),
-                        'ether');
-
-                    // create a project 
-                    myFactoryContract.methods.createProject(min_donation_wei, target_amount_wei,
-                        project_uri_link).send({
-                        from: currentaddress
-                    }).then((res) => {
-                        const returnTxData = (res.events.ProjectCreated.returnValues);
-                        const returnTxProjectId = returnTxData._project;
-                        const returnTxCreator = returnTxData._creator;
-                        console.log(returnTxProjectId, returnTxCreator);
-                        formData.append('project_uri_link', project_uri_link);
-                        formData.append('project_address', returnTxProjectId);
-                        formData.append('project_creator', returnTxCreator);
-                        formData.append('minimum_pay', crowd_min_amount);
-                        formData.append('target_amount', crowd_target_amount);
-                        formData.append('amount_in', crowd_amount_in);
-                        $(".new-loader-wrapper").addClass("d-none");
-                        // for (const value of formData.values()) {
-                        // console.log(value);
-                        // }
-                        $.ajax({
-                            url: 'php/publish_stories.php',
-                            type: "POST",
-                            cache: false,
-                            contentType: false,
-                            processData: false,
-                            data: formData,
-                            success: function() {
-                                toastr["success"]("Story Published");
-                                window.location.replace("stories");
-                                AutoSave();
-                            }
-                        });
-                    }).catch((err) => {
-                        $(".new-loader-wrapper").addClass("d-none");
-                        console.log(err);
-                    });
-                } else {
-                    console.log("Please connect with metamask");
-                }
-            }
-
             if (error == "") {
-                if (crowd_on_off) {
-                    if ($('#user_amount_in').val() === 'ETH') {
-                        if ((window.ethereum.networkVersion) !== '5') {
-                            changeNetwork('5');
-                        } else {
-                            console.log(crowd_min_amount, crowd_target_amount, crowd_amount_in);
-                            const promise1 = Promise.resolve(fun_project_qri(crowd_project_uri));
-                            promise1.then((value) => {
-                                $(".new-loader-wrapper").removeClass("d-none");
-                                $(".new-loader-wrapper").addClass("d-flex");
-                                createProjectFunding(crowd_min_amount, crowd_target_amount,
-                                    value,
-                                    crowd_amount_in);
-                            });
-                        }
-                    } else if ($('#user_amount_in').val() === 'MATIC') {
-                        if ((window.ethereum.networkVersion) !== '80001') {
-                            changeNetwork('13881');
-                        } else {
-                            console.log(crowd_min_amount_matic, crowd_target_amount_matic,
-                                crowd_amount_in);
-                            const promise2 = Promise.resolve(fun_project_qri(crowd_project_uri_matic));
-                            promise2.then((value) => {
-                                $(".new-loader-wrapper").removeClass("d-none");
-                                $(".new-loader-wrapper").addClass("d-flex");
-                                createProjectFundingMatic(crowd_min_amount_matic,
-                                    crowd_target_amount_matic,
-                                    value, crowd_amount_in);
-                            });
-                        }
-
-                    } else {
-                        console.log('Something went wrong.')
+                $.ajax({
+                    url: 'php/publish_stories.php',
+                    type: "POST",
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: formData,
+                    success: function() {
+                        toastr["success"]("Story Published");
+                        window.location.replace("stories");
+                        AutoSave();
                     }
-
-                } else {
-                    $.ajax({
-                        url: 'php/publish_stories.php',
-                        type: "POST",
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        data: formData,
-                        success: function() {
-                            toastr["success"]("Story Published");
-                            window.location.replace("stories");
-                            AutoSave();
-                        }
-                    });
-                }
+                });
             }
         });
 
 
         function AutoSave() {
             _autosave = setInterval(function() {
+                //alert('hii');
                 var story_title = $('#story_title').val();
+                //var story_editor = quill.container.innerHTML;
                 var myEditor = document.querySelector('#editor')
                 var story_editor = myEditor.children[0].innerHTML;
                 var post_id = $('#post_id').val();
@@ -1348,10 +903,15 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                     $.ajax({
                         url: 'php/autosave_stories.php',
                         type: "POST",
+                        /* dataType: "json", */
                         cache: false,
                         contentType: false,
                         processData: false,
                         data: formData,
+                        /* beforeSend: function() {
+                            // setting a timeout
+                            $('#result').html("Saving...").fadeOut(200);
+                        }, */
                         success: function(data) {
                             if (data != "") {
                                 $('#post_id').val(data);
@@ -1359,6 +919,9 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
 
                             }
                             toastr["success"]("Story Saved");
+
+                            //$("#draftMsg").css('cssText', 'display:block');
+                            //$('#result').html("Saved.").fadeIn(200);
                         }
                     });
                 }
@@ -1370,8 +933,11 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
     <script>
     $(document).ready(function() {
         $('#submitTag').on('click', function(e) {
+
             e.preventDefault();
             var error = "";
+            /* var myEditor = document.querySelector('#editorComment')
+            var editorComment = myEditor.children[0].innerHTML; */
             var formData = new FormData();
 
             if ($('#editorTag').val() == "") {
@@ -1382,6 +948,8 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
             }
 
             formData.append('user_uid', $('#user_uid').val());
+
+
             if (error == "") {
                 $.ajax({
                     url: "php/addTag.php",
@@ -1440,7 +1008,12 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
 
     const date = flatpickr("#myDate", optionDate);
     const time = flatpickr("#myTime", optionTime);
-
+    // date.set("onChange", function(selectedDates, dateStr, instance) {
+    //     console.log(dateStr)
+    // });
+    // time.set("onChange", function(selectedDates, dateStr, instance) {
+    //     console.log(dateStr)
+    // });
     const radio_value = $('input[name=radio]:checked', '#myForm').val();
     $('#add_story').html(radio_value);
 
@@ -1515,241 +1088,6 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
             $('#theme-preview-modal-title').text('Theme-4 Preview');
         }
         $('#theme-preview-modal').modal('show');
-    }
-
-    function confirmation_function() {
-        if ($("#settingConfiramtion").is(':checked')) {
-            Eth_to_usd();
-            const min_donatation = parseFloat($('#min_donation').val());
-            const target_amount = parseFloat($('#target_amount').val());
-            if (min_donatation <= 0 || isNaN(min_donatation)) {
-                toastr["error"]("Error in Min Donation");
-                $("#settingConfiramtion").prop('checked', false);
-            }
-            if (target_amount <= 0 || isNaN(target_amount)) {
-                toastr["error"]("Error in Target Amount");
-                $("#settingConfiramtion").prop('checked', false);
-            }
-            if (min_donatation > target_amount) {
-                toastr["error"]("Min Donation must be less than Target Amount");
-                $("#settingConfiramtion").prop('checked', false);
-            }
-
-            if ((min_donatation > 0) && (target_amount > 0) && (min_donatation < target_amount)) {
-                crowdfunding_price_confiramtion = true;
-            } else {
-                crowdfunding_price_confiramtion = false;
-            }
-        } else {
-            toastr["error"]("confirm crowdfunding settings first.");
-        }
-    }
-
-    function confirmation_function_matic() {
-        if ($("#settingConfiramtion_matic").is(':checked')) {
-            Matic_to_usd();
-            const min_donatation = parseFloat($('#min_donation_matic').val());
-            const target_amount = parseFloat($('#target_amount_matic').val());
-            if (min_donatation <= 0 || isNaN(min_donatation)) {
-                toastr["error"]("Error in Min Donation");
-                $("#settingConfiramtion_matic").prop('checked', false);
-            }
-            if (target_amount <= 0 || isNaN(target_amount)) {
-                toastr["error"]("Error in Target Amount");
-                $("#settingConfiramtion_matic").prop('checked', false);
-            }
-            if (min_donatation > target_amount) {
-                toastr["error"]("Min Donation must be less than Target Amount");
-                $("#settingConfiramtion_matic").prop('checked', false);
-            }
-
-            if ((min_donatation > 0) && (target_amount > 0) && (min_donatation < target_amount)) {
-                crowdfunding_price_confiramtion = true;
-            } else {
-                crowdfunding_price_confiramtion = false;
-            }
-        } else {
-            toastr["error"]("confirm crowdfunding settings first.");
-        }
-    }
-
-    function Eth_to_usd() {
-        var ethereum_amount = $("#target_amount").val();
-        let convFrom;
-        let convTo;
-        var chain = "ethereum";
-        if ($(this).prop("name") == "usd") {
-            convFrom = "usd";
-            convTo = "eth";
-        } else {
-            convFrom = "eth";
-            convTo = "usd";
-        }
-        $.getJSON(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${chain}`,
-            function(data) {
-                var origAmount = parseFloat($("#target_amount").val());
-                var exchangeRate = parseFloat(data[0].current_price);
-                let amount = null;
-                if (convFrom == "eth")
-                    amount = parseFloat(origAmount * exchangeRate);
-                else
-                    amount = parseFloat(origAmount / exchangeRate);
-                $("input[name='" + convTo + "']").val(amount.toFixed(5));
-                if (convFrom === "eth") {
-                    if (isNaN(amount)) {
-                        $("#dollar_amount").text('0.00');
-                    } else {
-                        $("#dollar_amount").text(amount);
-                    }
-                    if (isNaN(origAmount)) {
-                        $("#eth_show_value").text('0');
-                    } else {
-                        $("#eth_show_value").text(origAmount);
-                    }
-                }
-            });
-    }
-
-    function Matic_to_usd() {
-        var ethereum_amount = $("#target_amount_matic").val();
-        let convFromMatic;
-        let convTo;
-        var chain = "matic-network";
-        if ($(this).prop("name") == "usd") {
-            convFromMatic = "usd";
-            convTo = "matic";
-        } else {
-            convFromMatic = "matic";
-            convTo = "usd";
-        }
-        $.getJSON(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${chain}`,
-            function(data) {
-                var origAmount = parseFloat($("#target_amount_matic").val());
-                var exchangeRate = parseFloat(data[0].current_price);
-                let amount = null;
-                if (convFromMatic == "matic")
-                    amount = parseFloat(origAmount * exchangeRate);
-                else
-                    amount = parseFloat(origAmount / exchangeRate);
-                $("input[name='" + convTo + "']").val(amount.toFixed(5));
-                if (convFromMatic === "matic") {
-                    if (isNaN(amount)) {
-                        $("#dollar_amount_matic").text('0.00');
-                    } else {
-                        $("#dollar_amount_matic").text(amount);
-                    }
-                    if (isNaN(origAmount)) {
-                        $("#matic_show_value").text('0');
-                    } else {
-                        $("#matic_show_value").text(origAmount);
-                    }
-                }
-            });
-    }
-
-
-    $(document).ready(function() {
-        $('#crowd_funding_body').slideUp();
-        $("#crowd_funding_switch").on('change', function() {
-            if ($(this).is(':checked')) {
-                crowd_funding_switch = $(this).is(':checked');
-                $('.themeSliderShow').css('display', 'none');
-                $('#crowd_funding_body').slideDown();
-            } else {
-                crowd_funding_switch = $(this).is(':checked');
-                $('#crowd_funding_body').slideUp();
-                $('.themeSliderShow').css('display', 'block');
-            }
-        });
-        // eth
-        $(".currencyField").keypress(function() {
-            Eth_to_usd();
-            $("#settingConfiramtion").prop('checked', false);
-        });
-        $(".currencyField").change(function() {
-            Eth_to_usd();
-            $("#settingConfiramtion").prop('checked', false);
-        });
-
-        $('#min_donation').keypress(function() {
-            $("#settingConfiramtion").prop('checked', false);
-        });
-        $('#min_donation').change(function() {
-            $("#settingConfiramtion").prop('checked', false);
-        });
-
-        $("#settingConfiramtion").on('change', function() {
-            confirmation_function();
-            changeNetwork('5');
-        });
-        // matic
-        $(".currencyFieldMatic").keypress(function() {
-            Matic_to_usd();
-            $("#settingConfiramtion_matic").prop('checked', false);
-        });
-        $(".currencyFieldMatic").change(function() {
-            Matic_to_usd();
-            $("#settingConfiramtion_matic").prop('checked', false);
-        });
-
-        $('#min_donation_matic').keypress(function() {
-            $("#settingConfiramtion_matic").prop('checked', false);
-        });
-        $('#min_donation_matic').change(function() {
-            $("#settingConfiramtion_matic").prop('checked', false);
-        });
-
-        $("#settingConfiramtion_matic").on('change', function() {
-            confirmation_function_matic();
-            changeNetwork('13881');
-        });
-
-        $("#crowd_funding_network").on('change', function() {
-            if ($(this).is(':checked')) {
-                crowd_funding_network = $(this).is(':checked');
-                $('.network_class_matic').css('font-weight', 'bold');
-                $('.network_class_eth').css('font-weight', 'inherit');
-                $('#matic_crowdfunding_section').css('display', 'flex');
-                $('#eth_crowdfunding_section').css('display', 'none');
-                $('#user_amount_in').val('MATIC');
-                changeNetwork('13881');
-            } else {
-                crowd_funding_network = $(this).is(':checked');
-                $('.network_class_eth').css('font-weight', 'bold');
-                $('.network_class_matic').css('font-weight', 'inherit');
-                $('#matic_crowdfunding_section').css('display', 'none');
-                $('#eth_crowdfunding_section').css('display', 'flex');
-                $('#user_amount_in').val('ETH');
-                changeNetwork('5');
-            }
-        });
-    });
-    // check start
-    async function isConnected() {
-        const currAccount = $('#user_address').val();
-        var str2 = "0x";
-        if (currAccount.indexOf(str2) != -1) {
-            $('#crowdfunding_section').css('display', 'block');
-        } else {
-            $('#crowdfunding_section').css('display', 'none');
-        }
-    }
-    isConnected();
-    // check end
-    async function changeNetwork(chainId) {
-        console.log(window.ethereum.networkVersion);
-        if (window.ethereum.networkVersion !== chainId) {
-            try {
-                await window.ethereum.request({
-                    method: 'wallet_switchEthereumChain',
-                    params: [{
-                        chainId: `0x${chainId}`
-                    }],
-                });
-            } catch (err) {
-                console.log(err);
-            }
-        }
     }
     </script>
 </body>

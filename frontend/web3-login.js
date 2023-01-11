@@ -151,7 +151,8 @@ async function userLogin() {
       }
 
       function handleAuthenticate({ publicAddress, signature }) {
-        axios.post(
+        axios
+          .post(
             backendPath+"backend/server.php",
             {
               request: "auth",

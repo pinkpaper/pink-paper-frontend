@@ -2,81 +2,9 @@
 
 require_once("./router.php");
 
-// ##################################################
-// ##################################################
-// ##################################################
+// live server routes
 
-//
-// ──────────────────────────────────────────────────────────────────────── II ──────────
-//   :::::: L O C A L   R O U T E   D A T A : :  :   :    :     :        :          :
-// ──────────────────────────────────────────────────────────────────────────────────
-//
-
-
-get('./pinkpaper-testnet/', 'home.php');
-get('./pinkpaper-testnet/home', 'home.php');
-get('./pinkpaper-testnet/register', 'signup-user.php');
-get('./pinkpaper-testnet/login-user', 'login-user.php');
-get('./pinkpaper-testnet/login-user-mm', 'login-user-mm.php');
-get('./pinkpaper-testnet/logout', 'logout-user.php');
-get('./pinkpaper-testnet/reset-code', 'reset-code.php');
- get('./pinkpaper-testnet/user-otp', 'user-otp.php');
-// get('./pinkpaper-testnet/logout', 'logout-user.php');
-get('./pinkpaper-testnet/forgot-password', 'forgot-password.php');
-get('./pinkpaper-testnet/create-story', 'create-story.php');
-get('./pinkpaper-testnet/stories', 'stories.php');
-get('./pinkpaper-testnet/user-stats', 'user-stats.php');
-get('./pinkpaper-testnet/audience-stats', 'audience-stats.php');
-get('./pinkpaper-testnet/reading-list', 'reading-list.php');
-get('./pinkpaper-testnet/user-settings', 'user-settings.php');
-get('./pinkpaper-testnet/about-us', 'about-us.php');
-get('./pinkpaper-testnet/contact-us', 'contact-us.php');
-get('./pinkpaper-testnet/edit-story/$edit_req', 'edit-story.php');
-get('./pinkpaper-testnet/withdraw-fund/$edit_req', 'withdraw-fund.php');
-get('./pinkpaper-testnet/privacy-policy', 'privacy-policy.php');
-get('./pinkpaper-testnet/cookies-policy', 'cookies-policy.php');
-get('./pinkpaper-testnet/terms_of_use', 'terms_of_use.php');
-//dashboard
-get('./pinkpaper-testnet/dashboard/', 'dashboard/index.php');
-get('./pinkpaper-testnet/dashboard/login', 'dashboard/login.php');
-get('./pinkpaper-testnet/dashboard/logout', 'dashboard/logout.php');
-get('./pinkpaper-testnet/dashboard/allpost', 'dashboard/allpost.php');
-get('./pinkpaper-testnet/dashboard/trash-stories', 'dashboard/trash-stories.php');
-get('./pinkpaper-testnet/dashboard/all-tags', 'dashboard/all-tags.php');
-get('./pinkpaper-testnet/dashboard/add-tag', 'dashboard/add-tag.php');
-get('./pinkpaper-testnet/dashboard/all-users', 'dashboard/all-users.php');
-get('./pinkpaper-testnet/dashboard/add-user', 'dashboard/add-user.php');
-get('./pinkpaper-testnet/dashboard/addpost', 'dashboard/addpost.php');
-get('./pinkpaper-testnet/dashboard/followusers', 'dashboard/followusers.php');
-get('./pinkpaper-testnet/dashboard/postlike', 'dashboard/postlike.php');
-get('./pinkpaper-testnet/dashboard/savepost', 'dashboard/savepost.php');
-get('./pinkpaper-testnet/dashboard/newsletter', 'dashboard/newsletter.php');
-get('./pinkpaper-testnet/dashboard/comments', 'dashboard/comments.php');
-get('./pinkpaper-testnet/dashboard/viewlogo', 'dashboard/viewlogo.php');
-get('./pinkpaper-testnet/dashboard/nav', 'dashboard/nav.php');
-get('./pinkpaper-testnet/dashboard/social', 'dashboard/social.php');
-get('./pinkpaper-testnet/dashboard/editor', 'dashboard/editor.php');
-get('./pinkpaper-testnet/dashboard/contactus', 'dashboard/contactus.php');
-get('./pinkpaper-testnet/dashboard/aboutus', 'dashboard/aboutus.php');
-get('./pinkpaper-testnet/dashboard/aboutus', 'dashboard/privacy-policy.php');
-get('./pinkpaper-testnet/dashboard/aboutus', 'dashboard/cookies-policy.php');
-get('./pinkpaper-testnet/dashboard/aboutus', 'dashboard/terms.php');
-get('./pinkpaper-testnet/dashboard/metamask', 'dashboard/metamask.php');
-get('./pinkpaper-testnet/dashboard/change-password', 'dashboard/change-password.php');
-get('./pinkpaper-testnet/about/$about_req', 'about.php');
-get('./pinkpaper-testnet/topic/$topic_req', 'topic.php');
-get('./pinkpaper-testnet/search/$search_req', 'search.php');
-get('./pinkpaper-testnet/$username_profile', 'profile.php');
-get('./pinkpaper-testnet/$username_post/$post_slug', 'single-post.php');
-any('./pinkpaper-testnet/404','404.php');
-
-
-//
-// ────────────────────────────────────────────────────────────────────── I ──────────
-//   :::::: L I V E   R O U T E   D A T A : :  :   :    :     :        :          :
-// ────────────────────────────────────────────────────────────────────────────────
-//
-
+// get('./sitemap.xml', 'sitemap.php');
 // get('./', 'home.php');
 // get('./home', 'home.php');
 // get('./register', 'signup-user.php');
@@ -84,8 +12,7 @@ any('./pinkpaper-testnet/404','404.php');
 // get('./login-user-mm', 'login-user-mm.php');
 // get('./logout', 'logout-user.php');
 // get('./reset-code', 'reset-code.php');
-//  get('./user-otp', 'user-otp.php');
-// // get('./logout', 'logout-user.php');
+// get('./user-otp', 'user-otp.php');
 // get('./forgot-password', 'forgot-password.php');
 // get('./create-story', 'create-story.php');
 // get('./stories', 'stories.php');
@@ -99,7 +26,6 @@ any('./pinkpaper-testnet/404','404.php');
 // get('./privacy-policy', 'privacy-policy.php');
 // get('./cookies-policy', 'cookies-policy.php');
 // get('./terms_of_use', 'terms_of_use.php');
-// //dashboard
 // get('./dashboard/', 'dashboard/index.php');
 // get('./dashboard/login', 'dashboard/login.php');
 // get('./dashboard/logout', 'dashboard/logout.php');
@@ -132,3 +58,62 @@ any('./pinkpaper-testnet/404','404.php');
 // get('./$username_profile', 'profile.php');
 // get('./$username_post/$post_slug', 'single-post.php');
 // any('/404','404.php');
+
+
+// local server routes
+
+
+get('./pinkpaper-mainnet/sitemap.xml', 'sitemap.php');
+get('./pinkpaper-mainnet/', 'home.php');
+get('./pinkpaper-mainnet/home', 'home.php');
+get('./pinkpaper-mainnet/register', 'signup-user.php');
+get('./pinkpaper-mainnet/login-user', 'login-user.php');
+get('./pinkpaper-mainnet/login-user-mm', 'login-user-mm.php');
+get('./pinkpaper-mainnet/logout', 'logout-user.php');
+get('./pinkpaper-mainnet/reset-code', 'reset-code.php');
+get('./pinkpaper-mainnet/user-otp', 'user-otp.php');
+get('./pinkpaper-mainnet/forgot-password', 'forgot-password.php');
+get('./pinkpaper-mainnet/create-story', 'create-story.php');
+get('./pinkpaper-mainnet/stories', 'stories.php');
+get('./pinkpaper-mainnet/user-stats', 'user-stats.php');
+get('./pinkpaper-mainnet/audience-stats', 'audience-stats.php');
+get('./pinkpaper-mainnet/reading-list', 'reading-list.php');
+get('./pinkpaper-mainnet/user-settings', 'user-settings.php');
+get('./pinkpaper-mainnet/about-us', 'about-us.php');
+get('./pinkpaper-mainnet/contact-us', 'contact-us.php');
+get('./pinkpaper-mainnet/edit-story/$edit_req', 'edit-story.php');
+get('./pinkpaper-mainnet/privacy-policy', 'privacy-policy.php');
+get('./pinkpaper-mainnet/cookies-policy', 'cookies-policy.php');
+get('./pinkpaper-mainnet/terms_of_use', 'terms_of_use.php');
+get('./pinkpaper-mainnet/dashboard/', 'dashboard/index.php');
+get('./pinkpaper-mainnet/dashboard/login', 'dashboard/login.php');
+get('./pinkpaper-mainnet/dashboard/logout', 'dashboard/logout.php');
+get('./pinkpaper-mainnet/dashboard/allpost', 'dashboard/allpost.php');
+get('./pinkpaper-mainnet/dashboard/trash-stories', 'dashboard/trash-stories.php');
+get('./pinkpaper-mainnet/dashboard/all-tags', 'dashboard/all-tags.php');
+get('./pinkpaper-mainnet/dashboard/add-tag', 'dashboard/add-tag.php');
+get('./pinkpaper-mainnet/dashboard/all-users', 'dashboard/all-users.php');
+get('./pinkpaper-mainnet/dashboard/add-user', 'dashboard/add-user.php');
+get('./pinkpaper-mainnet/dashboard/addpost', 'dashboard/addpost.php');
+get('./pinkpaper-mainnet/dashboard/followusers', 'dashboard/followusers.php');
+get('./pinkpaper-mainnet/dashboard/postlike', 'dashboard/postlike.php');
+get('./pinkpaper-mainnet/dashboard/savepost', 'dashboard/savepost.php');
+get('./pinkpaper-mainnet/dashboard/newsletter', 'dashboard/newsletter.php');
+get('./pinkpaper-mainnet/dashboard/comments', 'dashboard/comments.php');
+get('./pinkpaper-mainnet/dashboard/viewlogo', 'dashboard/viewlogo.php');
+get('./pinkpaper-mainnet/dashboard/nav', 'dashboard/nav.php');
+get('./pinkpaper-mainnet/dashboard/social', 'dashboard/social.php');
+get('./pinkpaper-mainnet/dashboard/editor', 'dashboard/editor.php');
+get('./pinkpaper-mainnet/dashboard/contactus', 'dashboard/contactus.php');
+get('./pinkpaper-mainnet/dashboard/aboutus', 'dashboard/aboutus.php');
+get('./pinkpaper-mainnet/dashboard/aboutus', 'dashboard/privacy-policy.php');
+get('./pinkpaper-mainnet/dashboard/aboutus', 'dashboard/cookies-policy.php');
+get('./pinkpaper-mainnet/dashboard/aboutus', 'dashboard/terms.php');
+get('./pinkpaper-mainnet/dashboard/metamask', 'dashboard/metamask.php');
+get('./pinkpaper-mainnet/dashboard/change-password', 'dashboard/change-password.php');
+get('./pinkpaper-mainnet/about/$about_req', 'about.php');
+get('./pinkpaper-mainnet/topic/$topic_req', 'topic.php');
+get('./pinkpaper-mainnet/search/$search_req', 'search.php');
+get('./pinkpaper-mainnet/$username_profile', 'profile.php');
+get('./pinkpaper-mainnet/$username_post/$post_slug', 'single-post.php');
+any('./pinkpaper-mainnet/404','404.php');

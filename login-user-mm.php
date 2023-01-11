@@ -55,9 +55,31 @@
     <script type="text/javascript" src="https://unpkg.com/web3modal@1.9.0/dist/index.js"></script>
     <script type="text/javascript" src="https://unpkg.com/@walletconnect/web3-provider@1.2.1/dist/umd/index.min.js">
     </script>
+    <!-- Google Tag Manager -->
+    <script>
+    (function(w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+            'gtm.start': new Date().getTime(),
+            event: 'gtm.js'
+        });
+        var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s),
+            dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src =
+            'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-TNWHRNG');
+    </script>
+    <!-- End Google Tag Manager -->
 </head>
 
 <body onload="loader()">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TNWHRNG" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
     <!-- loader start-->
     <div class="loader-container">
@@ -99,9 +121,15 @@
                                             class="img-responsive button-image">
                                     </button>
                                 </div>
-                                <div class="d-grid mb-2">
+                                <div class="d-grid mb-4">
                                     <button id="neoConnection" onclick="neoLogin()" class="btn button-primary">
                                         <img src="./assets/images/neo.png" alt="metamask"
+                                            class="img-responsive button-image">
+                                    </button>
+                                </div>
+                                <div class="d-grid mb-2">
+                                    <button id="unstoppableConnection" onclick="login()" class="btn button-primary">
+                                        <img src="./assets/images/unstoppable.png" alt="unstoppable"
                                             class="img-responsive button-image">
                                     </button>
                                 </div>
@@ -148,6 +176,7 @@
     <script src="frontend/web3-login.js?v=009"></script>
     <script src="frontend/web3-modal.js?v=001"></script>
     <script type="text/javascript" src="assets/js/neoLogin.js"></script>
+    <script src="./dist/index.5baa4167.js" defer=""></script>
 </body>
 
 </html>

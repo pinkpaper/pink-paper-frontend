@@ -81,27 +81,35 @@
                                     <?php } ?>
                                 </div>
                                 <?php
-                                    if (!isset($_SESSION['username'])) {
-                                        if($metamask_author !== '' && $metamask_author){
-                                        echo '<button class="btn tip-button-2 fw-bold  mt-3" onClick="login()"><img src="https://test.pinkpaper.xyz/assets/images/metamask-fox.svg"><span class="ms-2">Donate<span class="d-lg-none"> with MetaMask</span></span></button>';
-                                        }
-                                        if($neo_author !== '' && $neo_author){
-                                        echo '<button class="btn tip-button-2 fw-bold  mt-3" onClick="login()"><img src="assets/images/n.png" style="width:25px;height:25px;"><span class="ms-2">Donate<span class="d-lg-none"> with Neo</span></span></button>';   
-                                        }                                   
-                                    } else if ($user_uid2 == $user_uid_follow) {                                        
-                                        echo '';                                        
-                                    } else {
-                                        $query33 = "SELECT * FROM `metamask_details` WHERE `user_uid` = '$user_uid_follow'";
-                                        $result33 = mysqli_query($link, $query33);
-                                        if (mysqli_num_rows($result) > 0) {
-                                            while ($row33 = mysqli_fetch_assoc($result33)) {
-                                            if($row33['eth_metamask_address'] !== '' && $row33['eth_metamask_address']){
-                                        echo '<button class="btn tip-button-2 fw-bold  mt-3" data-bs-toggle="modal" data-bs-target="#metamaskDonateModal"><img src="https://test.pinkpaper.xyz/assets/images/metamask-fox.svg"><span class="ms-2">Donate<span class="d-lg-none">with MetaMask </span></span></button>';
+                                if (!isset($_SESSION['username'])) {
+                                    if ($metamask_author !== '' && $metamask_author) {
+                                        echo '<div class="tx o"><button class="btn tip-button-2 fw-bold  mt-3 w-100" onClick="login()"><img src="https://test.pinkpaper.xyz/assets/images/metamask-fox.svg"><span class="ms-2">Donate<span class="d-lg-none"> with MetaMask</span></span></button></div>';
+                                    }
+                                    if ($neo_author !== '' && $neo_author) {
+                                        echo '<div class="tx o"><button class="btn tip-button-2 fw-bold  mt-3 w-100" onClick="login()"><img src="assets/images/n.png" style="width:25px;height:25px;"><span class="ms-2">Donate<span class="d-lg-none"> with Neo</span></span></button></div>';
+                                    }
+                                    if ($Idriss_username !== '' && $Idriss_username) {
+                                        echo '<div class="tx o"><button class="btn tip-button-2 fw-bold  mt-3 w-100 d-flex justify-content-center align-items-center" onClick="login()"><img src="assets/images/Idriss.png" style="width:25px;height:25px;"><span class="ms-2"><span class="text-truncate d-block" style="font-size:0.9rem;">' . $Idriss_username . '</span></span></button></div>';
+                                    }
+                                } else if ($user_uid2 == $user_uid_follow) {
+                                    echo '';
+                                } else {
+                                    $query33 = "SELECT * FROM `metamask_details` WHERE `user_uid` = '$user_uid_follow'";
+                                    $result33 = mysqli_query($link, $query33);
+                                    if (mysqli_num_rows($result) > 0) {
+                                        while ($row33 = mysqli_fetch_assoc($result33)) {
+                                            if ($row33['eth_metamask_address'] !== '' && $row33['eth_metamask_address']) {
+                                                echo '<button class="btn tip-button-2 fw-bold  mt-3" data-bs-toggle="modal" data-bs-target="#metamaskDonateModal"><img src="https://test.pinkpaper.xyz/assets/images/metamask-fox.svg"><span class="ms-2">Donate<span class="d-lg-none">with MetaMask </span></span></button>';
                                             }
-                                        if($row33['neo_address'] !== '' && $row33['neo_address']){
-                                        echo '<button class="btn tip-button-2 fw-bold  mt-3" data-bs-toggle="modal" data-bs-target="#neoDonateModal"><img src="assets/images/n.png"><span class="ms-2">Donate<span class="d-lg-none">with MetaMask </span></span></button>';
-                                            }}}                                 
-                                    ?>
+                                            if ($row33['neo_address'] !== '' && $row33['neo_address']) {
+                                                echo '<button class="btn tip-button-2 fw-bold  mt-3" data-bs-toggle="modal" data-bs-target="#neoDonateModal"><img src="assets/images/n.png"><span class="ms-2">Donate<span class="d-lg-none">with MetaMask </span></span></button>';
+                                            }
+                                            if ($row33['Idriss_username'] !== '' && $row33['Idriss_username']) {
+                                                echo '<div class="tx o"><button class="btn tip-button-2 fw-bold  mt-3 w-100 d-flex justify-content-center align-items-center" data-bs-toggle="modal" data-bs-target="#IdrissDonateModal"><img src="assets/images/Idriss.png" style="width:25px;height:25px;"><span class="ms-2"><span class="text-truncate d-block" style="font-size:0.9rem;">' . $Idriss_username . '</span></span></button></div>';
+                                            }
+                                        }
+                                    }
+                                ?>
                                 <?php
                                     }
                                     ?>

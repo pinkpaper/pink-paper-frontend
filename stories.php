@@ -51,10 +51,10 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
     <!-- Enter page description -->
     <meta property="og:description" content="<?php echo ($meta_description); ?>...">
     <!-- Enter Logo image URL for example : http://cryptonite.finstreet.in/images/cryptonitepost.png -->
-    <meta property="og:image" itemprop="image" content="https://test.pinkpaper.xyz/assets/images/logo/logo_icon.png" />
+    <meta property="og:image" itemprop="image" content="https://content.pinkpaper.xyz/assets/images/logo/logo_icon.png" />
     <meta property="og:image:secure_url" itemprop="image"
-        content="https://test.pinkpaper.xyz/assets/images/logo/logo_icon.png" />
-    <meta name="twitter:card" content="https://test.pinkpaper.xyz/assets/images/logo/logo_icon.png">
+        content="https://content.pinkpaper.xyz/assets/images/logo/logo_icon.png" />
+    <meta name="twitter:card" content="https://content.pinkpaper.xyz/assets/images/logo/logo_icon.png">
     <meta property="og:image:width" content="600">
     <meta property="og:image:height" content="315">
 
@@ -166,18 +166,21 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
     #chedule_sort_id {
         display: none;
     }
-
-    .withdraw {
-        background-color: #f44336;
-        padding: 0.2rem 0.4rem;
-        color: #fff;
-        border-radius: 10px;
-        font-size: 0.75rem;
-    }
     </style>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TNWHRNG');</script>
+<!-- End Google Tag Manager -->
 </head>
 
 <body onload="loader()">
+ <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TNWHRNG"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
     <!-- loader start-->
     <div class="loader-container">
@@ -387,16 +390,12 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
             var limit = 2;
             row = row + limit;
             $('#rowPublished').val(row);
-            const user_uids = $('#userUid').val();
             $("#loadBtnPublished").val('Loading...');
 
             $.ajax({
                 type: 'POST',
                 url: 'php/loadMorePublishedData.php',
-                data: {
-                    'row': row,
-                    'user_uid': user_uids
-                },
+                data: 'row=' + row,
                 success: function(data) {
                     var rowCount = row + limit;
                     $('.post-published').append(data);
@@ -544,7 +543,6 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
     sortPublishedData();
     sortUnlistedData();
     sortScheduleData();
-
     function checkTabActive() {
         if ($('#drafts-tab').hasClass('active')) {
             $('#draft_sort_id').css('display', 'block');

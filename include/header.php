@@ -43,7 +43,7 @@ $rowLogo = mysqli_fetch_assoc($result);
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="create-story">Publish new story</a></li>
+                            <li><a class="dropdown-item" href="create-story">Publish new  story</a></li>
                             <li><a class="dropdown-item" href="stories">Stories</a></li>
                             <li><a class="dropdown-item" href="user-stats">Stats</a></li>
                             <li><a class="dropdown-item" href="reading-list">Reading List</a></li>
@@ -172,15 +172,22 @@ $rowLogo = mysqli_fetch_assoc($result);
 $(document).ready(function() {
     var slug;
     $('#zero-conf').DataTable();
+
     $('#search').on('click', function(e) {
+
+
         e.preventDefault();
         var error = "";
+
         var formData = new FormData();
         if ($('#searchtext').val() == "") {
+            // sweetAlert("Warning", "Please enter all fields", "warning");
             error = error + 'searchtext';
         } else {
             formData.append('searchtext', $('#searchtext').val());
         }
+
+
         if (error == "") {
             console.log(formData);
             $.ajax({
@@ -195,38 +202,48 @@ $(document).ready(function() {
                 success: function(data) {
                     console.log(data);
                     if (data.status == 201) {
+                        // if(data.link!=""){
                         window.location.replace("index");
+                        // }else{
+                        //     window.location.replace("/");
+                        // }
+
                     } else if (data.status == 301) {
                         console.log(data.error);
                         swal("error");
+                        // $('#contact-success').css('display', 'none');
+                        // $('#contact-form').css('display', 'block');
+                        // swal('success'); 
                     } else if (data.status == 601) {
                         console.log(data.error);
                         swal("error");
+                        // $('#contact-success').css('display', 'none');
+                        // $('#contact-form').css('display', 'block');
+                        // swal('success'); 
                     } else if (data.status == 603) {
                         console.log(data.error);
                         swal("error");
+                        // $('#contact-success').css('display', 'none');
+                        // $('#contact-form').css('display', 'block');
+                        // swal('success'); 
                     } else {
-                        console.log("problem with query");
+                        //     swal("problem with query");
                     }
                 }
             });
         } else {
+
         }
     });
+
+
 });
 </script>
-<script>
-var input = document.getElementById("searchtext");
-input.addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {
-        event.preventDefault();
-        search();
-    }
-});
 
+
+<script>
 function search() {
     var a = $('#searchtext').val();
     window.location.href = "search/" + a;
 }
-
 </script>

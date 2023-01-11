@@ -14,7 +14,7 @@
                         while ($row = mysqli_fetch_assoc($result)) {
                     ?>
                             <div class="swiper-slide">
-                                <div class="card border-0 shadow-sm mb-4" style="height:311.8px;">
+                                <div class="card border-0 shadow-sm mb-4">
                                     <div class="card-img p-2">
                                         <a href="<?php echo $row['username']; ?>/<?php echo $row['post_slug']; ?>">
                                             <?php

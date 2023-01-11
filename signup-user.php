@@ -6,6 +6,10 @@ if(!isset($_SESSION['userAddress'])){
     exit;
 }else{
     $metamask_address = $_SESSION['userAddress'];
+    $username ='';
+    if(isset($_SESSION['userLabel'])){
+        $username = $_SESSION['userLabel'];
+    }
     // $publicName = $_SESSION['publicName'];
     $sql = "SELECT * FROM user_login  WHERE metamask_address = '$metamask_address'";
         $run_Sql = mysqli_query($link, $sql);
@@ -60,9 +64,31 @@ if(!isset($_SESSION['userAddress'])){
     }
     </style>
     <!-- Css for view password icon ends -->
+    <!-- Google Tag Manager -->
+    <script>
+    (function(w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+            'gtm.start': new Date().getTime(),
+            event: 'gtm.js'
+        });
+        var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s),
+            dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src =
+            'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-TNWHRNG');
+    </script>
+    <!-- End Google Tag Manager -->
 </head>
 
 <body onload="loader()">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TNWHRNG" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
     <!-- loader start-->
     <div class="loader-container">
@@ -124,11 +150,11 @@ if(!isset($_SESSION['userAddress'])){
                                     ?>
                                     <div class="form-group mb-3">
                                         <input class="form-control" type="text" name="name" placeholder="Full Name"
-                                            required value="<?php echo $name ?>">
+                                            required>
                                     </div>
                                     <div class="form-group mb-3">
-                                        <input class="form-control" type="text" name="username"
-                                            placeholder="Username" required value="<?php echo $username ?>">
+                                        <input class="form-control" type="text" name="username" placeholder="Username"
+                                            required value="<?php echo $username ?>">
                                     </div>
                                     <div class="form-group mb-3">
                                         <input class="form-control" type="hidden" name="metamask_address"

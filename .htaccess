@@ -8,6 +8,8 @@ RewriteCond %{REQUEST_FILENAME} !-d
 
 RewriteRule ^(.+)$ routes.php [QSA,L]
 
+RewriteRule ^sitemap\.xml/?$ sitemap.php
+
 # cache settingh
 <FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf|svg|ttf)$">
 Header set Cache-Control "max-age=31536000, public"
