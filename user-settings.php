@@ -2,6 +2,8 @@
 <?php
 require_once "php/schedule_cron.php";
 $username = $_SESSION['username'];
+$login_metamask_address = '';
+$user_uid = '';
 if ($username != false) {
     $sql = "SELECT * FROM user_login WHERE username = '$username'";
     $run_Sql = mysqli_query($link, $sql);
@@ -17,6 +19,7 @@ if ($username != false) {
         $instagram_url = $fetch_info['instagram_url'];
         $linkedin_url = $fetch_info['linkedin_url'];
         $facebook_url = $fetch_info['facebook_url'];
+        $login_metamask_address = $fetch_info['metamask_address'];
         $code = $fetch_info['code'];
         if ($status == "verified") {
             if ($code != 0) {
@@ -218,7 +221,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
     <!-- header start-->
     <?php include('include/header.php'); ?>
     <!-- header end-->
-
+<input type="hidden" name="login_metamask_address" id="login_metamask_address" value="<?= $login_metamask_address ?>">
     <section class="my-5" style="padding-top:50px;">
         <div class="container">
             <div class="row-h">
@@ -457,14 +460,15 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                                                 <?php
                                                                 }
                                                             } ?>
+                                                <small class="text-primary my-2 py-2" style="font-size: 12px;">Note: This field will be auto filled when your wallet address is connected with Idriss Account.</small>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-12 col-sm-12">
-                                            <div class="inputs-1 d-flex  justify-content-end gap-2">
+                                            <!-- <div class="inputs-1 d-flex  justify-content-end gap-2">
                                                 <button class="btn button-outline-primary" id='cancel888' style="visibility: hidden;" type='reset' onclick="window.location.replace('user-settings.php')">Cancel</button>
                                                 <button class='btn button-outline-primary' data-role="update" id='save888' style="visibility: hidden;" type='button'>Save</button>
                                                 <button class='btn button-outline-primary' id="edit888">Edit</button>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                     <div class="row d-flex justify-content-center align-items-end">
@@ -611,6 +615,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
     <script src="assets/toastr/toastr.min.js"></script>
     <script type="text/javascript" src="assets/js/app.js"></script>
     <script type="text/javascript" src="assets/js/loader.js"></script>
+    <script src="https://unpkg.com/idriss-crypto/lib/bundle/global.js"></script>
     <script>
         $('.nav-link').click(function() {
             $('.nav-link').hover('');
@@ -2047,6 +2052,93 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                 }
             });
         });
+
+        function setTwitterAccount(twitterAccount) {
+            const T_username = (twitterAccount.split('@')[1]);
+            const twitterFullUrl = `https://twitter.com/${T_username}`;
+            $('#social-twitter').val(twitterFullUrl);
+
+            var error = "";
+            var formData = new FormData();
+            formData.append('social-twitter', $('#social-twitter').val());
+            formData.append('user_uid', $('#user_uid').val());
+            if (error == "") {
+                console.log(formData);
+                $.ajax({
+                    url: "php/edit-settings.php",
+                    type: "POST",
+                    dataType: "json",
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: formData,
+
+                    success: function(data) {
+                        console.log(data);
+                        if (data.status == 201) {
+                            toastr["success"]("Twitter Account updated");
+                        } else if (data.status == 501) {
+                            toastr["success"]("No changes made");
+                        } else if (data.status == 301) {
+                            console.log(data.error);
+                            toastr["success"]("Error");
+                        }
+                    }
+                });
+            }
+        }
+
+        function setIDrissAccount() {
+            var error = "";
+            var formData = new FormData();
+            formData.append('IDrissaddress', $('#IDrissaddress').val());
+            formData.append('user_uid', $('#user_uid').val());
+            if (error == "") {
+                console.log(formData);
+                $.ajax({
+                    url: "php/updatemetaaddress.php",
+                    type: "POST",
+                    dataType: "json",
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: formData,
+
+                    success: function(data) {
+                        console.log(data);
+                        if (data.status == 201) {
+                            toastr["success"]("IDriss Address Updated");
+                            $('#IDrissaddress').prop("readonly", true);
+                        } else if (data.status == 501) {
+                            toastr["success"]("No changes made");
+                        } else if (data.status == 801) {
+                            console.log(data.error);
+                            toastr.error("Error");
+                        }
+                    }
+                });
+            } else {}
+        }
+
+        // Idriss setup start
+        const IDrissUsernameData = ($('#login_metamask_address').val()).trim().toString();
+        if (IDrissUsernameData !== '' && IDrissUsernameData) {
+            let idriss = new IdrissCrypto.IdrissCrypto();
+            getdata(IDrissUsernameData);
+            async function getdata(data) {
+                const resultAccount = await idriss.reverseResolve(data);
+                $('#IDrissaddress').val(resultAccount);
+                setIDrissAccount();
+                if (resultAccount['0'] === '@') {
+                    setTwitterAccount(resultAccount);
+                } else {
+                    console.log(false);
+                }
+            }
+        } else {
+            console.log('No IDriss Account found');
+        }
+        // Idriss setup end
     </script>
 
 </body>

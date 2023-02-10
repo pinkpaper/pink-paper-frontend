@@ -154,7 +154,7 @@ if(!isset($_SESSION['userAddress'])){
                                     </div>
                                     <div class="form-group mb-3">
                                         <input class="form-control" type="text" name="username" placeholder="Username"
-                                            required value="<?php echo $username ?>">
+                                            required value="<?php echo $username ?>" id="user_username">
                                     </div>
                                     <div class="form-group mb-3">
                                         <input class="form-control" type="hidden" name="metamask_address"
@@ -195,6 +195,11 @@ if(!isset($_SESSION['userAddress'])){
         } else {
             input.attr("type", "password");
         }
+    });
+    $(function() {
+        $('#user_username').keyup(function() {
+            $(this).val($(this).val().replace(/ +?/g, ''));
+        });
     });
     </script>
     <!-- Javascript for view password ends-->

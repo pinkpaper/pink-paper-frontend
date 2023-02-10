@@ -2903,8 +2903,8 @@ $Idriss_username = $fetch_info_author['Idriss_username'];
     async function load() {
         const postUid = $('#postUId').val();
         const ipfs_url = $('#ipfsUrl').val();
-        const projectId = '';
-        const projectSecret = '';
+        const projectId = '2DInI7VLAGEHD8O9MjGjm2HDlo5';
+        const projectSecret = 'f69504cfab98937d3b6bd405d175420a';
         const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
 
         ipfs = IpfsApi({

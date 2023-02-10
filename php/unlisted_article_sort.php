@@ -27,7 +27,7 @@ if (isset($_POST['user_uid'])) {
         while ($row = mysqli_fetch_assoc($result)) {
     ?>
 
-<div class="story-post-card shadow-sm d-flex justify-content-between align-items-center px-3 py-2 mb-3 gap-2">
+<div class="story-post-card shadow-sm d-flex justify-content-between align-items-center px-3 py-2 mb-3 gap-2 flex-column flex-lg-row">
     <div class="d-flex flex-column flex-lg-row">
         <div class="div-width">
             <h5 class="fw-bold text-capitalize mb-1" style="color:var(--text-color);">
@@ -35,7 +35,7 @@ if (isset($_POST['user_uid'])) {
             <p class="text-muted mb-0 articles-dot">
                 <?php echo strip_tags($row['post_content']); ?></p>
         </div>
-        <small class="mx-lg-5 px-lg-5"><?= trim($row['created_at'],"+0530") ?></small>
+        <small class="mx-lg-5 px-lg-5 d-flex justify-content-center align-items-center"><?= trim($row['created_at'],"+0530") ?></small>
     </div>
     <div class="d-flex justify-content-center align-items-center gap-2">
         <a href="edit-story/<?php echo $row['post_id']; ?>" class="text-link-2" role="button"><i
