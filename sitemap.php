@@ -1,21 +1,23 @@
 <?php
 error_reporting(E_ALL);
 
-$con =mysqli_connect('localhost','ether_cms','WL02XE056L5j','ether_cms');
+$con =mysqli_connect('localhost', 'root', 'Test@Pinkpaper2323', 'demo_pinkpaper');
 $stories = $con->query("SELECT post_slug,user_uid FROM stories");
 $username=$con->query("SELECT username,user_uid FROM user_login");
-$baseUrl = "https://content.pinkpaper.xyz/";
-$notification="https://content.pinkpaper.xyz/login-user-mm";
-$reading_list="https://content.pinkpaper.xyz/topic/Blockchain";
+$baseUrl = "http://demo.pinkpaper.xyz/";
+$notification="http://demo.pinkpaper.xyz/notifications";
+$reading_list="http://demo.pinkpaper.xyz/reading-list";
 
 header("Content-Type: application/xml; charset=utf-8");
-echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL; 
-echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">' . PHP_EOL;
+echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
+echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+    ' . PHP_EOL;
 
-$create_story="https://content.pinkpaper.xyz/create-story";
-$all_writer="https://content.pinkpaper.xyz/about-us";
-$tranding_post="https://content.pinkpaper.xyz/contact-us";
-$datetime = new DateTime('now', new DateTimeZone('Asia/Calcutta'));
+    $create_story="http://demo.pinkpaper.xyz/create-story";
+    $all_writer="http://demo.pinkpaper.xyz/all-writers";
+    $tranding_post="http://demo.pinkpaper.xyz/trending-post";
+    $datetime = new DateTime('now', new DateTimeZone('Asia/Calcutta'));
 
     $datetime = $datetime->format(DateTime::ATOM); // output: '2021-01-03T02:30:00+01:00'
 
@@ -115,3 +117,4 @@ $datetime = new DateTime('now', new DateTimeZone('Asia/Calcutta'));
         echo '<priority>0.20</priority>'.PHP_EOL;
         echo '</url>' . PHP_EOL;
     echo '</urlset>' . PHP_EOL;
+?>

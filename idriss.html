@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<h1>Hello this is the test</h1>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi facere molestiae ea suscipit facilis laboriosam assumenda error nisi! Voluptatem cumque in hic vel dolor laborum quos porro, quasi distinctio placeat?</p>
+<body>
+    <script src="https://unpkg.com/idriss-crypto/lib/bundle/global.js"></script>
+    <script>
+        let idriss = new IdrissCrypto.IdrissCrypto();
+        const Authorization = IdrissCrypto.Authorization.CreateOTP();
+        
+        getdata("hello@idriss.xyz");
+        async function getdata(data){
+            const resultEmail = await idriss.resolve(data);
+            console.log(resultEmail);
+        }
+
+
+    </script>
+</body>
+
+</html>

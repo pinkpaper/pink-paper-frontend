@@ -8,13 +8,13 @@
                     <?php
                     $query = "SELECT `stories`.*,`user_login`.`username`, `user_login`.`name`, `user_login`.`profile`,`post_views`.* FROM `stories` 
     INNER JOIN `user_login` ON `stories`.`user_uid` = `user_login`.`user_uid` 
-    INNER JOIN `post_views` ON `stories`.`post_uid`=`post_views`.`post_uid`  WHERE `stories`.`post_status` = 'published' AND `stories`.`unlisted` = 'false'  ORDER BY `post_views`.`post_per_day_views` DESC LIMIT 10";
+    INNER JOIN `post_views` ON `stories`.`post_uid`=`post_views`.`post_uid`  WHERE `stories`.`post_status` = 'published' AND `stories`.`unlisted` = 'false' GROUP BY `stories`.`post_uid` ORDER BY `post_views`.`post_per_day_views` DESC LIMIT 10";
                     $result = mysqli_query($link, $query);
                     if (mysqli_num_rows($result) > 0) {
                         while ($row = mysqli_fetch_assoc($result)) {
                     ?>
                             <div class="swiper-slide">
-                                <div class="card border-0 shadow-sm mb-4">
+                                <div class="card border-0 shadow-sm mb-4" style="height:311.8px;">
                                     <div class="card-img p-2">
                                         <a href="<?php echo $row['username']; ?>/<?php echo $row['post_slug']; ?>">
                                             <?php
@@ -43,14 +43,14 @@
                                             <?php
                                             if ($row['profile'] == '') {
                                                 echo '<div class="profile"><a href="' . $row['username'] . '">
-    <canvas class="avatar-image img-fluid rounded-circle" title="' . $row['name'] . '" width="40" height="40"></canvas>
-</a></div>';
-                                            } else {
-                                                echo '<div class="profile">
-    <a href="' . $row['username'] . '">
-    <img src="uploads/profile/' . $row['profile'] . '" alt="" class="img-fluid rounded-circle">
-    </a>
-    </div>';
+                                                    <canvas class="avatar-image img-fluid rounded-circle" title="' . $row['name'] . '" width="40" height="40"></canvas>
+                                                </a></div>';
+                                                                                            } else {
+                                                                                                echo '<div class="profile">
+                                                    <a href="' . $row['username'] . '">
+                                                    <img src="uploads/profile/' . $row['profile'] . '" alt="" class="img-fluid rounded-circle">
+                                                    </a>
+                                                    </div>';
                                             }
                                             ?>
                                             <div class="author-name ms-2">

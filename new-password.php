@@ -33,24 +33,15 @@ require_once "php/schedule_cron.php";
     <link href="assets/css/app.css" rel="stylesheet">
     <link href="assets/css/loader.css" rel="stylesheet">
 
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-TNWHRNG');</script>
-<!-- End Google Tag Manager -->
 </head>
 
 <body onload="loader()">
- <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TNWHRNG"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 
     <!-- loader start-->
     <div class="loader-container">
-        <div class="loader"></div>
+        <div class="loadingio-spinner-ellipsis-tjmuel5ie5"><div class="ldio-g2ezeznggp">
+<div></div><div></div><div></div><div></div><div></div>
+</div></div>
     </div>
     <!-- loader end-->
 
@@ -131,6 +122,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script type="text/javascript" src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="assets/js/app.js"></script>
+    <script type="text/javascript" src="assets/js/popr/popr.js"></script>
     <script type="text/javascript" src="assets/js/loader.js"></script>
 
     </script>

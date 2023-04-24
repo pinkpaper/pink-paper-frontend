@@ -1,7 +1,20 @@
 <?php
 $request = $_SERVER['REQUEST_URI'];
-$router = str_replace('/pinkpaper-mainnet','',$request);
+//
+// ──────────────────────────────────────────────── I ──────────
+//   :::::: L I V E : :  :   :    :     :        :          :
+// ──────────────────────────────────────────────────────────
+//
 
+// $router = str_replace('/','',$request);
+
+//
+// ────────────────────────────────────────────────────────── I ──────────
+//   :::::: L O C A L H O S T : :  :   :    :     :        :          :
+// ────────────────────────────────────────────────────────────────────
+//
+
+$router = str_replace('/pinkpaper-testnet','',$request);
 
 if($router=='/' || $router=='/home'){
     include('home.php');
@@ -30,13 +43,7 @@ if($router=='/' || $router=='/home'){
 }elseif(preg_match("/[a-zA-Z0-9_-]/i", $router)){
     include('profile.php');
     
-}
-//dashbaord router
-
-//error router
-else{
+}else{
     include('404.php');
     
 }
-
-?>

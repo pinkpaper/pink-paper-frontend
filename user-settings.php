@@ -32,7 +32,6 @@ if ($username != false) {
 } else {
     header('Location: login-user');
 }
-
 ?>
 <?php
 $meta_title = 'Settings';
@@ -58,9 +57,9 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
     <!-- Enter page description -->
     <meta property="og:description" content="<?php echo ($meta_description); ?>...">
     <!-- Enter Logo image URL for example : http://cryptonite.finstreet.in/images/cryptonitepost.png -->
-    <meta property="og:image" itemprop="image" content="https://content.pinkpaper.xyz/assets/images/logo/logo_icon.png" />
-    <meta property="og:image:secure_url" itemprop="image" content="https://content.pinkpaper.xyz/assets/images/logo/logo_icon.png" />
-    <meta name="twitter:card" content="https://content.pinkpaper.xyz/assets/images/logo/logo_icon.png">
+    <meta property="og:image" itemprop="image" content="https://test.pinkpaper.xyz/assets/images/logo/logo_icon.png" />
+    <meta property="og:image:secure_url" itemprop="image" content="https://test.pinkpaper.xyz/assets/images/logo/logo_icon.png" />
+    <meta name="twitter:card" content="https://test.pinkpaper.xyz/assets/images/logo/logo_icon.png">
     <meta property="og:image:width" content="600">
     <meta property="og:image:height" content="315">
 
@@ -98,6 +97,10 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
 
     <link rel='stylesheet' href='https://cdn.quilljs.com/1.2.3/quill.snow.css'>
     <link rel='stylesheet' href='https://cdn.quilljs.com/1.2.3/quill.bubble.css'>
+    <link rel="stylesheet" href="assets/css/medium.css" />
+    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="assets/js/popr/popr.css">
+    <link rel="stylesheet" href="assets/css/croudFundingUI.css">
     <!-- Styling for settings starts -->
     <style type="text/css">
         .left-card {
@@ -185,419 +188,382 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
         }
     </style>
     <!-- Styling for settings ends-->
-    <!-- Google Tag Manager -->
-    <script>
-        (function(w, d, s, l, i) {
-            w[l] = w[l] || [];
-            w[l].push({
-                'gtm.start': new Date().getTime(),
-                event: 'gtm.js'
-            });
-            var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s),
-                dl = l != 'dataLayer' ? '&l=' + l : '';
-            j.async = true;
-            j.src =
-                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-            f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-TNWHRNG');
-    </script>
-    <!-- End Google Tag Manager -->
 </head>
 
 <body onload="loader()">
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TNWHRNG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
 
     <!-- loader start-->
     <div class="loader-container">
-        <div class="loader"></div>
+        <div class="loadingio-spinner-ellipsis-tjmuel5ie5">
+            <div class="ldio-g2ezeznggp">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
     </div>
     <!-- loader end-->
 
     <button id="back-to-top" class="btn btn-lg back-to-top text-white"><i class="fas fa-chevron-up"></i></button>
+    <input type="hidden" name="login_metamask_address" id="login_metamask_address" value="<?= $login_metamask_address ?>">
 
-    <!-- header start-->
-    <?php include('include/header.php'); ?>
-    <!-- header end-->
-<input type="hidden" name="login_metamask_address" id="login_metamask_address" value="<?= $login_metamask_address ?>">
-    <section class="my-5" style="padding-top:50px;">
-        <div class="container">
-            <div class="row-h">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <div>
-                        <h3 class="fw-bold text-capitalize mb-0 text-align d-none d-md-none d-lg-block d-sm-none " style="color:var(--text-color);
-                            margin-left: 82px;">Settings
-                        </h3>
-
-                        <div class="d-flex justify-content-between">
-
-                        </div>
-                    </div>
-                    <div class="about-you">
-                        <h2 class="fw-bold text-capitalize mb-0 text-align=left" style="color:var(--text-color);padding-top:27px;padding-left:11.5vw;
-                            width:100%">About You
-                        </h2>
-                        <hr style="color: gray;padding-left:11.5vw;margin-left:11.5vw">
-                        </hr>
-                    </div>
-                </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-1 d-flex justify-content-center">
+                <!-- side menu include here start -->
+                <?php include('include/side-menu-medium-top.php'); ?>
+                <?php include('include/side-menu-medium.php'); ?>
+                <?php include('include/side-menu-medium-bottom.php'); ?>
+                <!-- side menu include here end -->
             </div>
-
-            <div class="row">
-                <div class="col-4 d-none d-md-none d-lg-block d-sm-none ">
-                    <div class="d-flex justify-content-between align-items-center mb-4 	">
-                        <div>
-                            <ul class="nav nav-tabs flex-column " style="text-align: left;text-decoration:none;margin-left: 92px;">
-
-                                <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="#about-you" style="justify-content:left">About You</a>
-                                </li>
-                                <!-- <li class="nav-item">
-                                    <a class="nav-link " href="#email-section">Email</a>
-                                </li>                                 -->
-                                <li class="nav-item">
-                                    <a class="nav-link " href="#meta-section" tabindex="-1" aria-disabled="true">Metamask Details</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#social-section">Social Settings</a>
-                                </li>
-                            </ul>
+            <div class="col-lg-11 col-md-12 my-5 my-lg-1">
+                <div class="top-panel m-lg-5 mb-0 pb-4 bg-white border-bottom">
+                    <div class="tag-main-wrapper">
+                        <div class="tag-main-inner-wrapper">
+                            <div class="tag-container">
+                                <div class="inner-tag-container">
+                                    <div class="tag-icon-name-div">
+                                        <div class="tag-icon-name-inner-div">
+                                            <div class="y">
+                                                <h1 class="tag-heading">Settings</h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <!-- About You Starts -->
-                <div class="col-8 d-md-block d-lg-block">
-                    <div class="row">
-                        <section id="about-you">
-                            <div class="about-you" href="about-you">
+                <section class="my-5">
+                    <div class="container">
+                        <div class="row">
+                            <!-- About You Starts -->
+                            <div class="col-12 d-md-block d-lg-block">
                                 <div class="row">
-                                    <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <section id="about-you">
+                                        <div class="about-you" href="about-you">
+                                            <div class="row">
+                                                <div class="d-flex justify-content-between align-items-center mb-4">
 
-                                        <h5 class="fw-bold text-capitalize mb-0 text-align" style="color:var(--text-color);">Name
-                                            <p></p>
-                                            <div class=" form-group mb-3">
-                                                <?php
+                                                    <h5 class="fw-bold text-capitalize mb-0 text-align" style="color:var(--text-color);">Name
+                                                        <p></p>
+                                                        <div class=" form-group mb-3">
+                                                            <?php
 
-                                                $query = "SELECT * from `user_login` WHERE`user_login`.`user_uid`='$user_uid' ";
-                                                $result = mysqli_query($link, $query);
-                                                if (mysqli_num_rows($result) > 0) {
-                                                    while ($row = mysqli_fetch_array($result)) {
-                                                ?> <input class="form-control" required readonly id="name" type="text" placeholder="Name" required value="<?php echo $row['name'] ?>">
-                                                        <input type="hidden" id="user_uid" value="<?php echo $user_uid ?>">
+                                                            $query = "SELECT * from `user_login` WHERE`user_login`.`user_uid`='$user_uid' ";
+                                                            $result = mysqli_query($link, $query);
+                                                            if (mysqli_num_rows($result) > 0) {
+                                                                while ($row = mysqli_fetch_array($result)) {
+                                                            ?> <input class="form-control" required readonly id="name" type="text" placeholder="Name" required value="<?php echo $row['name'] ?>">
+                                                                    <input type="hidden" id="user_uid" value="<?php echo $user_uid ?>">
+                                                        </div>
+
+                                                    <?php }
+                                                            } else { ?>
+                                                <?php } ?>
+                                                    </h5>
+                                                    <div class="d-flex justify-content-between">
+
+                                                    </div>
+
+                                                    <div class="inputs d-flex justify-content-between align-items-center mt-4 gap-2">
+                                                        <button class="audience-button " id='cancel' style="visibility: hidden;" type='reset'>Cancel</button>
+                                                        <button class='audience-button' data-role="update" id='submitname' style="visibility: hidden;" type='button'>Save</a>
+                                                            <button class='audience-button' id="edit1">Edit</button>
+                                                    </div>
+
+                                                </div>
                                             </div>
+                                            <div class="row">
+                                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                                    <h5 class="fw-bold text-capitalize mb-0 text-align" style="color:var(--text-color);">Bio
+                                                        <p></p>
+                                                        <div class="form-group mb-3">
+                                                            <input class="form-control" readonly id="Bio" type="text" name="bio" placeholder="Bio" required value="<?php echo $bio ?>">
+                                                        </div>
+                                                    </h5>
+                                                    <div class="d-flex justify-content-between">
 
-                                        <?php }
-                                                } else { ?>
-                                    <?php } ?>
-                                        </h5>
-                                        <div class="d-flex justify-content-between">
+                                                    </div>
+                                                    <div class="inputs d-flex justify-content-between align-items-center mt-4 gap-2">
+                                                        <button class="audience-button" id='cancel2' style="visibility: hidden;" onclick="window.location.replace('user-settings.php')" type='reset'>Cancel</button>
+                                                        <button class='audience-button' id='save2' style="visibility: hidden;" type='submit'>Save</button>
 
-                                        </div>
+                                                        <button class='audience-button' id="edit2">Edit</button>
+                                                    </div>
 
-                                        <div class="inputs d-flex justify-content-between align-items-center mt-4 gap-2">
-                                            <button class="btn button-outline-primary " id='cancel' style="visibility: hidden;" type='reset'>Cancel</button>
-                                            <button class='btn button-outline-primary' data-role="update" id='submitname' style="visibility: hidden;" type='button'>Save</a>
-                                                <button class='btn button-outline-primary' id="edit1">Edit</button>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="d-flex justify-content-between align-items-center mb-4">
-                                        <h5 class="fw-bold text-capitalize mb-0 text-align" style="color:var(--text-color);">Bio
-                                            <p></p>
-                                            <div class="form-group mb-3">
-                                                <input class="form-control" readonly id="Bio" type="text" name="bio" placeholder="Bio" required value="<?php echo $bio ?>">
+                                                </div>
                                             </div>
-                                        </h5>
-                                        <div class="d-flex justify-content-between">
-
-                                        </div>
-                                        <div class="inputs d-flex justify-content-between align-items-center mt-4 gap-2">
-                                            <button class="btn button-outline-primary" id='cancel2' style="visibility: hidden;" onclick="window.location.replace('user-settings.php')" type='reset'>Cancel</button>
-                                            <button class='btn button-outline-primary' id='save2' style="visibility: hidden;" type='submit'>Save</button>
-
-                                            <button class='btn button-outline-primary' id="edit2">Edit</button>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class=" col-12 d-flex justify-content-between align-items-center mb-4">
-                                        <h5 class="fw-bold text-capitalize mb-0 text-align mx-2" style="color:var(--text-color);">Photo
-                                            <p class="fw-bold text-capitalize mb-0 text-align" style="font-size: small;color:grey">Your photo appears on your Profile
-                                                page and<br> with your stories across Medium.
-                                                File type: JPG, PNG or GIF.</p>
-                                        </h5>
-                                        <div>
-                                            <!-- Query for profile picture -->
-                                            <?php
-                                            $query = "SELECT `user_login`.* FROM `user_login` WHERE `user_uid`='$user_uid'";
-                                            $result = mysqli_query($link, $query);
-                                            if (mysqli_num_rows($result) > 0) {
-                                                while ($row = mysqli_fetch_assoc($result)) {
-                                                    if ($row['profile'] == '') {
-                                                        echo '<div class="profile">
+                                            <div class="row">
+                                                <div class=" col-12 d-flex justify-content-between align-items-center mb-4">
+                                                    <h5 class="fw-bold text-capitalize mb-0 text-align mx-2" style="color:var(--text-color);">Photo
+                                                        <p class="fw-bold text-capitalize mb-0 text-align" style="font-size: small;color:grey">Your photo appears on
+                                                            your Profile
+                                                            page and<br> with your stories across Medium.
+                                                            File type: JPG, PNG or GIF.</p>
+                                                    </h5>
+                                                    <div>
+                                                        <!-- Query for profile picture -->
+                                                        <?php
+                                                        $query = "SELECT `user_login`.* FROM `user_login` WHERE `user_uid`='$user_uid'";
+                                                        $result = mysqli_query($link, $query);
+                                                        if (mysqli_num_rows($result) > 0) {
+                                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                                if ($row['profile'] == '') {
+                                                                    echo '<div class="profile">
                                                     <a href="' . $row['username'] . '">
                                                     <canvas class="avatar-image img-fluid rounded-circle" title="' . $row['name'] . '" width="40" height="40"></canvas>
 
                                                     </a>
                                                 </div>';
-                                                    } else {
-                                                        echo '<div class="profile" style="width:6rem;height:6rem;">
+                                                                } else {
+                                                                    echo '<div class="profile" style="width:6rem;height:6rem;">
                                                     <a href="' . $row['username'] . '">
                                                         <img src="uploads/profile/' . $row['profile'] . '" alt="" class="img-fluid rounded-circle">
                                                     </a>
                                                 </div>';
-                                                    }
-                                                }
-                                            }
-                                            ?>
-                                            <!-- Query for profile picture ends-->
-                                        </div>
-
-
-                                    </div>
-                                    <div class="col-12 d-flex justify-content-end align-items-center">
-                                        <form action="upload.php" method="post" enctype="multipart/form-data" style="justify-content:space-between;" class="align-items-center d-flex form justify-content-center">
-                                            <input type="file" name="fileToUpload" id="fileToUpload" style="display: inline-block;font-weight: 200;line-height: 1.5;justify-content:space-between;margin-left: 15px;visibility: hidden;width: 90%;
-                                        ">
-                                            <input class="btn button-outline-primary" type="submit" value="Upload Image" name="submit" id="upload" style="display: inline-block;font-weight: 200;line-height: 1;justify-content:space-between;margin-left: 55px;visibility: hidden;">
-                                        </form>
-                                        <button id="edit6" class="btn button-outline-primary">Edit</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                        <!-- Metamask Details starts -->
-                        <section id="meta-section">
-                            <div class="meta-section"> <?php
-                                                        $query = "SELECT * from `metamask_details` WHERE`metamask_details`.`user_uid`='$user_uid' ";
-                                                        $result = mysqli_query($link, $query);
-                                                        if (mysqli_num_rows($result) > 0) {
+                                                                }
+                                                            }
+                                                        }
                                                         ?>
+                                                        <!-- Query for profile picture ends-->
+                                                    </div>
 
-                                    <div class="row">
-                                        <div class="d-flex justify-content-between align-items-center mb-4 col-sm-12">
-                                            <div class="security-settings">
-                                                <h2 class="fw-bold text-capitalize mb-0 text-align" style="color:var(--text-color);">Account Details
-                                                </h2>
-                                                <hr style="color: gray; width:29vw;padding-left: 15vw;">
-                                                </hr>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row d-flex justify-content-center align-items-end">
-                                        <div class="col-lg-12 col-md-12 col-sm-12">
-                                            <small class="mb-4 d-block">You can recieve
-                                                donation on these accounts from users.
-                                            </small>
-                                        </div>
-                                        <div class="col-lg-6 col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <label for="email" class="fw-bold text-capitalize mb-0 text-align=left">Meta
-                                                    Address</label>
 
-                                                <?php
+                                                </div>
+                                                <div class="col-12 d-flex justify-content-end align-items-center">
+                                                    <form action="upload.php" method="post" enctype="multipart/form-data" style="justify-content:space-between;" class="align-items-center d-flex form justify-content-center">
+                                                        <input type="file" name="fileToUpload" id="fileToUpload" style="display: inline-block;font-weight: 200;line-height: 1.5;justify-content:space-between;margin-left: 15px;visibility: hidden;width: 90%;
+                                        ">
+                                                        <input class="audience-button" type="submit" value="Upload Image" name="submit" id="upload" style="display: inline-block;font-weight: 200;line-height: 1;justify-content:space-between;margin-left: 55px;visibility: hidden;">
+                                                    </form>
+                                                    <button id="edit6" class="audience-button">Edit</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <!-- Metamask Details starts -->
+                                    <section id="meta-section">
+                                        <div class="meta-section"> <?php
+                                                                    $query = "SELECT * from `metamask_details` WHERE`metamask_details`.`user_uid`='$user_uid' ";
+                                                                    $result = mysqli_query($link, $query);
+                                                                    if (mysqli_num_rows($result) > 0) {
+                                                                    ?>
+                                                <div class="row">
+                                                    <div class="d-flex justify-content-between align-items-center mb-4 col-sm-12">
+                                                        <div class="security-settings">
+                                                            <h2 class="fw-bold text-capitalize mb-0 text-align" style="color:var(--text-color);">Account Details
+                                                            </h2>
+                                                            <hr style="color: gray; width:29vw;padding-left: 15vw;">
+                                                            </hr>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row d-flex justify-content-center align-items-end">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        <small class="mb-4 d-block">You can recieve
+                                                            donation on these accounts from users.
+                                                        </small>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-12 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label for="email" class="fw-bold text-capitalize mb-0 text-align=left">Meta
+                                                                Address</label>
 
-                                                            $query = "SELECT * from `metamask_details` WHERE`metamask_details`.`user_uid`='$user_uid' ";
-                                                            $result = mysqli_query($link, $query);
-                                                            if (mysqli_num_rows($result) > 0) {
-                                                                while ($row = mysqli_fetch_array($result)) {
-                                                ?>
-                                                        <input class="form-control" required readonly id="maddress" name="maddress" type="text" value="<?php echo $row['eth_metamask_address'] ?>">
-                                                        <input type="hidden" id="user_uid" value="<?php echo $user_uid ?>">
-                                                <?php
-                                                                }
-                                                            } ?>
+                                                            <?php
+
+                                                                        $query = "SELECT * from `metamask_details` WHERE`metamask_details`.`user_uid`='$user_uid' ";
+                                                                        $result = mysqli_query($link, $query);
+                                                                        if (mysqli_num_rows($result) > 0) {
+                                                                            while ($row = mysqli_fetch_array($result)) {
+                                                            ?>
+                                                                    <input class="form-control" required readonly id="maddress" name="maddress" type="text" value="<?php echo $row['eth_metamask_address'] ?>">
+                                                                    <input type="hidden" id="user_uid" value="<?php echo $user_uid ?>">
+                                                            <?php
+                                                                            }
+                                                                        } ?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-12 col-sm-12">
+                                                        <div class="inputs-1 d-flex  justify-content-end gap-2">
+                                                            <button class="audience-button" id='cancel8' style="visibility: hidden;" type='reset' onclick="window.location.replace('user-settings.php')">Cancel</button>
+                                                            <button class='audience-button' data-role="update" id='save8' style="visibility: hidden;" type='button'>Save</button>
+                                                            <button class='audience-button' id="edit8">Edit</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-12 col-sm-12 mt-4">
+                                                        <div class="form-group">
+                                                            <label for="email" class="fw-bold text-capitalize mb-0 text-align=left">Neo
+                                                                Address</label>
+                                                            <?php
+                                                                        $query = "SELECT * from `metamask_details` WHERE`metamask_details`.`user_uid`='$user_uid' ";
+                                                                        $result = mysqli_query($link, $query);
+                                                                        if (mysqli_num_rows($result) > 0) {
+                                                                            while ($row = mysqli_fetch_array($result)) {
+                                                            ?>
+                                                                    <input class="form-control" required readonly id="naddress" name="naddress" type="text" value="<?php echo $row['neo_address'] ?>">
+                                                                    <input type="hidden" id="user_uid" value="<?php echo $user_uid ?>">
+                                                            <?php
+                                                                            }
+                                                                        } ?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-12 col-sm-12">
+                                                        <div class="inputs-1 d-flex  justify-content-end gap-2">
+                                                            <button class="audience-button" id='cancel88' style="visibility: hidden;" type='reset' onclick="window.location.replace('user-settings.php')">Cancel</button>
+                                                            <button class='audience-button' data-role="update" id='save88' style="visibility: hidden;" type='button'>Save</button>
+                                                            <button class='audience-button' id="edit88">Edit</button>
+                                                        </div>
+                                                    </div>
+                                                    <!-- IDriss Account -->
+                                                    <div class="col-lg-6 col-md-12 col-sm-12 mt-4">
+                                                        <div class="form-group">
+                                                            <label for="email" class="fw-bold text-capitalize mb-1 text-align=left d-flex align-items-center">IDriss Username<img src="assets/images/Idriss.png" style="height:1.2rem;margin-left:5px;display:none;" id="Idriss_img_id"></label>
+                                                            <?php
+                                                                        $query = "SELECT * from `metamask_details` WHERE`metamask_details`.`user_uid`='$user_uid' ";
+                                                                        $result = mysqli_query($link, $query);
+                                                                        if (mysqli_num_rows($result) > 0) {
+                                                                            while ($row = mysqli_fetch_array($result)) {
+                                                            ?>
+                                                                    <input class="form-control" required readonly id="IDrissaddress" name="IDrissaddress" type="text" value="<?php echo $row['Idriss_username'] ?>" placeholder="email | mobile | twitter username">
+                                                                    <input type="hidden" id="user_uid" value="<?php echo $user_uid ?>">
+                                                            <?php
+                                                                            }
+                                                                        } ?>
+                                                        <small class="text-primary my-2 py-2" style="font-size: 12px;">Note: This field will be auto filled when your wallet address is connected with Idriss Account.</small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-12 col-sm-12">
+                                                        <!-- <div class="inputs-1 d-flex  justify-content-end gap-2">
+                                                            <button class="audience-button" id='cancel888' style="visibility: hidden;" type='reset' onclick="window.location.replace('user-settings.php')">Cancel</button>
+                                                            <button class='audience-button' data-role="update" id='save888' style="visibility: hidden;" type='button'>Save</button>
+                                                            <button class='audience-button' id="edit888">Edit</button>
+                                                        </div> -->
+                                                    </div>
+                                                </div>
+                                                <div class="row d-flex justify-content-center align-items-end">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label for="meta" class="fw-bold text-capitalize mb-0 text-align=left">Account
+                                                                Status</label>
+                                                            <?php
+                                                                        $query = "SELECT * from `metamask_details` WHERE`metamask_details`.`user_uid`='$user_uid' ";
+                                                                        $result = mysqli_query($link, $query);
+                                                                        if (mysqli_num_rows($result) > 0) {
+                                                                            while ($row = mysqli_fetch_array($result)) {
+                                                                                $status_now = $row['meta_status'];
+                                                                                if ($row['meta_status'] == "active") {
+                                                                                    $meta_stat = "<button type=\"button\" class=\"user-profile-follow-button\" style=\"margin-top:5px;\">Active Account</button> <input type=\"hidden\" name=\"meta_status_check\" id=\"meta_status_check\" value=\"$status_now\" />";
+                                                                                } else {
+                                                                                    $meta_stat = "<button type=\"button\" class=\"user-profile-follow-button\" style=\"margin-top:5px;\">Inactive Account</button> <input type=\"hidden\" name=\"meta_status_check\" id=\"meta_status_check\" value=\"$status_now\" />";
+                                                                                }
+                                                            ?>
+                                                                    <br>
+                                                                    <?php echo $meta_stat;  ?>
+                                                        </div>
+                                                    <?php }
+                                                                        } else { ?>
+                                                <?php } ?>
+                                                    </div>
+                                                </div>
+                                            <?php } ?>
+                                        </div>
+
+                                    </section>
+                                    <!-- Metamask Details end -->
+                                    <!-- Social starts -->
+                                    <section id="social-section">
+                                        <div class="social-section mt-5">
+                                            <div class="row">
+                                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                                    <div class="email-settings">
+                                                        <h2 class="fw-bold text-capitalize mb-0 text-align=left" style="color:var(--text-color);">Social Settings
+                                                        </h2>
+                                                        <hr style="color: gray; width:29vw;padding-left: 15vw;">
+                                                        </hr>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                                    <h5 class="fw-bold text-capitalize mb-0 text-align" style="color:var(--text-color);">Twitter
+                                                        <p></p>
+                                                        <div class="form-group mb-3">
+                                                            <input class="form-control" type="text" readonly id="social-twitter" name="twitter_url" placeholder="Enter Twitter full account url" required value="<?php echo $twitter_url ?>">
+                                                        </div>
+                                                    </h5>
+                                                    <div class="d-flex justify-content-between"></div>
+                                                    <div class="inputs d-flex justify-content-between align-items-center mt-4 gap-2">
+                                                        <button class="audience-button" id='cancel-twitter' style="visibility: hidden;" type='reset' onclick="window.location.replace('user-settings.php')">Cancel</button>
+                                                        <button class='audience-button' id='save-twitter' style="visibility: hidden;" type='submit'>Save</button>
+
+                                                        <button class='audience-button' id="edit-twitter">Edit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                                    <h5 class="fw-bold text-capitalize mb-0 text-align" style="color:var(--text-color);">Instagram
+                                                        <p></p>
+                                                        <div class="form-group mb-3">
+                                                            <input class="form-control" type="text" readonly id="social-instagram" name="instagram_url" placeholder="Enter Instagram full account url" required value="<?php echo $instagram_url ?>">
+                                                        </div>
+                                                    </h5>
+                                                    <div class="d-flex justify-content-between"></div>
+                                                    <div class="inputs d-flex justify-content-between align-items-center mt-4 gap-2">
+                                                        <button class="audience-button" id='cancel-instagram' style="visibility: hidden;" type='reset' onclick="window.location.replace('user-settings.php')">Cancel</button>
+                                                        <button class='audience-button' id='save-instagram' style="visibility: hidden;" type='submit'>Save</button>
+
+                                                        <button class='audience-button' id="edit-instagram">Edit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                                    <h5 class="fw-bold text-capitalize mb-0 text-align" style="color:var(--text-color);">LinkedIn
+                                                        <p></p>
+                                                        <div class="form-group mb-3">
+                                                            <input class="form-control" type="text" readonly id="social-linkedin" name="linkedin_url" placeholder="Enter Linkedin full account url" required value="<?php echo $linkedin_url ?>">
+                                                        </div>
+                                                    </h5>
+                                                    <div class="d-flex justify-content-between"></div>
+                                                    <div class="inputs d-flex justify-content-between align-items-center mt-4 gap-2">
+                                                        <button class="audience-button" id='cancel-linkedin' style="visibility: hidden;" type='reset' onclick="window.location.replace('user-settings.php')">Cancel</button>
+                                                        <button class='audience-button' id='save-linkedin' style="visibility: hidden;" type='submit'>Save</button>
+
+                                                        <button class='audience-button' id="edit-linkedin">Edit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                                    <h5 class="fw-bold text-capitalize mb-0 text-align" style="color:var(--text-color);">Facebook
+                                                        <p></p>
+                                                        <div class="form-group mb-3">
+                                                            <input class="form-control" type="text" readonly id="social-facebook" name="facebook_url" placeholder="Enter Facebook full account url" required value="<?php echo $facebook_url ?>">
+                                                        </div>
+                                                    </h5>
+                                                    <div class="d-flex justify-content-between"></div>
+                                                    <div class="inputs d-flex justify-content-between align-items-center mt-4 gap-2">
+                                                        <button class="audience-button" id='cancel-facebook' style="visibility: hidden;" type='reset' onclick="window.location.replace('user-settings.php')">Cancel</button>
+                                                        <button class='audience-button' id='save-facebook' style="visibility: hidden;" type='submit'>Save</button>
+
+                                                        <button class='audience-button' id="edit-facebook">Edit</button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 col-md-12 col-sm-12">
-                                            <div class="inputs-1 d-flex  justify-content-end">
-                                                <button class="btn button-outline-primary" id='cancel8' style="visibility: hidden;" type='reset' onclick="window.location.replace('user-settings.php')">Cancel</button>
-                                                <button class='btn button-outline-primary' data-role="update" id='save8' style="visibility: hidden;" type='button'>Save</button>
-                                                <button class='btn button-outline-primary' id="edit8">Edit</button>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-12 col-sm-12 mt-4">
-                                            <div class="form-group">
-                                                <label for="email" class="fw-bold text-capitalize mb-0 text-align=left">Neo
-                                                    Address</label>
-                                                <?php
-                                                            $query = "SELECT * from `metamask_details` WHERE`metamask_details`.`user_uid`='$user_uid' ";
-                                                            $result = mysqli_query($link, $query);
-                                                            if (mysqli_num_rows($result) > 0) {
-                                                                while ($row = mysqli_fetch_array($result)) {
-                                                ?>
-                                                        <input class="form-control" required readonly id="naddress" name="maddress" type="text" value="<?php echo $row['neo_address'] ?>">
-                                                        <input type="hidden" id="user_uid" value="<?php echo $user_uid ?>">
-                                                <?php
-                                                                }
-                                                            } ?>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-12 col-sm-12">
-                                            <div class="inputs-1 d-flex  justify-content-end">
-                                                <button class="btn button-outline-primary" id='cancel88' style="visibility: hidden;" type='reset' onclick="window.location.replace('user-settings.php')">Cancel</button>
-                                                <button class='btn button-outline-primary' data-role="update" id='save88' style="visibility: hidden;" type='button'>Save</button>
-                                                <button class='btn button-outline-primary' id="edit88">Edit</button>
-                                            </div>
-                                        </div>
-                                        <!-- IDriss Account -->
-                                        <div class="col-lg-6 col-md-12 col-sm-12 mt-4">
-                                            <div class="form-group">
-                                                <label for="email" class="fw-bold text-capitalize mb-0 text-align=left">IDriss Username</label>
-                                                <?php
-                                                            $query = "SELECT * from `metamask_details` WHERE`metamask_details`.`user_uid`='$user_uid' ";
-                                                            $result = mysqli_query($link, $query);
-                                                            if (mysqli_num_rows($result) > 0) {
-                                                                while ($row = mysqli_fetch_array($result)) {
-                                                ?>
-                                                        <input class="form-control" required readonly id="IDrissaddress" name="IDrissaddress" type="text" value="<?php echo $row['Idriss_username'] ?>" placeholder="email | mobile | twitter username">
-                                                        <input type="hidden" id="user_uid" value="<?php echo $user_uid ?>">
-                                                <?php
-                                                                }
-                                                            } ?>
-                                                <small class="text-primary my-2 py-2" style="font-size: 12px;">Note: This field will be auto filled when your wallet address is connected with Idriss Account.</small>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-12 col-sm-12">
-                                            <!-- <div class="inputs-1 d-flex  justify-content-end gap-2">
-                                                <button class="btn button-outline-primary" id='cancel888' style="visibility: hidden;" type='reset' onclick="window.location.replace('user-settings.php')">Cancel</button>
-                                                <button class='btn button-outline-primary' data-role="update" id='save888' style="visibility: hidden;" type='button'>Save</button>
-                                                <button class='btn button-outline-primary' id="edit888">Edit</button>
-                                            </div> -->
-                                        </div>
-                                    </div>
-                                    <div class="row d-flex justify-content-center align-items-end">
-                                        <div class="col-lg-12 col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <label for="meta" class="fw-bold text-capitalize mb-0 text-align=left">Account
-                                                    Status</label>
-                                                <?php
-                                                            $query = "SELECT * from `metamask_details` WHERE`metamask_details`.`user_uid`='$user_uid' ";
-                                                            $result = mysqli_query($link, $query);
-                                                            if (mysqli_num_rows($result) > 0) {
-                                                                while ($row = mysqli_fetch_array($result)) {
-                                                                    $status_now = $row['meta_status'];
-                                                                    if ($row['meta_status'] == "active") {
-                                                                        $meta_stat = "<button type=\"button\" class=\"follow_btn btn button-follow fw-bold\" style=\"margin-top:5px;\">Active Account</button> <input type=\"hidden\" name=\"meta_status_check\" id=\"meta_status_check\" value=\"$status_now\" />";
-                                                                    } else {
-                                                                        $meta_stat = "<button type=\"button\" class=\"follow_btn btn button-follow fw-bold\" style=\"margin-top:5px;\">Inactive Account</button> <input type=\"hidden\" name=\"meta_status_check\" id=\"meta_status_check\" value=\"$status_now\" />";
-                                                                    }
-                                                ?>
-                                                        <br>
-                                                        <?php echo $meta_stat;  ?>
-                                            </div>
-                                        <?php }
-                                                            } else { ?>
-                                    <?php } ?>
-                                        </div>
-                                    </div>
-                                <?php } ?>
+                                    </section>
+                                    <!-- Social Ends -->
+                                </div>
                             </div>
-
-                        </section>
-                        <!-- Metamask Details end -->
-                        <!-- Social starts -->
-                        <section id="social-section">
-                            <div class="social-section mt-5">
-                                <div class="row">
-                                    <div class="d-flex justify-content-between align-items-center mb-4">
-                                        <div class="email-settings">
-                                            <h2 class="fw-bold text-capitalize mb-0 text-align=left" style="color:var(--text-color);">Social Settings
-                                            </h2>
-                                            <hr style="color: gray; width:29vw;padding-left: 15vw;">
-                                            </hr>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="d-flex justify-content-between align-items-center mb-4">
-                                        <h5 class="fw-bold text-capitalize mb-0 text-align" style="color:var(--text-color);">Twitter
-                                            <p></p>
-                                            <div class="form-group mb-3">
-                                                <input class="form-control" type="text" readonly id="social-twitter" name="twitter_url" placeholder="Enter Twitter full account url" required value="<?php echo $twitter_url ?>">
-                                            </div>
-                                        </h5>
-                                        <div class="d-flex justify-content-between"></div>
-                                        <div class="inputs d-flex justify-content-between align-items-center mt-4 gap-2">
-                                            <button class="btn button-outline-primary" id='cancel-twitter' style="visibility: hidden;" type='reset' onclick="window.location.replace('user-settings.php')">Cancel</button>
-                                            <button class='btn button-outline-primary' id='save-twitter' style="visibility: hidden;" type='submit'>Save</button>
-
-                                            <button class='btn button-outline-primary' id="edit-twitter">Edit</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="d-flex justify-content-between align-items-center mb-4">
-                                        <h5 class="fw-bold text-capitalize mb-0 text-align" style="color:var(--text-color);">Instagram
-                                            <p></p>
-                                            <div class="form-group mb-3">
-                                                <input class="form-control" type="text" readonly id="social-instagram" name="instagram_url" placeholder="Enter Instagram full account url" required value="<?php echo $instagram_url ?>">
-                                            </div>
-                                        </h5>
-                                        <div class="d-flex justify-content-between"></div>
-                                        <div class="inputs d-flex justify-content-between align-items-center mt-4 gap-2">
-                                            <button class="btn button-outline-primary" id='cancel-instagram' style="visibility: hidden;" type='reset' onclick="window.location.replace('user-settings.php')">Cancel</button>
-                                            <button class='btn button-outline-primary' id='save-instagram' style="visibility: hidden;" type='submit'>Save</button>
-
-                                            <button class='btn button-outline-primary' id="edit-instagram">Edit</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="d-flex justify-content-between align-items-center mb-4">
-                                        <h5 class="fw-bold text-capitalize mb-0 text-align" style="color:var(--text-color);">LinkedIn
-                                            <p></p>
-                                            <div class="form-group mb-3">
-                                                <input class="form-control" type="text" readonly id="social-linkedin" name="linkedin_url" placeholder="Enter Linkedin full account url" required value="<?php echo $linkedin_url ?>">
-                                            </div>
-                                        </h5>
-                                        <div class="d-flex justify-content-between"></div>
-                                        <div class="inputs d-flex justify-content-between align-items-center mt-4 gap-2">
-                                            <button class="btn button-outline-primary" id='cancel-linkedin' style="visibility: hidden;" type='reset' onclick="window.location.replace('user-settings.php')">Cancel</button>
-                                            <button class='btn button-outline-primary' id='save-linkedin' style="visibility: hidden;" type='submit'>Save</button>
-
-                                            <button class='btn button-outline-primary' id="edit-linkedin">Edit</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="d-flex justify-content-between align-items-center mb-4">
-                                        <h5 class="fw-bold text-capitalize mb-0 text-align" style="color:var(--text-color);">Facebook
-                                            <p></p>
-                                            <div class="form-group mb-3">
-                                                <input class="form-control" type="text" readonly id="social-facebook" name="facebook_url" placeholder="Enter Facebook full account url" required value="<?php echo $facebook_url ?>">
-                                            </div>
-                                        </h5>
-                                        <div class="d-flex justify-content-between"></div>
-                                        <div class="inputs d-flex justify-content-between align-items-center mt-4 gap-2">
-                                            <button class="btn button-outline-primary" id='cancel-facebook' style="visibility: hidden;" type='reset' onclick="window.location.replace('user-settings.php')">Cancel</button>
-                                            <button class='btn button-outline-primary' id='save-facebook' style="visibility: hidden;" type='submit'>Save</button>
-
-                                            <button class='btn button-outline-primary' id="edit-facebook">Edit</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                        <!-- Social Ends -->
-                    </div>
-                </div>
+                        </div>
+                </section>
             </div>
-    </section>
-
-
-
-
-
-    <!-- footer start-->
-    <?php include('include/footer.php'); ?>
-    <!-- footer end-->
-
+        </div>
+    </div>
 
 
     <!-- script -->
@@ -614,6 +580,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
     <script src="assets/tagify/jQuery.tagify.min.js"></script>
     <script src="assets/toastr/toastr.min.js"></script>
     <script type="text/javascript" src="assets/js/app.js"></script>
+    <script type="text/javascript" src="assets/js/popr/popr.js"></script>
     <script type="text/javascript" src="assets/js/loader.js"></script>
     <script src="https://unpkg.com/idriss-crypto/lib/bundle/global.js"></script>
     <script>
@@ -896,6 +863,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
                 save.style.visibility = "visible";
                 cancel.style.visibility = "visible";
             });
+
 
             $('#edit888').click(function() {
                 $('#IDrissaddress').focus($('#IDrissaddress').css({
@@ -1511,6 +1479,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
 
                 }
             });
+
             $('#save888').on('click', function(event) {
 
                 event.preventDefault();
@@ -1570,6 +1539,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
 
                 }
             });
+
         });
     </script>
     <script>
@@ -2122,11 +2092,17 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
 
         // Idriss setup start
         const IDrissUsernameData = ($('#login_metamask_address').val()).trim().toString();
+        // const IDrissUsernameData = '0x995945Fb74e0f8e345b3f35472c3e07202Eb38Ac';
         if (IDrissUsernameData !== '' && IDrissUsernameData) {
             let idriss = new IdrissCrypto.IdrissCrypto();
             getdata(IDrissUsernameData);
             async function getdata(data) {
                 const resultAccount = await idriss.reverseResolve(data);
+                if(resultAccount !== ''){                    
+                    $('#Idriss_img_id').css('display','block');
+                }else{
+                    $('#Idriss_img_id').css('display','none');
+                }
                 $('#IDrissaddress').val(resultAccount);
                 setIDrissAccount();
                 if (resultAccount['0'] === '@') {

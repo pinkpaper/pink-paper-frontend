@@ -5,30 +5,87 @@ if (mysqli_connect_error()) {
 }
 if (isset($_POST['row'])) {
     $start = $_POST['row'];
-    $limit = 2;
-    $query = "SELECT * FROM `stories` WHERE `post_status` = 'schedule' AND `unlisted` = 'false' ORDER BY post_id DESC LIMIT " . $start . "," . $limit;
+    $limit = 10;
+    $query = "SELECT `stories`.*,`user_login`.`username`, `user_login`.`name`, `user_login`.`profile`
+    FROM `stories` INNER JOIN `user_login` ON `stories`.`user_uid` = `user_login`.`user_uid`
+    WHERE `post_status` = 'schedule' AND `unlisted` = 'false' ORDER BY post_id DESC LIMIT " . $start . "," . $limit;
     $result = mysqli_query($link, $query);
+    $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
     if ($result->num_rows > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
+            $trim_url = (explode("/", $_SERVER['REQUEST_URI']));
+            $copy_url = $actual_link . "/" . $row['username'] . "/" . $row['post_slug'];
 ?>
-            <div class="story-post-card shadow-sm d-flex justify-content-between align-items-center px-3 py-2 mb-3 gap-2 flex-column flex-lg-row">
-                <div class="d-flex flex-column flex-lg-row">
-                    <div class="div-width">
-                        <h5 class="fw-bold text-capitalize mb-1 text-truncate" style="color:var(--text-color);">
-                            <?php echo $row['post_title']; ?></h5>
-                        <p class="text-muted mb-0 articles-dot">
-                            <?php echo strip_tags($row['post_content']); ?></p>
+            <div class="stories-top-panel-heading-container-div-wrapper">
+                <div class="stories-top-panel-heading-container-div-inner">
+                    <h3 class="stories-top-panel-heading-container-div-heading">
+                        <a rel="noopener follow"><?php echo $row['post_title']; ?></a>
+                    </h3>
+                    <div class="stories-top-panel-heading-container-div-div">
+                        <h3 class="stories-top-panel-heading-container-div-div-heading">
+                            <a rel="noopener follow"><?php echo strip_tags($row['post_content']); ?></a>
+                        </h3>
                     </div>
-                    <small class="mx-lg-5 px-lg-5 d-flex justify-content-center align-items-center"><?= trim($row['created_at'], "+0530") ?></small>
                 </div>
-                <div class="stories-panel-date-div mx-4 d-flex justify-content-center align-items-center">
-                    <small class="bg-light text-black-50" style="padding: 0.1rem 0.5rem;border-radius: 10px;font-size: 12px;">Schedule Time</small>
-                    <span class="stories-panel-date-div-span text-warning mx-2" style="font-size: 14px;"><?= trim($row['schedule_time'], "") ?></span>
-                </div>
-                <div class="d-flex justify-content-center align-items-center gap-2">
-                    <a id="copy_url" data-clipboard-text="<?= $actual_link ?>/<?php echo $row['username']; ?>/<?php echo $row['post_slug']; ?>" class="text-link-2" role="button"><i class="icon-docs"></i></a>
-                    <a href="edit-story/<?php echo $row['post_id']; ?>" class="text-link-2" role="button"><i class="icon-note"></i></a>
-                    <button class="btn text-link-2 p-0" role="button" onClick="del('<?php echo $row['post_uid']; ?>')"><i class="icon-trash"></i></button>
+                <div class="stories-panel-date-wrapper">
+                    <div class="stories-panel-date-inner">
+                        <div class="stories-panel-date-div">
+                            <span class="stories-panel-date-div-span"><?= trim($row['created_at'], "+0530") ?></span>
+                        </div>
+                        <div class="stories-panel-date-div mx-4">
+                            <small class="bg-light text-black-50" style="padding: 0.1rem 0.5rem;border-radius: 10px;font-size: 12px;">Schedule Time</small>
+                            <span class="stories-panel-date-div-span text-warning mx-2"><?= trim($row['schedule_time'], "") ?></span>
+                        </div>
+                        <div class="stories-panel-date-dot" aria-hidden="true">
+                            <span class="stories-panel-date-dot-span" aria-hidden="true">
+                                <span class="stories-panel-date-div-span">·</span>
+                                <span class="stories-panel-date-div-span">
+                                    <?php
+                                    $mycontent = $row['post_content'];
+                                    $word = str_word_count(strip_tags($mycontent));
+                                    $m = floor($word / 200);
+                                    $s = floor($word % 200 / (200 / 60));
+                                    //$readtime = $m . ' min' . ($m == 1 ? '' : 's') . ', ' . $s . ' sec' . ($s == 1 ? '' : 's');
+                                    if ($m >= '1') {
+                                        echo $m . ' min' . ($m == 1 ? '' : 's') . ' read';
+                                    } else if ($m <= '1') {
+                                        echo $s . ' sec' . ($s == 1 ? '' : 's') . ' read';
+                                    }
+                                    ?>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="stories-panel-date-div mx-4">
+                            <small class="bg-light text-black-50" style="padding: 0.1rem 0.5rem;border-radius: 10px;font-size: 12px;">Schedule Time</small>
+                            <span class="stories-panel-date-div-span text-warning mx-2"><?= trim($row['schedule_time'], "") ?></span>
+                        </div>
+                    </div>
+                    <div class="stories-panel-date-button-wrapper">
+                        <?php
+                        if ($row['is_croudfunded'] === 'true') {
+                        ?>
+                            <div class="stories-panel-date-button-inner mx-2" aria-hidden="false" aria-describedby="yourStoryActionsMenu" aria-labelledby="yourStoryActionsMenu">
+                                <a href="#" class="text-link-2 mb-1" role="button">
+                                    <span class="withdraw">withdraw</span>
+                                </a>
+                            </div>
+                        <?php } ?>
+                        <div class="stories-panel-date-button-inner mx-2" aria-hidden="false" aria-describedby="yourStoryActionsMenu" aria-labelledby="yourStoryActionsMenu">
+                            <a id="copy_url" data-clipboard-text="<?= $copy_url ?>" class="text-link-2" role="button">
+                                <i class="icon-docs"></i>
+                            </a>
+                        </div>
+                        <div class="stories-panel-date-button-inner mx-2" aria-hidden="false" aria-describedby="yourStoryActionsMenu" aria-labelledby="yourStoryActionsMenu">
+                            <a href="edit-story/<?php echo $row['post_id']; ?>" class="text-link-2" role="button">
+                                <i class="icon-note"></i>
+                            </a>
+                        </div>
+                        <div class="stories-panel-date-button-inner mx-2" aria-hidden="false" aria-describedby="yourStoryActionsMenu" aria-labelledby="yourStoryActionsMenu">
+                            <button class="stories-panel-date-button-inner-button" aria-controls="yourStoryActionsMenu" aria-expanded="false" onClick="del('<?php echo $row['post_uid']; ?>')">
+                                <i class="icon-trash"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 <?php }

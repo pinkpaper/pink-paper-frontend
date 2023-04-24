@@ -24,6 +24,46 @@ $(function () {
     });
 });
 
+$(document).ready(function() {
+     $('.popr').popr();
+});
+
+$(document).on('click', '#feugait', function () {                
+     alert('Feugait');
+});
+
+function toggleMenuButton() {
+    $('#menu-uppper-toggle-layer').toggleClass('show-menu-active');
+}
+
+function toggleMenuButtonMobile() {
+    $('#mobile_full_screen_menu').toggleClass('show-menu-active');
+}
+
+$(document).ready(function () {
+    var input = document.getElementById("searchtext");
+    input.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            search();
+        }
+    });
+    var input2 = document.getElementById("searchtext2");
+    input2.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            search2();
+        }
+    });
+});
+function search() {
+    var a = $('#searchtext').val();
+    window.location.href = "search/" + a;
+}
+function search2() {
+    var a = $('#searchtext2').val();
+    window.location.href = "search/" + a;
+}
 
 $(window).scroll(function () {
     if ($(this).scrollTop() > 50) {
@@ -91,7 +131,7 @@ function switchTheme(e) {
     }
 }
 
-toggleSwitch.addEventListener('change', switchTheme, false);
+// toggleSwitch.addEventListener('change', switchTheme, false);
 
 
 
@@ -271,3 +311,7 @@ function login() {
 //     }
 // }
 /* ------------------------ switch network code end ----------------------- */
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+});

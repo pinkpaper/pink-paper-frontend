@@ -1,0 +1,1 @@
+neoContract = '0x4c284d15ffe73a39b407e5d2bcfb421af3c2dd01';

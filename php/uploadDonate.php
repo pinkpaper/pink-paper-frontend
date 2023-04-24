@@ -31,37 +31,37 @@ if (isset($_POST['post_uuid'])) {
     $current_txn_url = '';
     $current_user_url='';
     $current_coin_symble='';
-        if ($current_chain_id === "1") {
-            $current_txn_url = 'https://etherscan.io/tx/';
-            $current_user_url='https://etherscan.io/address/';
+        if ($current_chain_id === "4") {
+            $current_txn_url = 'https://rinkeby.etherscan.io/tx/';
+            $current_user_url='https://rinkeby.etherscan.io/address/';
             $current_coin_symble='ETH';
-        } else if ($current_chain_id === "56") {
-            $current_txn_url = 'https://www.bscscan.com/tx/';
-            $current_user_url='https://www.bscscan.com/address/';
+        } else if ($current_chain_id === "97") {
+            $current_txn_url = 'https://testnet.bscscan.com/tx/';
+            $current_user_url='https://testnet.bscscan.com/address/';
             $current_coin_symble='BNB';
-        } else if ($current_chain_id === "42220") {
-            $current_txn_url = 'https://celoscan.io/tx/';
-            $current_user_url='https://celoscan.io/address/';
+        } else if ($current_chain_id === "44787") {
+            $current_txn_url = 'https://alfajores.celoscan.xyz/tx/';
+            $current_user_url='https://alfajores.celoscan.xyz/address/';
             $current_coin_symble='CELO';
-        } else if ($current_chain_id === "250") {
-            $current_txn_url = 'https://ftmscan.com/tx/';
-            $current_user_url='https://ftmscan.com/address/';
+        } else if ($current_chain_id === "4002") {
+            $current_txn_url = 'https://testnet.ftmscan.com/tx/';
+            $current_user_url='https://testnet.ftmscan.com/address/';
             $current_coin_symble='FTM';
-        } else if ($current_chain_id === "43114") {
-            $current_txn_url = 'https://snowtrace.io/tx/';
-            $current_user_url='https://snowtrace.io/address/';
+        } else if ($current_chain_id === "43113") {
+            $current_txn_url = 'https://testnet.snowtrace.io/tx/';
+            $current_user_url='https://testnet.snowtrace.io/address/';
             $current_coin_symble='AVAX';
-        } else if ($current_chain_id === "8217") {
-            $current_txn_url = 'https://scope.klaytn.com/tx/';
-            $current_user_url='https://scope.klaytn.com/account/';
+        } else if ($current_chain_id === "1001") {
+            $current_txn_url = 'https://baobab.scope.klaytn.com/tx/';
+            $current_user_url='https://baobab.scope.klaytn.com/account/';
             $current_coin_symble='KLYAN';
-        } else if ($current_chain_id === "137") {
-            $current_txn_url = 'https://polygonscan.com/tx/';
-            $current_user_url='https://polygonscan.com/address/';
+        } else if ($current_chain_id === "80001") {
+            $current_txn_url = 'https://mumbai.polygonscan.com/tx/';
+            $current_user_url='https://mumbai.polygonscan.com/address/';
             $current_coin_symble='MATIC';
         } else {
-            $current_txn_url = 'https://etherscan.io/tx/';
-            $current_user_url='https://etherscan.io/address/';
+            $current_txn_url = 'https://rinkeby.etherscan.io/tx/';
+            $current_user_url='https://rinkeby.etherscan.io/address/';
             $current_coin_symble='ETH';
         }
     $_SESSION['transaction_hash'] = $transaction_hash;

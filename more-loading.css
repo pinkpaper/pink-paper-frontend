@@ -1,0 +1,13 @@
+.skelton-loader-setting svg {
+  width:78%;
+  height: 100%;
+  display: flex;
+}
+
+@media screen and (max-width: 991px) {
+  .skelton-loader-setting svg {
+    width: 100%;
+    height: 100%;
+    display: flex;
+  }
+}

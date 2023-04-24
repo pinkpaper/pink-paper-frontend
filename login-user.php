@@ -1,5 +1,5 @@
 <?php require_once "php/controllerUserData.php"; ?>
- <?php
+<?php
 require_once "php/schedule_cron.php";
 if (isset($_SESSION['username'])) {
   header("Location: ./");
@@ -10,148 +10,153 @@ if (isset($_SESSION['username'])) {
 <html lang="en">
 
 <head>
-  <title>Login | Pink Paper </title>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Pink Paper </title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- favicon -->
-  <link rel="icon" href="assets/images/logo/favicon.ico">
+    <!-- favicon -->
+    <link rel="icon" href="assets/images/logo/favicon.ico">
 
-  <!-- fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <!-- icons pack -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css" />
+    <!-- icons pack -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css" />
 
-  <!-- stylesheet -->
-  <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/css/app.css" rel="stylesheet">
-  <link href="assets/css/loader.css" rel="stylesheet">
+    <!-- stylesheet -->
+    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/app.css" rel="stylesheet">
+    <link href="assets/css/loader.css" rel="stylesheet">
 
-  <!-- Css for view password icon starts -->
-  <style type="text/css">
+    <!-- Css for view password icon starts -->
+    <style type="text/css">
     .field-icon {
-      float: right;
-      margin-left: -25px;
-      margin-top: -25px;
-      position: relative;
-      z-index: 2;
+        float: right;
+        margin-left: -25px;
+        margin-top: -25px;
+        position: relative;
+        z-index: 2;
     }
-  </style>
-  <!-- Css for view password icon ends -->
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-TNWHRNG');</script>
-<!-- End Google Tag Manager -->
+    </style>
+    <!-- Css for view password icon ends -->
 </head>
 
 <body onload="loader()">
- <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TNWHRNG"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 
-  <!-- loader start-->
-  <div class="loader-container">
-    <div class="loader"></div>
-  </div>
-  <!-- loader end-->
+    <!-- loader start-->
+    <div class="loader-container">
+        <div class="loadingio-spinner-ellipsis-tjmuel5ie5">
+            <div class="ldio-g2ezeznggp">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <!-- loader end-->
 
-  <?php
+    <?php
   $result = mysqli_query($link, 'SELECT * FROM `logo`');
   $rowLogo = mysqli_fetch_assoc($result);
   ?>
 
-  <div class="container">
-    <div class="row justify-content-center my-5">
-      <div class="col-lg-8 col-md-12">
-        <div class="register-main-card shadow">
-          <div class="row">
-            <div class="col-lg-6 col-md-12">
-              <div class="register-left px-3 py-4">
-                <div class="d-flex justify-content-between align-items-center">
-                  <img src="<?php echo $rowLogo['logo_image']; ?>" width='151px' alt='logo'>
-                  <a href="./"class="btn btn-home-icon"><i class="icon-home"></i></a>
-                </div>
-                <div class="p-5">
-                  <img src="assets/images/logo/post.svg" class="img-fluid" alt="">
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-12">
-              <div class="register-right text-center px-4 py-4">
-                <h4 class="fw-bold">Welcome Back!</h4>
-                <p class="text-muted">Login with your email and password.</p>
+    <div class="container">
+        <div class="row justify-content-center my-5">
+            <div class="col-lg-8 col-md-12">
+                <div class="register-main-card shadow">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                            <div class="register-left px-3 py-4">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <img src="<?php echo $rowLogo['logo_image']; ?>" width='151px' alt='logo'>
+                                    <a href="./" class="btn btn-home-icon"><i class="icon-home"></i></a>
+                                </div>
+                                <div class="p-5">
+                                    <img src="assets/images/logo/post.svg" class="img-fluid" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="register-right text-center px-4 py-4">
+                                <h4 class="fw-bold">Welcome Back!</h4>
+                                <p class="text-muted">Login with your email and password.</p>
 
-                <form action="login-user.php" method="POST" autocomplete="">
-                  <?php
+                                <form action="login-user.php" method="POST" autocomplete="">
+                                    <?php
                   if (count($errors) > 0) {
                   ?>
-                    <div class="alert alert-danger text-center my-3">
-                      <?php
+                                    <div class="alert alert-danger text-center my-3">
+                                        <?php
                       foreach ($errors as $showerror) {
                         echo $showerror;
                       }
                       ?>
-                    </div>
-                  <?php
+                                    </div>
+                                    <?php
                   }
                   ?>
-                  <div class="form-group mb-3">
-                    <input class="form-control" type="text" name="username" placeholder="Email Address" required value="<?php echo $username ?>">
-                  </div>
-                  <div class="form-group mb-0">
-                    <input id="password-field" class="form-control" type="password" name="password" placeholder="Password" required>
-                    <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password" style="left:-10px;"></span>
-                  </div>
-                  <div class="mb-3 d-flex justify-content-end"><a href="forgot-password" class="login-link">Forgot
-                      password?</a></div>
-                  <div class="d-grid mb-4">
-                    <input class="btn button-primary" type="submit" name="login" value="Login">
-                  </div>
-                  <div class="text-center fw-bold">Not yet a member? <a href="register" class="login-link">Register</a></div>
-                </form>
-              </div>
+                                    <div class="form-group mb-3">
+                                        <input class="form-control" type="text" name="username"
+                                            placeholder="Email Address" required value="<?php echo $username ?>">
+                                    </div>
+                                    <div class="form-group mb-0">
+                                        <input id="password-field" class="form-control" type="password" name="password"
+                                            placeholder="Password" required>
+                                        <span toggle="#password-field"
+                                            class="fa fa-fw fa-eye field-icon toggle-password"
+                                            style="left:-10px;"></span>
+                                    </div>
+                                    <div class="mb-3 d-flex justify-content-end"><a href="forgot-password"
+                                            class="login-link">Forgot
+                                            password?</a></div>
+                                    <div class="d-grid mb-4">
+                                        <input class="btn button-primary" type="submit" name="login" value="Login">
+                                    </div>
+                                    <div class="text-center fw-bold">Not yet a member? <a href="register"
+                                            class="login-link">Register</a></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 
 
 
 
 
 
-  <!-- script -->
-  <script type="text/javascript" src="assets/jquery/jquery-3.4.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script type="text/javascript" src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script type="text/javascript" src="assets/js/app.js"></script>
-  <script type="text/javascript" src="assets/js/loader.js"></script>
+    <!-- script -->
+    <script type="text/javascript" src="assets/jquery/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script type="text/javascript" src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="assets/js/app.js"></script>
+    <script type="text/javascript" src="assets/js/popr/popr.js"></script>
+    <script type="text/javascript" src="assets/js/loader.js"></script>
 
-  <!-- Javascript for view password starts-->
-  <script type="text/javascript">
+    <!-- Javascript for view password starts-->
+    <script type="text/javascript">
     $(".toggle-password").click(function() {
 
-      $(this).toggleClass("fa-eye fa-eye-slash");
-      var input = $($(this).attr("toggle"));
-      if (input.attr("type") == "password") {
-        input.attr("type", "text");
-      } else {
-        input.attr("type", "password");
-      }
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        var input = $($(this).attr("toggle"));
+        if (input.attr("type") == "password") {
+            input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
     });
-  </script>
-  <!-- Javascript for view password ends-->
+    </script>
+    <!-- Javascript for view password ends-->
 </body>
 
 </html>

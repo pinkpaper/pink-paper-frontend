@@ -5,7 +5,7 @@ if (mysqli_connect_error()) {
 }
 
 date_default_timezone_set("Asia/Calcutta");
-$date_now = date("r");
+$date_now = date("Y-m-d H:i");
 $from_ip = $_SERVER['REMOTE_ADDR'];
 $from_browser = $_SERVER['HTTP_USER_AGENT'];
 
